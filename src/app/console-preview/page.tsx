@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BarChart3, CalendarRange, LayoutDashboard, MapPinned, UsersRound } from "lucide-react";
+import { CalendarRange, ImageIcon, LayoutDashboard, MapPinned, UsersRound } from "lucide-react";
 
-import { BrowserFrame, ConsoleAssignmentScreen, ConsoleScheduleScreen } from "@/components/mockup-screens";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -42,10 +42,31 @@ export default function ConsolePreviewPage() {
             </div>
           </div>
 
-          <div className="mt-10">
-            <BrowserFrame>
-              <ConsoleAssignmentScreen />
-            </BrowserFrame>
+          <div className="mt-10 concept-card overflow-hidden rounded-[34px] p-4 sm:p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-[24px] border border-[var(--line)] bg-white px-4 py-4 sm:px-5">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
+                  Static preview image
+                </p>
+                <p className="mt-2 text-lg font-bold text-[var(--foreground)]">
+                  Schedule manager reference
+                </p>
+              </div>
+              <span className="rounded-full bg-[rgba(255,154,31,0.12)] px-3 py-2 text-xs font-semibold text-[var(--accent-deep)]">
+                Provided visual reference
+              </span>
+            </div>
+
+            <div className="mt-4 overflow-hidden rounded-[28px] border border-[var(--line)] bg-[#f5f6f8]">
+              <Image
+                src="/previews/console-schedule-preview.png"
+                alt="Static Busition Console schedule manager preview"
+                width={1899}
+                height={1102}
+                className="h-auto w-full"
+                priority
+              />
+            </div>
           </div>
         </section>
 
@@ -88,53 +109,47 @@ export default function ConsolePreviewPage() {
           </div>
         </section>
 
-        <section className="grid gap-12 py-20 sm:py-24 lg:grid-cols-[1.14fr_0.86fr] lg:items-start">
-          <div>
-            <BrowserFrame>
-              <ConsoleScheduleScreen />
-            </BrowserFrame>
+        <section className="grid gap-4 py-20 sm:py-24 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="concept-card rounded-[36px] p-6 sm:p-8">
+            <div className="section-kicker">Why the preview changed</div>
+            <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)]">
+              The live mockup is gone. This preview now uses a fixed image reference.
+            </h2>
+            <div className="mt-6 space-y-4 text-base leading-8 text-[var(--foreground-soft)]">
+              <p>
+                The previous version embedded web-built console mockups directly into the preview page.
+                This version keeps the preview intentionally static so the marketing route behaves more
+                like a visual concept sheet.
+              </p>
+              <p>
+                The actual Busition Console still lives separately under the real console service route
+                with assignments, schedules, drivers, and organization pages.
+              </p>
+            </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="concept-card rounded-[36px] p-6 sm:p-8">
-              <div className="section-kicker">Why the routes split</div>
-              <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)]">
-                The marketing flow and the actual console now live separately.
-              </h2>
-              <div className="mt-6 space-y-4 text-base leading-8 text-[var(--foreground-soft)]">
-                <p>
-                  The previous console page was still acting like a showcase. The new Busition
-                  Console route now behaves like a real operator surface with multiple pages and
-                  task-specific work areas.
-                </p>
-                <p>
-                  This preview remains useful because it explains the design intent behind those
-                  working surfaces before a team enters the service itself.
-                </p>
-              </div>
-            </div>
-
+          <div className="grid gap-4">
             <div className="concept-card rounded-[36px] p-6 sm:p-8">
               <div className="flex items-center gap-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
-                  <BarChart3 className="h-6 w-6" />
+                  <ImageIcon className="h-6 w-6" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                    Next step
+                    Preview mode
                   </p>
                   <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                    What the real console adds
+                    What this image communicates
                   </h3>
                 </div>
               </div>
 
               <div className="mt-6 space-y-3">
                 {[
-                  "A dedicated dashboard for route readiness and live alerts",
-                  "Interactive driver assignment with route-side detail panels",
-                  "A multi-page schedule manager based on the admin mockups",
-                  "Driver and organization management in the same orange-led visual system",
+                  "Dark operator navigation with orange-led active states",
+                  "A three-column planner for route list, schedule editor, and map",
+                  "Static concept framing for presentation or stakeholder review",
+                  "A cleaner distinction between marketing preview and real product",
                 ].map((item) => (
                   <div
                     key={item}
@@ -145,6 +160,18 @@ export default function ConsolePreviewPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="concept-card rounded-[36px] p-6 sm:p-8">
+              <div className="section-kicker">Next step</div>
+              <h3 className="mt-6 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
+                The real console remains interactive.
+              </h3>
+              <p className="mt-4 text-base leading-8 text-[var(--foreground-soft)]">
+                Use the actual console route when you want to explore working assignments,
+                schedules, driver management, and organization controls. Use this preview
+                page when you want a simpler static presentation of the intended layout.
+              </p>
             </div>
           </div>
         </section>
