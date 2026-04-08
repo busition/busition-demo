@@ -139,6 +139,12 @@ export function SiteShell({ children }: SiteShellProps) {
               <p>Representative: Jeongheon Woo</p>
               <p>Privacy Officer: Kyungmin Yoo</p>
               <p>Business Registration No.: 117-20-13096</p>
+              <Link
+                href="/policy/service"
+                className="inline-block pt-2 transition-colors hover:text-[var(--foreground)]"
+              >
+                Terms of Service
+              </Link>
             </div>
           </div>
 
