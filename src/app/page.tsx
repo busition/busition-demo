@@ -1,9 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BellRing, BusFront, Clock3, GraduationCap, LocateFixed, MapPinned, School, ShieldCheck, UsersRound, Waypoints } from "lucide-react";
 
 import {
   BrowserFrame,
-  ConsoleAssignmentScreen,
   MateRouteScreen,
   MateTimetableScreen,
   OrbitRoleMap,
@@ -291,7 +291,13 @@ export default function Home() {
             ]}
           >
             <BrowserFrame>
-              <ConsoleAssignmentScreen />
+              <Image
+                src="/previews/console-schedule-preview.png"
+                alt="Busition Console schedule manager preview"
+                width={1899}
+                height={1102}
+                className="h-auto w-full"
+              />
             </BrowserFrame>
           </FeatureSection>
 
