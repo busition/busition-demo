@@ -34,10 +34,10 @@ export default function ConsolePreviewPage() {
                 Enter console service
               </Link>
               <Link
-                href="/driver"
+                href="/driver-preview"
                 className="outline-button rounded-[18px] px-6 py-4 text-sm font-semibold"
               >
-                Back to Driver
+                Back to Driver Preview
               </Link>
             </div>
           </div>

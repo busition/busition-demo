@@ -40,9 +40,9 @@ const previewLinks = [
     icon: UsersRound,
   },
   {
-    href: "/driver",
+    href: "/driver-preview",
     title: "Busition for Driver",
-    description: "Preview the trip-first driver experience with boarding control and stop-level focus.",
+    description: "Preview the trip-first driver concept before opening the actual driver mobile service.",
     icon: BusFront,
   },
   {

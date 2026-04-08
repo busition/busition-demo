@@ -149,6 +149,19 @@ a {
   background-size: 24px 24px;
 }
 
+.driver-shell-bg {
+  background:
+    radial-gradient(circle at top center, rgba(255, 194, 88, 0.18), transparent 18%),
+    linear-gradient(180deg, #fff8ef 0%, #f2f5f8 100%);
+}
+
+.driver-map-grid {
+  background-image:
+    linear-gradient(rgba(28, 28, 28, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 28, 28, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
 @keyframes floatCard {
   0%,
   100% {

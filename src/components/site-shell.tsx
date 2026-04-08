@@ -14,7 +14,7 @@ type SiteShellProps = {
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/mate-preview", label: "Mate Preview" },
-  { href: "/driver", label: "Driver" },
+  { href: "/driver-preview", label: "Driver Preview" },
   { href: "/console-preview", label: "Console Preview" },
 ];
 
@@ -143,7 +143,7 @@ export function SiteShell({ children }: SiteShellProps) {
             </p>
             <div className="mt-4 flex flex-col gap-3 text-sm text-[var(--foreground-soft)]">
               <Link href="/mate-preview">Busition for Mate Preview</Link>
-              <Link href="/driver">Busition for Driver</Link>
+              <Link href="/driver-preview">Busition for Driver Preview</Link>
               <Link href="/console-preview">Busition for Console Preview</Link>
             </div>
           </div>
