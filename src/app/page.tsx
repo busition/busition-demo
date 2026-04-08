@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BellRing, BusFront, Clock3, GraduationCap, LocateFixed, MapPinned, School, ShieldCheck, UsersRound, Waypoints } from "lucide-react";
+import { ArrowRight, BusFront, Clock3, GraduationCap, MapPinned, School, ShieldCheck, UsersRound, Waypoints } from "lucide-react";
 
 import {
   BrowserFrame,
@@ -122,44 +122,21 @@ function DriverPreviewPhone({ className = "" }: { className?: string }) {
 function HeroVisual() {
   return (
     <div className="relative h-[460px] w-full lg:h-[540px]">
-      <div className="absolute right-8 top-16 h-[250px] w-[250px] rotate-[18deg] rounded-[46px] bg-[linear-gradient(135deg,#ffd450_0%,#ffaf21_100%)] shadow-[0_30px_60px_rgba(255,172,34,0.22)] lg:h-[320px] lg:w-[320px]" />
-      <div className="animate-bob-minor absolute left-8 top-12 rounded-full bg-white px-4 py-3 shadow-[0_16px_34px_rgba(0,0,0,0.06)]">
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--accent-soft)]">
-            <BellRing className="h-5 w-5 text-[var(--accent-deep)]" />
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Device-free launch
-            </p>
-            <p className="mt-1 text-sm font-semibold text-[var(--foreground)]">
-              Start with the phones people already use.
-            </p>
-          </div>
+      <div className="absolute inset-x-10 top-6 h-24 rounded-full bg-[radial-gradient(circle,rgba(255,208,92,0.42)_0%,rgba(255,208,92,0)_72%)] blur-3xl" />
+      <div className="absolute inset-y-16 left-0 w-40 rounded-full bg-[radial-gradient(circle,rgba(255,180,58,0.22)_0%,rgba(255,180,58,0)_78%)] blur-3xl" />
+
+      <div className="relative h-full overflow-hidden rounded-[42px] border border-[rgba(255,182,72,0.18)] bg-[linear-gradient(180deg,#fffaf1_0%,#fffefb_48%,#ffffff_100%)] shadow-[0_30px_80px_rgba(255,166,35,0.12)]">
+        <div className="absolute inset-0 flex items-center justify-center px-2 py-6 sm:px-5">
+          <Image
+            src="/illustrations/busition-connected-route-hero.png"
+            alt="Busition shuttle service illustration showing a connected route experience across bus and mobile interface."
+            width={1440}
+            height={1525}
+            className="h-full w-auto max-w-full object-contain"
+            priority
+          />
         </div>
       </div>
-
-      <div className="animate-float-mid absolute left-0 top-[120px] flex h-[190px] w-[190px] flex-col justify-between rounded-[42px] bg-[#ffbe32] p-6 shadow-[0_26px_52px_rgba(255,176,50,0.24)] lg:left-10 lg:h-[220px] lg:w-[220px]">
-        <div className="flex h-20 w-full items-start justify-between">
-          <div className="h-11 w-11 rounded-[12px] bg-[#6cc06f]/30" />
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-[0_8px_20px_rgba(0,0,0,0.06)]">
-            <LocateFixed className="h-5 w-5 text-[#6ab24d]" />
-          </div>
-        </div>
-        <div className="rounded-[24px] bg-[#2c2c31] p-4 text-white">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
-              <BusFront className="h-5 w-5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold">Morning shuttle</p>
-              <p className="text-xs text-white/64">Route is live</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <MatePreviewPhone className="absolute right-0 top-0 scale-[0.92] lg:right-8 lg:top-6 lg:scale-100" />
     </div>
   );
 }
@@ -237,8 +214,7 @@ export default function Home() {
       <main>
         <section className="mx-auto grid max-w-[1240px] gap-12 px-4 pb-20 pt-12 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:pb-28 lg:pt-20">
           <div className="flex flex-col justify-center">
-            <div className="section-kicker">Launch preview site</div>
-            <h1 className="mt-7 font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl xl:text-7xl">
+            <h1 className="font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl xl:text-7xl">
               A smarter beginning
               <br />
               for shuttle service.
