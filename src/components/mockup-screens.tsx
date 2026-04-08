@@ -1,4 +1,4 @@
-import { Bell, BusFront, LocateFixed, Route, UserRound } from "lucide-react";
+import { Bell, BusFront, LocateFixed, Route } from "lucide-react";
 
 export function PhoneFrame({
   children,
@@ -37,95 +37,6 @@ export function BrowserFrame({
         </div>
       </div>
       <div className="bg-white">{children}</div>
-    </div>
-  );
-}
-
-export function DriverLoginPanel() {
-  return (
-    <div className="rounded-[28px] border border-[var(--line)] bg-white p-6 shadow-[0_14px_34px_rgba(0,0,0,0.05)]">
-      <p className="text-sm font-semibold text-[var(--foreground-soft)]">Driver sign-in</p>
-      <div className="mt-5 space-y-3">
-        <div className="rounded-[16px] border border-[var(--line)] px-4 py-3 text-sm text-[var(--foreground-soft)]">
-          Email address
-        </div>
-        <div className="rounded-[16px] border border-[var(--line)] px-4 py-3 text-sm text-[var(--foreground-soft)]">
-          Password
-        </div>
-      </div>
-      <button className="orange-button mt-6 w-full rounded-[18px] py-3 text-sm font-semibold">
-        Login
-      </button>
-    </div>
-  );
-}
-
-export function DriverTripScreen() {
-  const riders = [
-    { name: "Mia Carter", status: "Boarded", tone: "bg-[rgba(25,184,146,0.12)] text-[var(--success)]" },
-    { name: "Ethan Bell", status: "Late +3 min", tone: "bg-[rgba(255,154,31,0.12)] text-[var(--accent-deep)]" },
-    { name: "Leah Kim", status: "Waiting", tone: "bg-[#f2f2ef] text-[var(--foreground-soft)]" },
-  ];
-
-  return (
-    <div className="bg-[#fbfaf6] px-5 pb-6 pt-7">
-      <div className="rounded-[24px] bg-[#fff3df] p-5">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold text-[var(--foreground-soft)]">
-              Today&apos;s route
-            </p>
-            <h3 className="mt-2 text-2xl font-bold text-[var(--foreground)]">
-              North Station Loop
-            </h3>
-            <p className="mt-2 text-sm text-[var(--foreground-soft)]">
-              Next stop in 5 min · 4 seats left
-            </p>
-          </div>
-          <div className="rounded-full bg-white px-3 py-2 text-xs font-semibold text-[var(--accent-deep)]">
-            Live trip
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-5 rounded-[24px] border border-[var(--line)] bg-white p-4">
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold text-[var(--foreground)]">Stop roster</p>
-          <span className="text-xs font-semibold text-[var(--foreground-soft)]">
-            Maple Avenue
-          </span>
-        </div>
-
-        <div className="mt-4 space-y-3">
-          {riders.map((rider) => (
-            <div
-              key={rider.name}
-              className="flex items-center justify-between rounded-[18px] bg-[#faf9f5] px-4 py-3"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white">
-                  <UserRound className="h-4 w-4 text-[var(--foreground-soft)]" />
-                </div>
-                <span className="text-sm font-semibold text-[var(--foreground)]">
-                  {rider.name}
-                </span>
-              </div>
-              <span className={`rounded-full px-3 py-2 text-xs font-semibold ${rider.tone}`}>
-                {rider.status}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-5 grid grid-cols-2 gap-3">
-        <button className="rounded-[18px] bg-[var(--accent)] py-3 text-sm font-semibold text-white">
-          Confirm stop
-        </button>
-        <button className="rounded-[18px] border border-[var(--line)] bg-white py-3 text-sm font-semibold text-[var(--foreground)]">
-          Open nav
-        </button>
-      </div>
     </div>
   );
 }

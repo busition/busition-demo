@@ -102,6 +102,20 @@ function MatePreviewPhone({ className = "" }: { className?: string }) {
   );
 }
 
+function DriverPreviewPhone({ className = "" }: { className?: string }) {
+  return (
+    <PhoneFrame className={className}>
+      <Image
+        src="/previews/driver-today-trip-preview.png"
+        alt="Busition Driver today's trip preview"
+        width={522}
+        height={1084}
+        className="h-auto w-full"
+      />
+    </PhoneFrame>
+  );
+}
+
 function HeroVisual() {
   return (
     <div className="relative h-[460px] w-full lg:h-[540px]">
@@ -288,6 +302,30 @@ export default function Home() {
                 </p>
                 <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
                   Live route preview for riders and guardians
+                </p>
+              </div>
+            </div>
+          </FeatureSection>
+
+          <FeatureSection
+            reverse
+            eyebrow="Driver experience"
+            title="A route-first mobile workspace that keeps the next action obvious."
+            description="The driver concept focused on clarity under motion. Instead of treating drivers like desk users, Busition keeps shift timing, next stop, vehicle state, and trip summary visible in one calm mobile surface."
+            bullets={[
+              "Keep shift window, next stop, and vehicle context on the first screen.",
+              "Reduce taps for mounted-phone usage during live shuttle operation.",
+              "Make trip progress readable without burying boarding or seat state.",
+            ]}
+          >
+            <div className="relative flex items-center justify-center">
+              <DriverPreviewPhone className="animate-float-mid scale-[0.92] sm:scale-100" />
+              <div className="absolute -bottom-2 right-4 hidden rounded-[24px] border border-[rgba(255,154,31,0.16)] bg-white/92 px-5 py-4 shadow-[0_18px_36px_rgba(26,26,26,0.08)] backdrop-blur sm:block">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+                  Static concept image
+                </p>
+                <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+                  Today&apos;s trip preview for route-first drivers
                 </p>
               </div>
             </div>
