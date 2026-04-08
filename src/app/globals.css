@@ -123,6 +123,19 @@ a {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.62) 100%);
 }
 
+.console-shell-bg {
+  background:
+    radial-gradient(circle at top right, rgba(255, 190, 64, 0.18), transparent 18%),
+    linear-gradient(180deg, #f7f8fa 0%, #eef1f4 100%);
+}
+
+.console-grid-map {
+  background-image:
+    linear-gradient(rgba(35, 35, 35, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(35, 35, 35, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
 @keyframes floatCard {
   0%,
   100% {

@@ -46,9 +46,9 @@ const previewLinks = [
     icon: BusFront,
   },
   {
-    href: "/console",
+    href: "/console-preview",
     title: "Busition for Console",
-    description: "Explore route assignment and schedule control based on the operator screen concepts.",
+    description: "Explore the operator preview before opening the actual multi-page console service.",
     icon: MapPinned,
   },
 ];
@@ -208,10 +208,10 @@ export default function Home() {
                 Start preview
               </Link>
               <Link
-                href="/console"
+                href="/console-preview"
                 className="outline-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-colors hover:text-[var(--accent-deep)]"
               >
-                Open console concept
+                Open console preview
               </Link>
             </div>
 

@@ -282,7 +282,7 @@ export function ConsoleAssignmentScreen() {
   return (
     <div className="grid min-h-[640px] grid-cols-[178px_1fr] bg-[#f5f7fb]">
       <aside className="bg-[#353535] px-5 py-7 text-white">
-        <p className="text-3xl font-bold tracking-[-0.06em] text-[#2b86f3]">Busition</p>
+        <p className="text-3xl font-bold tracking-[-0.06em] text-[var(--accent)]">Busition</p>
         <p className="mt-3 text-sm text-white/68">Operator Console</p>
 
         <button className="mt-7 w-full rounded-[12px] bg-white/12 px-4 py-3 text-sm font-semibold text-white/88">
@@ -294,7 +294,7 @@ export function ConsoleAssignmentScreen() {
             <div
               key={item}
               className={`rounded-[12px] px-4 py-3 font-semibold ${
-                index === 1 ? "bg-[#2b86f3] text-white" : "text-white/62"
+                index === 1 ? "bg-[var(--accent)] text-white" : "text-white/62"
               }`}
             >
               {item}
@@ -321,7 +321,7 @@ export function ConsoleAssignmentScreen() {
                 <p>Departure · Main transit hub</p>
                 <p>Arrival · Gate 12</p>
               </div>
-              <button className="mt-5 w-full rounded-[12px] bg-[var(--blue)] py-3 text-sm font-semibold text-white">
+              <button className="mt-5 w-full rounded-[12px] bg-[var(--accent)] py-3 text-sm font-semibold text-white">
                 Assign driver
               </button>
             </div>
@@ -428,7 +428,7 @@ export function OrbitRoleMap() {
       title: "Console",
       detail: "Routes, schedules, and operator control",
       className: "left-1/2 top-0 -translate-x-1/2",
-      icon: <Route className="h-5 w-5 text-[var(--blue)]" />,
+      icon: <Route className="h-5 w-5 text-[var(--accent-deep)]" />,
     },
     {
       title: "Driver",

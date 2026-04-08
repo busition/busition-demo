@@ -15,7 +15,7 @@ const navItems = [
   { href: "/", label: "Home" },
   { href: "/mate", label: "Mate" },
   { href: "/driver", label: "Driver" },
-  { href: "/console", label: "Console" },
+  { href: "/console-preview", label: "Console Preview" },
 ];
 
 function cx(...classNames: Array<string | false | null | undefined>) {
@@ -66,7 +66,7 @@ export function SiteShell({ children }: SiteShellProps) {
               href="/console"
               className="orange-button rounded-xl px-4 py-2 text-sm font-semibold transition-transform hover:-translate-y-0.5"
             >
-              Login
+              Operator Login
             </Link>
           </div>
 
@@ -144,7 +144,7 @@ export function SiteShell({ children }: SiteShellProps) {
             <div className="mt-4 flex flex-col gap-3 text-sm text-[var(--foreground-soft)]">
               <Link href="/mate">Busition for Mate</Link>
               <Link href="/driver">Busition for Driver</Link>
-              <Link href="/console">Busition for Console</Link>
+              <Link href="/console-preview">Busition for Console Preview</Link>
             </div>
           </div>
 

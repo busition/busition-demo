@@ -28,10 +28,10 @@ export default function DriverPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/console"
+                href="/console-preview"
                 className="orange-button rounded-[18px] px-6 py-4 text-sm font-semibold"
               >
-                Continue to Console
+                Continue to Console Preview
               </Link>
               <Link
                 href="/mate"
