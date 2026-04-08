@@ -36,18 +36,21 @@ const serviceLinks = [
     title: "Busition for Mate",
     description: "Open the actual rider and guardian mobile service experience.",
     icon: UsersRound,
+    openInNewTab: true,
   },
   {
     href: "/driver",
     title: "Busition for Driver",
     description: "Open the actual route-first driver mobile service experience.",
     icon: BusFront,
+    openInNewTab: true,
   },
   {
     href: "/console",
     title: "Busition for Console",
     description: "Open the actual multi-page operator console service.",
     icon: MapPinned,
+    openInNewTab: true,
   },
 ];
 
@@ -162,6 +165,9 @@ function HeroVisual() {
 }
 
 function FeatureSection({
+  ctaHref,
+  ctaLabel,
+  ctaOpenInNewTab = false,
   id,
   reverse = false,
   title,
@@ -170,6 +176,9 @@ function FeatureSection({
   bullets,
   children,
 }: {
+  ctaHref?: string;
+  ctaLabel?: string;
+  ctaOpenInNewTab?: boolean;
   id?: string;
   reverse?: boolean;
   title: string;
@@ -203,6 +212,19 @@ function FeatureSection({
               </div>
             ))}
           </div>
+          {ctaHref && ctaLabel ? (
+            <div className="mt-8">
+              <Link
+                href={ctaHref}
+                target={ctaOpenInNewTab ? "_blank" : undefined}
+                rel={ctaOpenInNewTab ? "noopener noreferrer" : undefined}
+                className="orange-button inline-flex items-center gap-2 rounded-[18px] px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5"
+              >
+                {ctaLabel}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
@@ -287,6 +309,9 @@ export default function Home() {
 
         <section className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
           <FeatureSection
+            ctaHref="/mate"
+            ctaLabel="Open Mate service"
+            ctaOpenInNewTab
             id="mate-experience"
             eyebrow="Mate experience"
             title="Live arrival guidance that makes waiting feel predictable."
@@ -311,6 +336,9 @@ export default function Home() {
           </FeatureSection>
 
           <FeatureSection
+            ctaHref="/driver"
+            ctaLabel="Open Driver service"
+            ctaOpenInNewTab
             id="driver-experience"
             reverse
             eyebrow="Driver experience"
@@ -336,6 +364,9 @@ export default function Home() {
           </FeatureSection>
 
           <FeatureSection
+            ctaHref="/console"
+            ctaLabel="Open Console service"
+            ctaOpenInNewTab
             id="console-experience"
             reverse
             eyebrow="Console experience"
@@ -398,6 +429,8 @@ export default function Home() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  target={link.openInNewTab ? "_blank" : undefined}
+                  rel={link.openInNewTab ? "noopener noreferrer" : undefined}
                   className="concept-card rounded-[30px] p-6 transition-transform hover:-translate-y-1"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
