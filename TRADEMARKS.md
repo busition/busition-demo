@@ -1,6 +1,13 @@
 # Trademarks
 
-`Busition`, the Busition name, logos, icons, and related brand identifiers are trademarks or service marks reserved by the project owner.
+`Busition`, the Busition name, logos, icons, and related brand identifiers are registered trademarks or reserved marks of the project owner.
+
+Trademark registration on record:
+
+- Registration Number: `40-2207862`
+- Registration Date: `2024-06-12`
+
+No trademark license is granted under this repository's software license.
 
 This repository does not grant any right to use the Busition marks for:
 
