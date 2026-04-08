@@ -161,9 +161,30 @@ export function SiteShell({ children }: SiteShellProps) {
               Product overview
             </p>
             <div className="mt-4 flex flex-col gap-3 text-sm text-[var(--foreground-soft)]">
-              <Link href="/#mate-experience">Busition for Mate</Link>
-              <Link href="/#driver-experience">Busition for Driver</Link>
-              <Link href="/#console-experience">Busition for Console</Link>
+              <Link
+                href="/mate"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-[var(--foreground)]"
+              >
+                Busition for Mate
+              </Link>
+              <Link
+                href="/driver"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-[var(--foreground)]"
+              >
+                Busition for Driver
+              </Link>
+              <Link
+                href="/console"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-[var(--foreground)]"
+              >
+                Busition for Console
+              </Link>
             </div>
           </div>
 
