@@ -145,6 +145,12 @@ export function SiteShell({ children }: SiteShellProps) {
               >
                 Terms of Service
               </Link>
+              <Link
+                href="/policy/privacy"
+                className="inline-block transition-colors hover:text-[var(--foreground)]"
+              >
+                Privacy Policy
+              </Link>
             </div>
           </div>
 
