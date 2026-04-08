@@ -134,11 +134,12 @@ export function SiteShell({ children }: SiteShellProps) {
         <div className="mx-auto grid max-w-[1240px] gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr_0.8fr] lg:px-8">
           <div>
             <BusitionLogo />
-            <p className="mt-4 max-w-md text-sm leading-7 text-[var(--foreground-soft)]">
-              Busition is the launch-preview site for a unified shuttle operations
-              platform connecting riders, guardians, drivers, and operators in one
-              live service flow.
-            </p>
+            <div className="mt-4 max-w-md space-y-1 text-sm leading-7 text-[var(--foreground-soft)]">
+              <p>Busition (버지션)</p>
+              <p>Representative: Jeongheon Woo</p>
+              <p>Privacy Officer: Kyungmin Yoo</p>
+              <p>Business Registration No.: 117-20-13096</p>
+            </div>
           </div>
 
           <div>
