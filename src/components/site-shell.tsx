@@ -63,9 +63,7 @@ export function SiteShell({ children }: SiteShellProps) {
               Overview
             </Link>
             <Link
-              href="/console"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/login?next=/console"
               className="orange-button rounded-xl px-4 py-2 text-sm font-semibold transition-transform hover:-translate-y-0.5"
             >
               Operator Login
@@ -114,9 +112,7 @@ export function SiteShell({ children }: SiteShellProps) {
                   Overview
                 </Link>
                 <Link
-                  href="/console"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/login?next=/console"
                   onClick={() => setMobileOpen(false)}
                   className="orange-button rounded-2xl px-4 py-3 text-center text-sm font-semibold"
                 >
