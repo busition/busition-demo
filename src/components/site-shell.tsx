@@ -13,7 +13,7 @@ type SiteShellProps = {
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/mate", label: "Mate" },
+  { href: "/mate-preview", label: "Mate Preview" },
   { href: "/driver", label: "Driver" },
   { href: "/console-preview", label: "Console Preview" },
 ];
@@ -57,7 +57,7 @@ export function SiteShell({ children }: SiteShellProps) {
 
           <div className="hidden items-center gap-3 lg:flex">
             <Link
-              href="/mate"
+              href="/mate-preview"
               className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-sm font-semibold text-[var(--foreground-soft)] transition-colors hover:text-[var(--foreground)]"
             >
               Preview
@@ -105,7 +105,7 @@ export function SiteShell({ children }: SiteShellProps) {
 
               <div className="mt-2 grid grid-cols-2 gap-2">
                 <Link
-                  href="/mate"
+                  href="/mate-preview"
                   onClick={() => setMobileOpen(false)}
                   className="rounded-2xl border border-[var(--line)] px-4 py-3 text-center text-sm font-semibold text-[var(--foreground)]"
                 >
@@ -142,7 +142,7 @@ export function SiteShell({ children }: SiteShellProps) {
               Preview pages
             </p>
             <div className="mt-4 flex flex-col gap-3 text-sm text-[var(--foreground-soft)]">
-              <Link href="/mate">Busition for Mate</Link>
+              <Link href="/mate-preview">Busition for Mate Preview</Link>
               <Link href="/driver">Busition for Driver</Link>
               <Link href="/console-preview">Busition for Console Preview</Link>
             </div>

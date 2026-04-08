@@ -136,6 +136,19 @@ a {
   background-size: 28px 28px;
 }
 
+.mate-shell-bg {
+  background:
+    radial-gradient(circle at top center, rgba(255, 194, 88, 0.2), transparent 20%),
+    linear-gradient(180deg, #fff7ec 0%, #f2f5fa 100%);
+}
+
+.mate-map-grid {
+  background-image:
+    linear-gradient(rgba(28, 28, 28, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 28, 28, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
 @keyframes floatCard {
   0%,
   100% {

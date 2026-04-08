@@ -34,9 +34,9 @@ const featureCards = [
 
 const previewLinks = [
   {
-    href: "/mate",
+    href: "/mate-preview",
     title: "Busition for Mate",
-    description: "See the rider and guardian-facing flow built around ETA, alerts, and shared visibility.",
+    description: "See the rider and guardian-facing concept flow before opening the actual Mate mobile service.",
     icon: UsersRound,
   },
   {
@@ -202,7 +202,7 @@ export default function Home() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               <Link
-                href="/mate"
+                href="/mate-preview"
                 className="orange-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-transform hover:-translate-y-0.5"
               >
                 Start preview

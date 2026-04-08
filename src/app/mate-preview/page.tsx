@@ -1,51 +1,53 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BusFront, CheckCheck, MapPinned, Smartphone, Waypoints } from "lucide-react";
+import { Bell, Clock3, MapPin, ShieldCheck, UsersRound } from "lucide-react";
 
-import { DriverLoginPanel, DriverTripScreen, PhoneFrame } from "@/components/mockup-screens";
+import { MateRouteScreen, MateTimetableScreen, PhoneFrame } from "@/components/mockup-screens";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
-  title: "Busition for Driver | Launch Preview",
+  title: "Busition for Mate | Preview",
   description:
-    "English preview page for the Busition driver experience.",
+    "English preview page for the Busition rider and guardian experience.",
 };
 
-export default function DriverPage() {
+export default function MatePreviewPage() {
   return (
     <SiteShell>
       <main className="mx-auto max-w-[1240px] px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28">
-        <section className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <section className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
           <div>
-            <div className="section-kicker">Busition for Driver</div>
+            <div className="section-kicker">Busition for Mate Preview</div>
             <h1 className="mt-6 font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl">
-              A driver flow built for the next stop, not the next distraction.
+              The mobile concept before you enter the actual Mate app.
             </h1>
             <p className="mt-6 max-w-[560px] text-lg leading-8 text-[var(--foreground-soft)]">
-              The driver concepts consistently pushed toward larger actions, less
-              typing, clearer stop focus, and simple correction when automatic
-              boarding prediction is not enough.
+              The concept direction for Mate was practical and calm: clear arrival timing,
+              route awareness, and enough shared access that guardians and staff stop relying
+              on phone calls to understand what is happening.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/console-preview"
+                href="/mate"
                 className="orange-button rounded-[18px] px-6 py-4 text-sm font-semibold"
               >
-                Continue to Console Preview
+                Enter Mate service
               </Link>
               <Link
-                href="/mate-preview"
+                href="/"
                 className="outline-button rounded-[18px] px-6 py-4 text-sm font-semibold"
               >
-                Back to Mate Preview
+                Back to Home
               </Link>
             </div>
           </div>
 
-          <div className="grid items-center gap-6 md:grid-cols-[0.72fr_1.28fr]">
-            <DriverLoginPanel />
-            <PhoneFrame className="animate-float-mid">
-              <DriverTripScreen />
+          <div className="flex flex-wrap items-center justify-center gap-8">
+            <PhoneFrame className="animate-float-mid scale-[0.96] sm:scale-100">
+              <MateTimetableScreen />
+            </PhoneFrame>
+            <PhoneFrame className="animate-float-slow hidden sm:block">
+              <MateRouteScreen />
             </PhoneFrame>
           </div>
         </section>
@@ -54,24 +56,24 @@ export default function DriverPage() {
           <div className="grid gap-4 lg:grid-cols-4">
             {[
               {
-                title: "Trip-first dashboard",
-                detail: "Surface route, next stop, seat signal, and rider status before anything else.",
-                icon: BusFront,
+                title: "Arrival timing",
+                detail: "Move from static schedules to live stop-aware countdowns.",
+                icon: Clock3,
               },
               {
-                title: "Boarding correction",
-                detail: "Let drivers repair one missed boarding event without opening a deep workflow.",
-                icon: CheckCheck,
+                title: "Boarding trust",
+                detail: "Make boarding and alighting visible instead of uncertain.",
+                icon: ShieldCheck,
               },
               {
-                title: "Navigation handoff",
-                detail: "Keep the next stop and route progression clear while staying compatible with nav tools.",
-                icon: MapPinned,
+                title: "Guardian access",
+                detail: "Share the same route view with family or school staff.",
+                icon: UsersRound,
               },
               {
-                title: "Simple device posture",
-                detail: "Stay usable on mounted phones with high-contrast controls and larger tap targets.",
-                icon: Smartphone,
+                title: "Route context",
+                detail: "Know which stop is current, what is next, and how full the ride is.",
+                icon: MapPin,
               },
             ].map((item) => (
               <div key={item.title} className="concept-card rounded-[28px] p-6">
@@ -91,21 +93,20 @@ export default function DriverPage() {
 
         <section className="grid gap-12 py-20 sm:py-24 lg:grid-cols-[1fr_0.94fr] lg:items-start">
           <div className="concept-card rounded-[36px] p-6 sm:p-8">
-            <div className="section-kicker">Driver design rule</div>
+            <div className="section-kicker">Why the routes split</div>
             <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)]">
-              Busition reduces calls and manual checking by changing what the driver sees.
+              Preview flow and mobile app flow now live separately.
             </h2>
             <div className="mt-6 space-y-4 text-base leading-8 text-[var(--foreground-soft)]">
               <p>
-                The strongest driver-side insight from the planning work is that the
-                UI cannot behave like a general consumer app. It has to respect the
-                rhythm of a route, the pressure of the next stop, and the need to
-                recover quickly from small boarding mismatches.
+                The preview remains useful for explaining the original concept logic,
+                but the actual Mate service now lives under its own mobile-first app shell
+                with multiple pages.
               </p>
               <p>
-                That is why the preview stays focused on route context, stop roster,
-                and quick boarding confirmation instead of hiding the operating
-                reality behind decorative interactions.
+                That separation makes the preview easier to present while keeping the
+                real product experience focused on timetable, route tracking, alerts, and
+                guardian sharing.
               </p>
             </div>
           </div>
@@ -113,25 +114,24 @@ export default function DriverPage() {
           <div className="concept-card rounded-[36px] p-6 sm:p-8">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
-                <Waypoints className="h-6 w-6" />
+                <Bell className="h-6 w-6" />
               </div>
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                  Trip flow
+                  Actual app
                 </p>
                 <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                  The route sequence
+                  What Mate now includes
                 </h3>
               </div>
             </div>
 
             <div className="mt-6 space-y-3">
               {[
-                "Driver login and trip selection",
-                "Today’s route briefing with stop list",
-                "Next-stop focus with rider exceptions",
-                "Boarding confirmation and correction",
-                "Trip close with final rider check",
+                "A real mobile timetable page for active and upcoming shuttles",
+                "A route screen that keeps the map and stop progression together",
+                "An alerts page for boarding, delay, and service notices",
+                "A family page for guardian and campus-side shared access",
               ].map((item) => (
                 <div
                   key={item}
