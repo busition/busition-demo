@@ -32,21 +32,21 @@ const featureCards = [
 
 const previewLinks = [
   {
-    href: "/mate-preview",
+    href: "/mate",
     title: "Busition for Mate",
-    description: "See the rider and guardian-facing concept flow before opening the actual Mate mobile service.",
+    description: "Open the actual rider and guardian mobile service experience.",
     icon: UsersRound,
   },
   {
-    href: "/driver-preview",
+    href: "/driver",
     title: "Busition for Driver",
-    description: "Preview the trip-first driver concept before opening the actual driver mobile service.",
+    description: "Open the actual route-first driver mobile service experience.",
     icon: BusFront,
   },
   {
-    href: "/console-preview",
+    href: "/console",
     title: "Busition for Console",
-    description: "Explore the operator preview before opening the actual multi-page console service.",
+    description: "Open the actual multi-page operator console service.",
     icon: MapPinned,
   },
 ];
@@ -405,7 +405,7 @@ export default function Home() {
                     {link.description}
                   </p>
                   <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent-deep)]">
-                    Open page
+                    Open service
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </Link>
