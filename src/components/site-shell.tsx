@@ -139,18 +139,20 @@ export function SiteShell({ children }: SiteShellProps) {
               <p>Representative: Jeongheon Woo</p>
               <p>Privacy Officer: Kyungmin Yoo</p>
               <p>Business Registration No.: 117-20-13096</p>
-              <Link
-                href="/policy/service"
-                className="inline-block pt-2 transition-colors hover:text-[var(--foreground)]"
-              >
-                Terms of Service
-              </Link>
-              <Link
-                href="/policy/privacy"
-                className="inline-block transition-colors hover:text-[var(--foreground)]"
-              >
-                Privacy Policy
-              </Link>
+              <div className="flex flex-col gap-1 pt-2">
+                <Link
+                  href="/policy/service"
+                  className="transition-colors hover:text-[var(--foreground)]"
+                >
+                  Terms of Service
+                </Link>
+                <Link
+                  href="/policy/privacy"
+                  className="transition-colors hover:text-[var(--foreground)]"
+                >
+                  Privacy Policy
+                </Link>
+              </div>
             </div>
           </div>
 
