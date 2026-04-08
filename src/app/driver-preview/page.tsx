@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BusFront, CheckCheck, MapPinned, Smartphone, Waypoints } from "lucide-react";
+import { BusFront, CheckCheck, ImageIcon, MapPinned, Smartphone } from "lucide-react";
 
-import { DriverLoginPanel, DriverTripScreen, PhoneFrame } from "@/components/mockup-screens";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -15,8 +15,8 @@ export default function DriverPreviewPage() {
   return (
     <SiteShell>
       <main className="mx-auto max-w-[1240px] px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28">
-        <section className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
+        <section>
+          <div className="max-w-[760px]">
             <div className="section-kicker">Busition for Driver Preview</div>
             <h1 className="mt-6 font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl">
               The driver concept before you enter the actual mobile app.
@@ -42,11 +42,33 @@ export default function DriverPreviewPage() {
             </div>
           </div>
 
-          <div className="grid items-center gap-6 md:grid-cols-[0.72fr_1.28fr]">
-            <DriverLoginPanel />
-            <PhoneFrame className="animate-float-mid">
-              <DriverTripScreen />
-            </PhoneFrame>
+          <div className="mt-10 concept-card overflow-hidden rounded-[34px] p-4 sm:p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-[24px] border border-[var(--line)] bg-white px-4 py-4 sm:px-5">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
+                  Static preview image
+                </p>
+                <p className="mt-2 text-lg font-bold text-[var(--foreground)]">
+                  Today&apos;s trip reference
+                </p>
+              </div>
+              <span className="rounded-full bg-[rgba(255,154,31,0.12)] px-3 py-2 text-xs font-semibold text-[var(--accent-deep)]">
+                Provided visual reference
+              </span>
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <div className="w-full max-w-[360px] overflow-hidden rounded-[34px] border border-[var(--line)] bg-white shadow-[0_28px_60px_rgba(26,26,26,0.08)]">
+                <Image
+                  src="/previews/driver-today-trip-preview.png"
+                  alt="Static Busition Driver today's trip preview"
+                  width={522}
+                  height={1084}
+                  className="h-auto w-full"
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -91,19 +113,19 @@ export default function DriverPreviewPage() {
 
         <section className="grid gap-12 py-20 sm:py-24 lg:grid-cols-[1fr_0.94fr] lg:items-start">
           <div className="concept-card rounded-[36px] p-6 sm:p-8">
-            <div className="section-kicker">Why the routes split</div>
+            <div className="section-kicker">Why the preview changed</div>
             <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)]">
-              Preview flow and driver app flow now live separately.
+              The live mockup is gone. This preview now uses a fixed image reference.
             </h2>
             <div className="mt-6 space-y-4 text-base leading-8 text-[var(--foreground-soft)]">
               <p>
-                The preview remains useful for showing the original driver concept,
-                but the actual Driver service now lives under its own mobile shell with
-                trip, route, boarding, and profile pages.
+                The previous version rendered web-built Driver mockups directly in the preview page.
+                This version keeps the preview intentionally static so it reads more like a clean
+                concept sheet for the route-first driver workspace.
               </p>
               <p>
-                That separation keeps the marketing story clean while letting the product
-                behave like a real operator-side mobile app.
+                The actual Driver service still lives separately under its own mobile shell with
+                trip, route, boarding, and profile pages.
               </p>
             </div>
           </div>
@@ -111,24 +133,24 @@ export default function DriverPreviewPage() {
           <div className="concept-card rounded-[36px] p-6 sm:p-8">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
-                <Waypoints className="h-6 w-6" />
+                <ImageIcon className="h-6 w-6" />
               </div>
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                  Actual app
+                  Preview mode
                 </p>
                 <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                  What Driver now includes
+                  What this image communicates
                 </h3>
               </div>
             </div>
 
             <div className="mt-6 space-y-3">
               {[
-                "A trip-first home page for today’s live shift",
-                "A route page that keeps navigation and stop sequence together",
-                "A boarding page for rider confirmation and exception repair",
-                "A profile page for vehicle readiness and driver-side support tools",
+                "A route-first home screen with shift, next stop, and vehicle in one view",
+                "Clear driver context without login-heavy or settings-heavy distraction",
+                "Trip summary blocks that read well on a mounted phone",
+                "A cleaner distinction between marketing preview and real app",
               ].map((item) => (
                 <div
                   key={item}
