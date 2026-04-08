@@ -4,8 +4,6 @@ import { ArrowRight, BellRing, BusFront, Clock3, GraduationCap, LocateFixed, Map
 
 import {
   BrowserFrame,
-  MateRouteScreen,
-  MateTimetableScreen,
   OrbitRoleMap,
   PhoneFrame,
 } from "@/components/mockup-screens";
@@ -89,6 +87,21 @@ const packages = [
   },
 ];
 
+function MatePreviewPhone({ className = "" }: { className?: string }) {
+  return (
+    <PhoneFrame className={className}>
+      <Image
+        src="/previews/mate-live-route-preview.png"
+        alt="Busition Mate live route preview"
+        width={523}
+        height={1149}
+        className="h-auto w-full"
+        priority
+      />
+    </PhoneFrame>
+  );
+}
+
 function HeroVisual() {
   return (
     <div className="relative h-[460px] w-full lg:h-[540px]">
@@ -129,9 +142,7 @@ function HeroVisual() {
         </div>
       </div>
 
-      <PhoneFrame className="absolute right-0 top-0 scale-[0.92] lg:right-8 lg:top-6 lg:scale-100">
-        <MateRouteScreen />
-      </PhoneFrame>
+      <MatePreviewPhone className="absolute right-0 top-0 scale-[0.92] lg:right-8 lg:top-6 lg:scale-100" />
     </div>
   );
 }
@@ -269,13 +280,16 @@ export default function Home() {
               "Keep the structure light enough for schools, campuses, and private shuttle programs.",
             ]}
           >
-            <div className="flex flex-wrap items-center justify-center gap-6">
-              <PhoneFrame className="animate-float-mid scale-[0.92] sm:scale-100">
-                <MateTimetableScreen />
-              </PhoneFrame>
-              <PhoneFrame className="animate-float-slow hidden sm:block">
-                <MateRouteScreen />
-              </PhoneFrame>
+            <div className="relative flex items-center justify-center">
+              <MatePreviewPhone className="animate-float-mid scale-[0.92] sm:scale-100" />
+              <div className="absolute -bottom-2 left-4 hidden rounded-[24px] border border-[rgba(255,154,31,0.16)] bg-white/92 px-5 py-4 shadow-[0_18px_36px_rgba(26,26,26,0.08)] backdrop-blur sm:block">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+                  Static concept image
+                </p>
+                <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+                  Live route preview for riders and guardians
+                </p>
+              </div>
             </div>
           </FeatureSection>
 
