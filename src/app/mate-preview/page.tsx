@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Bell, Clock3, MapPin, ShieldCheck, UsersRound } from "lucide-react";
+import { Bell, Clock3, ImageIcon, MapPin, ShieldCheck, UsersRound } from "lucide-react";
 
-import { MateRouteScreen, MateTimetableScreen, PhoneFrame } from "@/components/mockup-screens";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -15,8 +15,8 @@ export default function MatePreviewPage() {
   return (
     <SiteShell>
       <main className="mx-auto max-w-[1240px] px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28">
-        <section className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
-          <div>
+        <section>
+          <div className="max-w-[760px]">
             <div className="section-kicker">Busition for Mate Preview</div>
             <h1 className="mt-6 font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl">
               The mobile concept before you enter the actual Mate app.
@@ -42,13 +42,33 @@ export default function MatePreviewPage() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-8">
-            <PhoneFrame className="animate-float-mid scale-[0.96] sm:scale-100">
-              <MateTimetableScreen />
-            </PhoneFrame>
-            <PhoneFrame className="animate-float-slow hidden sm:block">
-              <MateRouteScreen />
-            </PhoneFrame>
+          <div className="mt-10 concept-card overflow-hidden rounded-[34px] p-4 sm:p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-[24px] border border-[var(--line)] bg-white px-4 py-4 sm:px-5">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
+                  Static preview image
+                </p>
+                <p className="mt-2 text-lg font-bold text-[var(--foreground)]">
+                  Live route reference
+                </p>
+              </div>
+              <span className="rounded-full bg-[rgba(255,154,31,0.12)] px-3 py-2 text-xs font-semibold text-[var(--accent-deep)]">
+                Provided visual reference
+              </span>
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <div className="w-full max-w-[360px] overflow-hidden rounded-[34px] border border-[var(--line)] bg-white shadow-[0_28px_60px_rgba(26,26,26,0.08)]">
+                <Image
+                  src="/previews/mate-live-route-preview.png"
+                  alt="Static Busition Mate live route preview"
+                  width={523}
+                  height={1149}
+                  className="h-auto w-full"
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -93,20 +113,19 @@ export default function MatePreviewPage() {
 
         <section className="grid gap-12 py-20 sm:py-24 lg:grid-cols-[1fr_0.94fr] lg:items-start">
           <div className="concept-card rounded-[36px] p-6 sm:p-8">
-            <div className="section-kicker">Why the routes split</div>
+            <div className="section-kicker">Why the preview changed</div>
             <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)]">
-              Preview flow and mobile app flow now live separately.
+              The live mockup is gone. This preview now uses a fixed image reference.
             </h2>
             <div className="mt-6 space-y-4 text-base leading-8 text-[var(--foreground-soft)]">
               <p>
-                The preview remains useful for explaining the original concept logic,
-                but the actual Mate service now lives under its own mobile-first app shell
-                with multiple pages.
+                The previous version rendered web-built Mate mockups directly in the preview page.
+                This version keeps the preview intentionally static so it reads more like a clean
+                concept sheet for route tracking and guardian sharing.
               </p>
               <p>
-                That separation makes the preview easier to present while keeping the
-                real product experience focused on timetable, route tracking, alerts, and
-                guardian sharing.
+                The actual Mate service still lives separately under its own mobile-first app shell
+                with timetable, route tracking, alerts, and family pages.
               </p>
             </div>
           </div>
@@ -118,20 +137,20 @@ export default function MatePreviewPage() {
               </div>
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                  Actual app
+                  Preview mode
                 </p>
                 <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                  What Mate now includes
+                  What this image communicates
                 </h3>
               </div>
             </div>
 
             <div className="mt-6 space-y-3">
               {[
-                "A real mobile timetable page for active and upcoming shuttles",
-                "A route screen that keeps the map and stop progression together",
-                "An alerts page for boarding, delay, and service notices",
-                "A family page for guardian and campus-side shared access",
+                "A mobile-first live route screen with one clear primary flow",
+                "Guardian sync status presented without heavy setup or clutter",
+                "Route map, stop labels, and trip detail in one vertical layout",
+                "A cleaner distinction between marketing preview and real app",
               ].map((item) => (
                 <div
                   key={item}
