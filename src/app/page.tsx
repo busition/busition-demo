@@ -30,7 +30,7 @@ const featureCards = [
   },
 ];
 
-const previewLinks = [
+const serviceLinks = [
   {
     href: "/mate",
     title: "Busition for Mate",
@@ -162,6 +162,7 @@ function HeroVisual() {
 }
 
 function FeatureSection({
+  id,
   reverse = false,
   title,
   description,
@@ -169,6 +170,7 @@ function FeatureSection({
   bullets,
   children,
 }: {
+  id?: string;
   reverse?: boolean;
   title: string;
   description: string;
@@ -177,7 +179,7 @@ function FeatureSection({
   children: React.ReactNode;
 }) {
   return (
-    <section className="py-16 sm:py-20">
+    <section id={id} className="scroll-mt-28 py-16 sm:py-20">
       <div
         className={`grid items-center gap-12 lg:grid-cols-2 ${reverse ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1" : ""}`}
       >
@@ -227,16 +229,16 @@ export default function Home() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               <Link
-                href="/mate-preview"
+                href="/#mate-experience"
                 className="orange-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-transform hover:-translate-y-0.5"
               >
-                Start preview
+                Explore Mate
               </Link>
               <Link
-                href="/console-preview"
+                href="/#console-experience"
                 className="outline-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-colors hover:text-[var(--accent-deep)]"
               >
-                Open console preview
+                View Console
               </Link>
             </div>
 
@@ -285,6 +287,7 @@ export default function Home() {
 
         <section className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
           <FeatureSection
+            id="mate-experience"
             eyebrow="Mate experience"
             title="Live arrival guidance that makes waiting feel predictable."
             description="The mobile concept work focused on a very practical experience: riders and guardians should know how far the route has progressed, what stop is next, and whether the shuttle is worth waiting for."
@@ -308,6 +311,7 @@ export default function Home() {
           </FeatureSection>
 
           <FeatureSection
+            id="driver-experience"
             reverse
             eyebrow="Driver experience"
             title="A route-first mobile workspace that keeps the next action obvious."
@@ -332,6 +336,7 @@ export default function Home() {
           </FeatureSection>
 
           <FeatureSection
+            id="console-experience"
             reverse
             eyebrow="Console experience"
             title="A console that looks like an operator tool, not a generic dashboard."
@@ -376,20 +381,20 @@ export default function Home() {
           <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-[720px]">
-                <div className="section-kicker">Preview by product</div>
+                <div className="section-kicker">Product suite</div>
                 <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-5xl">
-                  The site is now organized like the actual product family.
+                  Open the live Busition services by role.
                 </h2>
                 <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                  Instead of compressing every concept into one experimental page,
-                  Busition now has dedicated preview routes for the rider-facing,
-                  driver-facing, and operator-facing experiences.
+                  The product family now lives in the real service routes. Use the mobile
+                  Mate and Driver apps or jump into the multi-page Console without passing
+                  through separate preview pages.
                 </p>
               </div>
             </div>
 
             <div className="mt-10 grid gap-4 lg:grid-cols-3">
-              {previewLinks.map((link) => (
+              {serviceLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}

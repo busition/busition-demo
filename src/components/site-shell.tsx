@@ -13,9 +13,9 @@ type SiteShellProps = {
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/mate-preview", label: "Mate Preview" },
-  { href: "/driver-preview", label: "Driver Preview" },
-  { href: "/console-preview", label: "Console Preview" },
+  { href: "/#mate-experience", label: "Mate" },
+  { href: "/#driver-experience", label: "Driver" },
+  { href: "/#console-experience", label: "Console" },
 ];
 
 function cx(...classNames: Array<string | false | null | undefined>) {
@@ -57,10 +57,10 @@ export function SiteShell({ children }: SiteShellProps) {
 
           <div className="hidden items-center gap-3 lg:flex">
             <Link
-              href="/mate-preview"
+              href="/#mate-experience"
               className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-sm font-semibold text-[var(--foreground-soft)] transition-colors hover:text-[var(--foreground)]"
             >
-              Preview
+              Overview
             </Link>
             <Link
               href="/console"
@@ -105,11 +105,11 @@ export function SiteShell({ children }: SiteShellProps) {
 
               <div className="mt-2 grid grid-cols-2 gap-2">
                 <Link
-                  href="/mate-preview"
+                  href="/#mate-experience"
                   onClick={() => setMobileOpen(false)}
                   className="rounded-2xl border border-[var(--line)] px-4 py-3 text-center text-sm font-semibold text-[var(--foreground)]"
                 >
-                  Preview
+                  Overview
                 </Link>
                 <Link
                   href="/console"
@@ -139,12 +139,12 @@ export function SiteShell({ children }: SiteShellProps) {
 
           <div>
             <p className="text-sm font-semibold text-[var(--foreground)]">
-              Preview pages
+              Product overview
             </p>
             <div className="mt-4 flex flex-col gap-3 text-sm text-[var(--foreground-soft)]">
-              <Link href="/mate-preview">Busition for Mate Preview</Link>
-              <Link href="/driver-preview">Busition for Driver Preview</Link>
-              <Link href="/console-preview">Busition for Console Preview</Link>
+              <Link href="/#mate-experience">Busition for Mate</Link>
+              <Link href="/#driver-experience">Busition for Driver</Link>
+              <Link href="/#console-experience">Busition for Console</Link>
             </div>
           </div>
 

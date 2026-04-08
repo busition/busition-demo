@@ -85,7 +85,7 @@ export function DriverShell({ children }: DriverShellProps) {
             </div>
 
             <Link
-              href="/driver-preview"
+              href="/#driver-experience"
               className="rounded-full border border-black/6 bg-white px-3 py-2 text-xs font-semibold text-[var(--foreground-soft)]"
             >
               Preview

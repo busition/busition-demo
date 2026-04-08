@@ -97,10 +97,10 @@ export function ConsoleShell({ children }: ConsoleShellProps) {
 
           <div className="mt-auto space-y-3 pt-8">
             <Link
-              href="/console-preview"
+              href="/#console-experience"
               className="flex items-center justify-between rounded-[18px] border border-white/10 bg-white/6 px-4 py-3 text-sm font-semibold text-white/86 transition-colors hover:bg-white/10"
             >
-              <span>Open launch preview</span>
+              <span>Open product overview</span>
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link

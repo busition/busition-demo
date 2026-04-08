@@ -240,10 +240,10 @@ export function ConsoleDashboardView() {
               Open assignments
             </Link>
             <Link
-              href="/console-preview"
+              href="/#console-experience"
               className="outline-button rounded-[18px] px-5 py-3 text-sm font-semibold"
             >
-              Compare with preview
+              View product overview
             </Link>
           </>
         }
