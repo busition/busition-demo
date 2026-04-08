@@ -4,6 +4,8 @@
   --background: #fbfbf8;
   --foreground: #232323;
   --foreground-soft: #6f6f76;
+  --font-body-face: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-display-face: "Trebuchet MS", "Avenir Next Condensed", "Arial Narrow", sans-serif;
   --surface: rgba(255, 255, 255, 0.92);
   --surface-muted: #f4f3ee;
   --surface-band: #f1f0ea;

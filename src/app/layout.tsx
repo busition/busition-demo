@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Manrope, Sora } from "next/font/google";
 
 import "./globals.css";
-
-const bodyFont = Manrope({
-  subsets: ["latin"],
-  variable: "--font-body-face",
-});
-
-const displayFont = Sora({
-  subsets: ["latin"],
-  variable: "--font-display-face",
-});
 
 export const metadata: Metadata = {
   title: "Busition | Shuttle Operations, Rehearsed in Real Time",
@@ -33,9 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bodyFont.variable} ${displayFont.variable}`}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
