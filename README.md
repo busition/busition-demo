@@ -29,10 +29,23 @@ npm run start
 - `src/app/`: app entry, layout, and page
 - `src/components/`: brand, hero, and interactive demo components
 - `src/lib/`: scenario and demo data
-- `planning/`: business plan and visual planning materials used as product reference
 
 ## Notes
 
 - The public site is fully in English
-- `planning/` keeps the original strategy and design references
 - The interactive demo includes both live operations playback and route-planning preview
+
+## License
+
+The software source code in this repository is licensed under `AGPL-3.0-only`. See [LICENSE](./LICENSE).
+
+If you modify this project and let users interact with it over a network, `AGPL-3.0-only` requires you to make the corresponding source available to those users.
+
+## Brand And Asset Rights
+
+`Busition`, the Busition logos, brand graphics, product illustrations, and preview images are not licensed under `AGPL-3.0-only` unless a file explicitly says otherwise.
+
+See:
+
+- [RIGHTS-RESERVED.md](./RIGHTS-RESERVED.md)
+- [TRADEMARKS.md](./TRADEMARKS.md)
