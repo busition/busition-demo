@@ -2,15 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Building2,
-  CalendarRange,
-  House,
-  Route,
-  UsersRound,
-} from "lucide-react";
+import { Building2, CalendarRange, House, Route, UsersRound } from "lucide-react";
 
 import { BusitionLogo } from "@/components/busition-logo";
+import { driverRoster, routeAssignments } from "@/lib/console-data";
 
 type ConsoleShellProps = {
   children: React.ReactNode;
@@ -19,39 +14,49 @@ type ConsoleShellProps = {
 const navItems = [
   { href: "/console", label: "Dashboard", icon: House },
   { href: "/console/assignments", label: "Assignments", icon: Route },
-  { href: "/console/schedules", label: "Schedules", icon: CalendarRange },
   { href: "/console/drivers", label: "Drivers", icon: UsersRound },
+  { href: "/console/schedules", label: "Schedules", icon: CalendarRange },
   { href: "/console/organizations", label: "Organizations", icon: Building2 },
 ];
 
 const pageMeta: Record<
   string,
-  { title: string; subtitle: string; status: string }
+  { title: string; subtitle: string; status: string; actionHref: string; actionLabel: string }
 > = {
   "/console": {
     title: "Morning operations",
-    subtitle: "Live routes, alerts, and next actions.",
-    status: "18 live routes",
+    subtitle: "Work through the urgent routes first.",
+    status: "Live operations",
+    actionHref: "/console/assignments",
+    actionLabel: "Open assignments",
   },
   "/console/assignments": {
     title: "Assignments",
-    subtitle: "Route coverage and driver matching.",
-    status: "3 need drivers",
-  },
-  "/console/schedules": {
-    title: "Schedules",
-    subtitle: "Route plans and departures.",
-    status: "Wed active",
+    subtitle: "Match open routes with the best available coverage.",
+    status: "Coverage queue",
+    actionHref: "/console/drivers",
+    actionLabel: "View drivers",
   },
   "/console/drivers": {
     title: "Drivers",
-    subtitle: "Availability and live ownership.",
-    status: "24 ready",
+    subtitle: "See who is ready, blocked, or already on trip.",
+    status: "Roster live",
+    actionHref: "/console/assignments",
+    actionLabel: "Back to assignments",
+  },
+  "/console/schedules": {
+    title: "Schedules",
+    subtitle: "Check route plans, departures, and publish impact.",
+    status: "Planner active",
+    actionHref: "/console/assignments",
+    actionLabel: "View assignments",
   },
   "/console/organizations": {
     title: "Organizations",
-    subtitle: "Partners, launches, and access.",
-    status: "6 online",
+    subtitle: "Review launch state, contacts, and enabled services.",
+    status: "Partners online",
+    actionHref: "/console",
+    actionLabel: "Back to dashboard",
   },
 };
 
@@ -70,10 +75,13 @@ function isActive(pathname: string, href: string) {
 export function ConsoleShell({ children }: ConsoleShellProps) {
   const pathname = usePathname();
   const meta = pageMeta[pathname] ?? pageMeta["/console"];
+  const needsDriverCount = routeAssignments.filter((route) => route.status === "Needs driver").length;
+  const delayedCount = routeAssignments.filter((route) => route.status === "Delayed").length;
+  const readyDrivers = driverRoster.filter((driver) => driver.status === "Available").length;
 
   return (
     <div className="console-shell-bg min-h-screen bg-[#eef1f4] text-[var(--foreground)]">
-      <div className="grid min-h-screen lg:grid-cols-[248px_1fr]">
+      <div className="grid min-h-screen lg:grid-cols-[264px_1fr]">
         <aside className="hidden flex-col bg-[#312d29] px-5 py-6 text-white lg:flex">
           <Link href="/" aria-label="Busition home">
             <BusitionLogo compact />
@@ -85,6 +93,26 @@ export function ConsoleShell({ children }: ConsoleShellProps) {
             </p>
             <p className="mt-3 text-lg font-bold tracking-[-0.04em] text-white">Ronny</p>
             <p className="mt-2 text-sm text-white/64">Seoul AM · 06:30-15:00</p>
+          </div>
+
+          <div className="mt-4 rounded-[24px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-4">
+            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white/52">
+              Need now
+            </p>
+            <div className="mt-4 space-y-3 text-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-white/64">Routes need drivers</span>
+                <span className="font-semibold text-white">{needsDriverCount}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-white/64">Delayed routes</span>
+                <span className="font-semibold text-white">{delayedCount}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-white/64">Drivers ready now</span>
+                <span className="font-semibold text-white">{readyDrivers}</span>
+              </div>
+            </div>
           </div>
 
           <nav className="mt-8 space-y-1.5">
@@ -145,9 +173,17 @@ export function ConsoleShell({ children }: ConsoleShellProps) {
                   <p className="mt-2 text-sm text-[var(--foreground-soft)]">{meta.subtitle}</p>
                 </div>
 
-                <span className="rounded-full border border-[rgba(255,154,31,0.2)] bg-[rgba(255,154,31,0.1)] px-3 py-2 text-xs font-semibold text-[var(--accent-deep)]">
-                  {meta.status}
-                </span>
+                <div className="flex flex-col items-end gap-2">
+                  <span className="rounded-full border border-[rgba(255,154,31,0.2)] bg-[rgba(255,154,31,0.1)] px-3 py-2 text-xs font-semibold text-[var(--accent-deep)]">
+                    {meta.status}
+                  </span>
+                  <Link
+                    href={meta.actionHref}
+                    className="hidden text-sm font-semibold text-[var(--accent-deep)] sm:inline-flex"
+                  >
+                    {meta.actionLabel}
+                  </Link>
+                </div>
               </div>
 
               <div className="flex gap-2 overflow-x-auto pb-1 lg:hidden">

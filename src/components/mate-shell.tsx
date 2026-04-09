@@ -13,31 +13,28 @@ const navItems = [
   { href: "/mate", label: "Today", icon: Clock3 },
   { href: "/mate/route", label: "Route", icon: LocateFixed },
   { href: "/mate/alerts", label: "Alerts", icon: Bell },
-  { href: "/mate/family", label: "Family", icon: UsersRound },
+  { href: "/mate/family", label: "Sharing", icon: UsersRound },
 ];
 
-const pageMeta: Record<
-  string,
-  { title: string; subtitle: string; status: string }
-> = {
+const pageMeta: Record<string, { title: string; subtitle: string; status: string }> = {
   "/mate": {
-    title: "Today",
-    subtitle: "ETA, next stop, and route status.",
+    title: "Ride status",
+    subtitle: "Check ETA, next stop, and key updates first.",
     status: "ETA 6 min",
   },
   "/mate/route": {
-    title: "Route",
-    subtitle: "Track stop progress in one map.",
+    title: "Live route",
+    subtitle: "Track the current stop and what comes next.",
     status: "Journey live",
   },
   "/mate/alerts": {
     title: "Alerts",
-    subtitle: "Delay, service, and boarding updates.",
+    subtitle: "See important changes before the full feed.",
     status: "1 unread",
   },
   "/mate/family": {
-    title: "Family",
-    subtitle: "Shared rider and guardian access.",
+    title: "Sharing",
+    subtitle: "See who gets updates and what is shared.",
     status: "2 linked",
   },
 };
@@ -61,7 +58,7 @@ export function MateShell({ children }: MateShellProps) {
   return (
     <div className="mate-shell-bg min-h-screen">
       <div className="mx-auto flex min-h-screen max-w-[430px] flex-col bg-[linear-gradient(180deg,#fffdf8_0%,#f7f8fb_62%,#f4f6fa_100%)] lg:my-4 lg:min-h-[calc(100vh-2rem)] lg:rounded-[40px] lg:border lg:border-white/60 lg:shadow-[0_30px_72px_rgba(24,24,24,0.16)]">
-        <header className="sticky top-0 z-30 border-b border-black/5 bg-[rgba(255,253,248,0.92)] px-5 pb-4 pt-4 backdrop-blur">
+        <header className="sticky top-0 z-30 border-b border-black/5 bg-[rgba(255,253,248,0.94)] px-5 pb-4 pt-4 backdrop-blur">
           <div className="flex items-center justify-between text-xs font-semibold text-[var(--foreground-soft)]">
             <span>9:41</span>
             <span className="rounded-full bg-[rgba(255,154,31,0.12)] px-3 py-1 text-[var(--accent-deep)]">
@@ -89,13 +86,14 @@ export function MateShell({ children }: MateShellProps) {
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
                 Busition Mate
               </p>
-              <h1 className="mt-1 text-[1.6rem] font-bold tracking-[-0.06em] text-[var(--foreground)]">
+              <h1 className="mt-1 text-[1.55rem] font-bold tracking-[-0.06em] text-[var(--foreground)]">
                 {meta.title}
               </h1>
+              <p className="mt-1 text-sm leading-6 text-[var(--foreground-soft)]">
+                {meta.subtitle}
+              </p>
             </div>
           </div>
-
-          <p className="mt-3 text-sm leading-6 text-[var(--foreground-soft)]">{meta.subtitle}</p>
         </header>
 
         <main className="flex-1 px-4 pb-28 pt-4">{children}</main>

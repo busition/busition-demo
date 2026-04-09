@@ -11,34 +11,31 @@ type DriverShellProps = {
 
 const navItems = [
   { href: "/driver", label: "Today", icon: BusFront },
-  { href: "/driver/route", label: "Route", icon: LocateFixed },
   { href: "/driver/boarding", label: "Boarding", icon: UsersRound },
-  { href: "/driver/profile", label: "Profile", icon: CircleUserRound },
+  { href: "/driver/route", label: "Route", icon: LocateFixed },
+  { href: "/driver/profile", label: "Support", icon: CircleUserRound },
 ];
 
-const pageMeta: Record<
-  string,
-  { title: string; subtitle: string; status: string }
-> = {
+const pageMeta: Record<string, { title: string; subtitle: string; status: string }> = {
   "/driver": {
-    title: "Today",
-    subtitle: "Next stop, trip status, and core actions.",
-    status: "Driving now",
-  },
-  "/driver/route": {
-    title: "Route",
-    subtitle: "Live progress and stop order.",
+    title: "Drive now",
+    subtitle: "See the next stop and the next action first.",
     status: "Next stop 5 min",
   },
   "/driver/boarding": {
     title: "Boarding",
-    subtitle: "Confirm riders at the current stop.",
-    status: "3 waiting",
+    subtitle: "Work through the rider queue with fewer taps.",
+    status: "Queue active",
+  },
+  "/driver/route": {
+    title: "Route",
+    subtitle: "Keep the current stop and route line in view.",
+    status: "Driving now",
   },
   "/driver/profile": {
-    title: "Profile",
-    subtitle: "Driver, vehicle, and support status.",
-    status: "Ready",
+    title: "Support",
+    subtitle: "Vehicle checks, notices, and help in one place.",
+    status: "Shift ready",
   },
 };
 
@@ -61,7 +58,7 @@ export function DriverShell({ children }: DriverShellProps) {
   return (
     <div className="driver-shell-bg min-h-screen">
       <div className="mx-auto flex min-h-screen max-w-[430px] flex-col bg-[linear-gradient(180deg,#fffefb_0%,#f7f7f4_44%,#f3f5f7_100%)] lg:my-4 lg:min-h-[calc(100vh-2rem)] lg:rounded-[40px] lg:border lg:border-white/60 lg:shadow-[0_30px_72px_rgba(24,24,24,0.18)]">
-        <header className="sticky top-0 z-30 border-b border-black/5 bg-[rgba(255,254,251,0.92)] px-5 pb-4 pt-4 backdrop-blur">
+        <header className="sticky top-0 z-30 border-b border-black/5 bg-[rgba(255,254,251,0.94)] px-5 pb-4 pt-4 backdrop-blur">
           <div className="flex items-center justify-between text-xs font-semibold text-[var(--foreground-soft)]">
             <span>9:41</span>
             <span className="rounded-full bg-[rgba(255,154,31,0.12)] px-3 py-1 text-[var(--accent-deep)]">
@@ -89,13 +86,14 @@ export function DriverShell({ children }: DriverShellProps) {
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
                 Busition Driver
               </p>
-              <h1 className="mt-1 text-[1.6rem] font-bold tracking-[-0.06em] text-[var(--foreground)]">
+              <h1 className="mt-1 text-[1.55rem] font-bold tracking-[-0.06em] text-[var(--foreground)]">
                 {meta.title}
               </h1>
+              <p className="mt-1 text-sm leading-6 text-[var(--foreground-soft)]">
+                {meta.subtitle}
+              </p>
             </div>
           </div>
-
-          <p className="mt-3 text-sm leading-6 text-[var(--foreground-soft)]">{meta.subtitle}</p>
         </header>
 
         <main className="flex-1 px-4 pb-28 pt-4">{children}</main>
