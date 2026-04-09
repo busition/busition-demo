@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowRight, LoaderCircle } from "lucide-react";
+import { ArrowRight, ChevronDown, LoaderCircle } from "lucide-react";
 import { FormEvent, useState } from "react";
 
 const DEMO_EMAIL = "contact@wookingwoo.com";
@@ -23,6 +23,7 @@ export function OperatorLoginForm() {
   const [password, setPassword] = useState("");
   const [rememberDevice, setRememberDevice] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isDemoDetailsOpen, setIsDemoDetailsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const nextPath = getNextPath(searchParams.get("next"));
@@ -94,7 +95,7 @@ export function OperatorLoginForm() {
                 Preview workspace
               </p>
               <p className="mt-2 text-sm leading-6 text-[var(--foreground-soft)]">
-                Use the shared demo account below or autofill the form instantly.
+                Open the shared demo account only when you need to inspect the credentials directly.
               </p>
             </div>
 
@@ -103,25 +104,50 @@ export function OperatorLoginForm() {
             </span>
           </div>
 
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-[18px] border border-white/80 bg-white/88 px-4 py-4 shadow-[0_10px_24px_rgba(255,132,0,0.06)]">
+          <button
+            type="button"
+            aria-expanded={isDemoDetailsOpen}
+            aria-controls="demo-credentials-panel"
+            onClick={() => setIsDemoDetailsOpen((current) => !current)}
+            className="mt-4 flex w-full items-center justify-between rounded-[18px] border border-white/80 bg-white/88 px-4 py-4 text-left shadow-[0_10px_24px_rgba(255,132,0,0.06)] transition-colors hover:bg-white"
+          >
+            <div>
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-                Email
+                Sample account
               </p>
-              <p className="mt-2 break-all text-sm font-semibold text-[var(--foreground)]">
-                {DEMO_EMAIL}
+              <p className="mt-1 text-sm font-semibold text-[var(--foreground)]">
+                {isDemoDetailsOpen ? "Hide sample credentials" : "Show sample credentials"}
               </p>
             </div>
 
-            <div className="rounded-[18px] border border-white/80 bg-white/88 px-4 py-4 shadow-[0_10px_24px_rgba(255,132,0,0.06)]">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-                Password
-              </p>
-              <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
-                {DEMO_PASSWORD}
-              </p>
+            <ChevronDown
+              className={`h-5 w-5 text-[var(--foreground-soft)] transition-transform ${
+                isDemoDetailsOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {isDemoDetailsOpen ? (
+            <div id="demo-credentials-panel" className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-[18px] border border-white/80 bg-white/88 px-4 py-4 shadow-[0_10px_24px_rgba(255,132,0,0.06)]">
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+                  Email
+                </p>
+                <p className="mt-2 break-all text-sm font-semibold text-[var(--foreground)]">
+                  {DEMO_EMAIL}
+                </p>
+              </div>
+
+              <div className="rounded-[18px] border border-white/80 bg-white/88 px-4 py-4 shadow-[0_10px_24px_rgba(255,132,0,0.06)]">
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+                  Password
+                </p>
+                <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+                  {DEMO_PASSWORD}
+                </p>
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
