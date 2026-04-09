@@ -24,11 +24,19 @@ function LoginFormFallback() {
       <div className="mt-4 h-11 w-2/3 rounded-[18px] bg-[#f3f1ea]" />
       <div className="mt-3 h-5 w-full max-w-[24rem] rounded-full bg-[#f5f2ea]" />
 
-      <div className="mt-8 rounded-[26px] border border-[rgba(35,35,35,0.06)] bg-[#fcfbf7] p-5">
-        <div className="h-4 w-32 rounded-full bg-[#ece9e0]" />
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <div className="h-20 rounded-[18px] bg-[#f3f1ea]" />
-          <div className="h-20 rounded-[18px] bg-[#f3f1ea]" />
+      <div className="mt-8 rounded-[24px] border border-[rgba(35,35,35,0.06)] bg-[#fcfbf7] p-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex-1">
+            <div className="h-4 w-32 rounded-full bg-[#ece9e0]" />
+            <div className="mt-3 h-4 w-full max-w-[22rem] rounded-full bg-[#f3f1ea]" />
+          </div>
+          <div className="h-10 w-28 rounded-full bg-[#f3f1ea]" />
+        </div>
+
+        <div className="mt-4 h-4 w-40 rounded-full bg-[#ece9e0]" />
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          <div className="h-16 rounded-[16px] bg-[#f3f1ea]" />
+          <div className="h-16 rounded-[16px] bg-[#f3f1ea]" />
         </div>
       </div>
 
