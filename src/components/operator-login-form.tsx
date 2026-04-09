@@ -80,13 +80,13 @@ export function OperatorLoginForm() {
           </div>
         </div>
 
-        <div className="rounded-[24px] border border-[var(--line)] bg-white/84 p-5">
+        <div className="rounded-[26px] border border-[rgba(255,154,31,0.12)] bg-[linear-gradient(180deg,rgba(255,251,245,0.96)_0%,rgba(255,255,255,0.94)_100%)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="max-w-[26rem]">
-              <p className="text-sm font-semibold text-[var(--foreground)]">
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent-deep)]">
                 Preview workspace
               </p>
-              <p className="mt-1 text-sm leading-6 text-[var(--foreground-soft)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--foreground-soft)]">
                 Use the shared demo account when you want a quick look inside the preview console.
               </p>
             </div>
@@ -94,7 +94,7 @@ export function OperatorLoginForm() {
             <button
               type="button"
               onClick={fillDemoCredentials}
-              className="outline-button inline-flex h-10 shrink-0 items-center justify-center rounded-full px-4 text-sm font-semibold transition-colors hover:text-[var(--accent-deep)]"
+              className="inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-[rgba(255,154,31,0.18)] bg-[rgba(255,154,31,0.08)] px-4 text-sm font-semibold text-[var(--accent-deep)] transition-colors hover:bg-[rgba(255,154,31,0.14)]"
             >
               Autofill demo
             </button>
@@ -105,22 +105,32 @@ export function OperatorLoginForm() {
             aria-expanded={isDemoDetailsOpen}
             aria-controls="demo-credentials-panel"
             onClick={() => setIsDemoDetailsOpen((current) => !current)}
-            className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[var(--foreground-soft)] transition-colors hover:text-[var(--foreground)]"
+            className="mt-4 flex w-full items-center justify-between rounded-[18px] border border-[rgba(35,35,35,0.06)] bg-white/72 px-4 py-3 text-left transition-colors hover:bg-white/88"
           >
-            {isDemoDetailsOpen ? "Hide sample credentials" : "Show sample credentials"}
-            <ChevronDown
-              className={`h-4 w-4 transition-transform ${
-                isDemoDetailsOpen ? "rotate-180" : ""
-              }`}
-            />
+            <div>
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+                Sample account
+              </p>
+              <p className="mt-1 text-sm font-semibold text-[var(--foreground)]">
+                {isDemoDetailsOpen ? "Hide sample credentials" : "Show sample credentials"}
+              </p>
+            </div>
+
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[rgba(255,154,31,0.1)] text-[var(--accent-deep)]">
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${
+                  isDemoDetailsOpen ? "rotate-180" : ""
+                }`}
+              />
+            </div>
           </button>
 
           {isDemoDetailsOpen ? (
             <div
               id="demo-credentials-panel"
-              className="mt-4 grid gap-2 border-t border-[var(--line)] pt-4 sm:grid-cols-2"
+              className="mt-4 grid gap-2 border-t border-[rgba(35,35,35,0.06)] pt-4 sm:grid-cols-2"
             >
-              <div className="rounded-[16px] bg-[rgba(252,252,250,0.92)] px-4 py-3">
+              <div className="rounded-[16px] border border-[rgba(35,35,35,0.05)] bg-white/84 px-4 py-3">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
                   Email
                 </p>
@@ -129,7 +139,7 @@ export function OperatorLoginForm() {
                 </p>
               </div>
 
-              <div className="rounded-[16px] bg-[rgba(252,252,250,0.92)] px-4 py-3">
+              <div className="rounded-[16px] border border-[rgba(35,35,35,0.05)] bg-white/84 px-4 py-3">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
                   Password
                 </p>
