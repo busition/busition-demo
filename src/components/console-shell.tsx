@@ -24,39 +24,39 @@ const pageMeta: Record<
   { title: string; subtitle: string; status: string; actionHref: string; actionLabel: string }
 > = {
   "/console": {
-    title: "Morning operations",
-    subtitle: "Work through the urgent routes first.",
-    status: "Live operations",
+    title: "Operations overview",
+    subtitle: "Work through route risk, service health, and urgent actions first.",
+    status: "Desk live",
     actionHref: "/console/assignments",
-    actionLabel: "Open assignments",
+    actionLabel: "Open coverage desk",
   },
   "/console/assignments": {
-    title: "Assignments",
-    subtitle: "Match open routes with the best available coverage.",
-    status: "Coverage queue",
+    title: "Coverage desk",
+    subtitle: "Match open routes with the best available driver coverage.",
+    status: "Coverage live",
     actionHref: "/console/drivers",
-    actionLabel: "View drivers",
+    actionLabel: "View driver roster",
   },
   "/console/drivers": {
-    title: "Drivers",
-    subtitle: "See who is ready, blocked, or already on trip.",
+    title: "Driver roster",
+    subtitle: "See who is ready, blocked, or already in service.",
     status: "Roster live",
     actionHref: "/console/assignments",
-    actionLabel: "Back to assignments",
+    actionLabel: "Back to coverage desk",
   },
   "/console/schedules": {
-    title: "Schedules",
-    subtitle: "Check route plans, departures, and publish impact.",
-    status: "Planner active",
+    title: "Schedule planning",
+    subtitle: "Review route plans, departure windows, and downstream impact together.",
+    status: "Planner open",
     actionHref: "/console/assignments",
-    actionLabel: "View assignments",
+    actionLabel: "View coverage desk",
   },
   "/console/organizations": {
-    title: "Organizations",
-    subtitle: "Review launch state, contacts, and enabled services.",
-    status: "Partners online",
+    title: "Partner organizations",
+    subtitle: "Review launch state, contacts, and enabled services across the network.",
+    status: "Partners live",
     actionHref: "/console",
-    actionLabel: "Back to dashboard",
+    actionLabel: "Back to operations overview",
   },
 };
 
@@ -89,7 +89,7 @@ export function ConsoleShell({ children }: ConsoleShellProps) {
 
           <div className="mt-8 rounded-[24px] border border-white/8 bg-white/6 px-4 py-4">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white/52">
-              Operator
+              Console operator
             </p>
             <p className="mt-3 text-lg font-bold tracking-[-0.04em] text-white">Ronny</p>
             <p className="mt-2 text-sm text-white/64">Seoul AM · 06:30-15:00</p>
@@ -97,19 +97,19 @@ export function ConsoleShell({ children }: ConsoleShellProps) {
 
           <div className="mt-4 rounded-[24px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-4">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white/52">
-              Need now
+              Immediate priorities
             </p>
             <div className="mt-4 space-y-3 text-sm">
               <div className="flex items-center justify-between">
-                <span className="text-white/64">Routes need drivers</span>
+                <span className="text-white/64">Open coverage gaps</span>
                 <span className="font-semibold text-white">{needsDriverCount}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-white/64">Delayed routes</span>
+                <span className="text-white/64">Routes at risk</span>
                 <span className="font-semibold text-white">{delayedCount}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-white/64">Drivers ready now</span>
+                <span className="text-white/64">Drivers available now</span>
                 <span className="font-semibold text-white">{readyDrivers}</span>
               </div>
             </div>
@@ -149,7 +149,7 @@ export function ConsoleShell({ children }: ConsoleShellProps) {
               href="/"
               className="block rounded-[18px] border border-white/10 px-4 py-3 text-center text-sm font-semibold text-white/62 transition-colors hover:text-white/84"
             >
-              Back to site
+              Back to overview
             </Link>
           </div>
         </aside>

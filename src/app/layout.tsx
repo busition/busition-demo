@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Busition | Shuttle Operations, Rehearsed in Real Time",
+  title: "Busition | Real-Time Shuttle Operations",
   description:
-    "Pre-launch interactive demo for Busition, the mobility operations platform that synchronizes drivers, riders, guardians, and live console teams.",
+    "Busition is the shuttle operations platform that keeps riders, guardians, drivers, and operators aligned on live ETA, boarding status, and service changes.",
   icons: {
     icon: [
       { url: "/favicon.ico", type: "image/x-icon" },

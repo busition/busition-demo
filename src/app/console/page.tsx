@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { ConsoleDashboardView } from "@/components/console-app";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Operations Overview",
   description:
-    "Operational home for the Busition Console service.",
+    "Live operations overview for Busition Console with route risk, alerts, and service health.",
 };
 
 export default function ConsolePage() {

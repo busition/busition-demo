@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s | Busition Driver",
   },
   description:
-    "Front-end driver mobile app for Busition with trip dashboard, live route navigation, boarding controls, and driver profile tools.",
+    "Busition Driver helps drivers stay focused on the next stop, rider exceptions, route progress, and support tools during service.",
 };
 
 export default function DriverLayout({

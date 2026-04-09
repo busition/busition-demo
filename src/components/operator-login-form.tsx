@@ -33,12 +33,12 @@ export function OperatorLoginForm() {
     const normalizedEmail = email.trim().toLowerCase();
 
     if (!normalizedEmail || !password) {
-      setErrorMessage("Enter your operator email and password.");
+      setErrorMessage("Enter your operator email and password to continue.");
       return;
     }
 
     if (normalizedEmail !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
-      setErrorMessage("Invalid credentials. Use the demo account to continue.");
+      setErrorMessage("Those credentials do not match the preview workspace.");
       return;
     }
 
@@ -69,13 +69,13 @@ export function OperatorLoginForm() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[var(--foreground-soft)]">
-            Operator access
+            Console access
           </p>
           <h1 className="mt-3 font-display text-3xl font-semibold tracking-[-0.05em] text-[var(--foreground)] sm:text-4xl">
-            Sign in to Console
+            Access Busition Console
           </h1>
           <p className="mt-3 max-w-md text-sm leading-7 text-[var(--foreground-soft)]">
-            Use the demo account to open the operator workspace.
+            Use the preview workspace to review live routes, assignments, schedules, and partner operations.
           </p>
         </div>
 
@@ -84,12 +84,12 @@ export function OperatorLoginForm() {
           onClick={fillDemoCredentials}
           className="rounded-full border border-[rgba(255,154,31,0.24)] bg-[rgba(255,154,31,0.1)] px-4 py-2 text-xs font-semibold text-[var(--accent-deep)] transition-colors hover:bg-[rgba(255,154,31,0.16)]"
         >
-          Use demo account
+          Use preview credentials
         </button>
       </div>
 
       <div className="mt-6 rounded-[20px] border border-[var(--line)] bg-[#fcfcfa] px-4 py-4 text-sm text-[var(--foreground-soft)]">
-        Demo email: <span className="font-semibold text-[var(--foreground)]">{DEMO_EMAIL}</span>
+        Preview email: <span className="font-semibold text-[var(--foreground)]">{DEMO_EMAIL}</span>
       </div>
 
       <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
@@ -132,7 +132,7 @@ export function OperatorLoginForm() {
             onChange={(event) => setRememberDevice(event.target.checked)}
             className="h-4 w-4 rounded border-[var(--line)] text-[var(--accent)]"
           />
-          Remember this device
+          Remember this browser
         </label>
 
         {errorMessage ? (
@@ -149,11 +149,11 @@ export function OperatorLoginForm() {
           {isSubmitting ? (
             <>
               <LoaderCircle className="h-4 w-4 animate-spin" />
-              Signing in
+              Opening Console
             </>
           ) : (
             <>
-              Open Console
+              Open preview Console
               <ArrowRight className="h-4 w-4" />
             </>
           )}

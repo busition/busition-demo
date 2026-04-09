@@ -7,9 +7,9 @@ import { BusitionLogo } from "@/components/busition-logo";
 import { OperatorLoginForm } from "@/components/operator-login-form";
 
 export const metadata: Metadata = {
-  title: "Operator Login | Busition",
+  title: "Console Access | Busition",
   description:
-    "Operator sign-in page for the Busition Console demo with credential validation and console redirect.",
+    "Access the Busition Console preview for route coverage, schedule control, and live shuttle operations.",
 };
 
 function LoginFormFallback() {
@@ -39,7 +39,7 @@ export default function LoginPage() {
             className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-white/88 px-4 py-2 text-sm font-semibold text-[var(--foreground-soft)] transition-colors hover:text-[var(--foreground)]"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to site
+            Back to overview
           </Link>
         </div>
 
@@ -47,18 +47,18 @@ export default function LoginPage() {
           <section className="rounded-[36px] border border-[rgba(35,35,35,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88)_0%,rgba(248,248,243,0.96)_100%)] p-7 shadow-[0_24px_60px_rgba(24,24,24,0.08)] sm:p-8">
             <p className="section-kicker">Console access</p>
             <h2 className="mt-6 max-w-[12ch] font-display text-4xl font-semibold tracking-[-0.07em] text-[var(--foreground)] sm:text-5xl">
-              Open the operator workspace.
+              Access the operating desk.
             </h2>
             <p className="mt-5 max-w-[34rem] text-base leading-8 text-[var(--foreground-soft)]">
-              Sign in with the demo account to review routes, assignments, schedules,
-              and partner operations.
+              Sign in with the preview workspace to review live routes, coverage gaps,
+              schedule changes, and partner readiness.
             </p>
 
             <div className="mt-8 grid gap-3">
               {[
-                "One workspace for route readiness and exceptions.",
-                "Assignment, schedule, and roster pages stay connected.",
-                "Demo sign-in redirects straight to Console.",
+                "One workspace for live route health and exceptions.",
+                "Coverage, schedules, drivers, and partners stay connected.",
+                "Preview access opens directly into the Console workflow.",
               ].map((item) => (
                 <div
                   key={item}

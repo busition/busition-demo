@@ -12,7 +12,7 @@ type SiteShellProps = {
 };
 
 const navItems = [
-  { href: "/", label: "Home" },
+  { href: "/", label: "Overview" },
   { href: "/mate", label: "Mate" },
   { href: "/driver", label: "Driver" },
   { href: "/console", label: "Console" },
@@ -21,7 +21,7 @@ const navItems = [
 const footerLinks = [
   { href: "/policy/service", label: "Terms" },
   { href: "/policy/privacy", label: "Privacy" },
-  { href: "/login?next=/console", label: "Operator login" },
+  { href: "/login?next=/console", label: "Open Console" },
 ];
 
 function cx(...classNames: Array<string | false | null | undefined>) {
@@ -71,7 +71,7 @@ export function SiteShell({ children }: SiteShellProps) {
               href="/login?next=/console"
               className="orange-button rounded-xl px-4 py-2 text-sm font-semibold transition-transform hover:-translate-y-0.5"
             >
-              Operator login
+              Open Console
             </Link>
           </div>
 
@@ -109,7 +109,7 @@ export function SiteShell({ children }: SiteShellProps) {
                 onClick={() => setMobileOpen(false)}
                 className="orange-button mt-2 rounded-2xl px-4 py-3 text-center text-sm font-semibold"
               >
-                Operator login
+                Open Console
               </Link>
             </div>
           </div>
@@ -124,7 +124,7 @@ export function SiteShell({ children }: SiteShellProps) {
             <div className="max-w-[760px]">
               <BusitionLogo />
               <p className="mt-4 text-sm leading-7 text-[var(--foreground-soft)]">
-                Busition (버지션)
+                Real-time shuttle operations for riders, guardians, drivers, and operators.
               </p>
 
               <div className="mt-4 flex flex-col gap-1 text-sm leading-7 text-[var(--foreground-soft)] sm:flex-row sm:flex-wrap sm:gap-x-6">
@@ -158,7 +158,7 @@ export function SiteShell({ children }: SiteShellProps) {
 
           <div className="flex flex-col gap-2 pt-5 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)] sm:flex-row sm:items-center sm:justify-between">
             <p>© {currentYear} Busition.</p>
-            <p>Mobility operations for shared routes.</p>
+            <p>From live position to operational certainty.</p>
           </div>
         </div>
       </footer>

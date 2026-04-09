@@ -208,7 +208,7 @@ export function MateTimetableView() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Current ride
+              Live trip
             </p>
             <h2 className="mt-3 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
               {mateHero.eta}
@@ -218,7 +218,7 @@ export function MateTimetableView() {
             </p>
           </div>
           <span className="rounded-full bg-white px-3 py-2 text-xs font-semibold text-[var(--accent-deep)] shadow-[0_10px_20px_rgba(255,154,31,0.1)]">
-            {unreadAlerts.length} unread
+            {unreadAlerts.length} new
           </span>
         </div>
 
@@ -245,8 +245,8 @@ export function MateTimetableView() {
 
         <div className="mt-5 grid grid-cols-3 gap-2">
           <ActionLink href="/mate/route" label="Track route" emphasis />
-          <ActionLink href="/mate/alerts" label="View alerts" />
-          <ActionLink href="/mate/family" label="Sharing" />
+          <ActionLink href="/mate/alerts" label="Open alerts" />
+          <ActionLink href="/mate/family" label="Shared access" />
         </div>
       </section>
 
@@ -257,31 +257,31 @@ export function MateTimetableView() {
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Need now
+              Stay informed
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              The next useful checks
+              What to check before pickup
             </h3>
           </div>
         </div>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           <div className="rounded-[20px] border border-black/6 bg-white px-4 py-4">
-            <p className="text-sm font-semibold text-[var(--foreground)]">Track live progress</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">Follow live progress</p>
             <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
               See the route line and current stop before leaving for pickup.
             </p>
           </div>
           <div className="rounded-[20px] border border-black/6 bg-white px-4 py-4">
-            <p className="text-sm font-semibold text-[var(--foreground)]">Check alerts first</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">Check service alerts</p>
             <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
-              Keep delay, service, and boarding changes visible in one feed.
+              Keep delay, route, and boarding changes visible in one feed.
             </p>
           </div>
           <div className="rounded-[20px] border border-black/6 bg-white px-4 py-4">
-            <p className="text-sm font-semibold text-[var(--foreground)]">Share with family</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">Confirm shared access</p>
             <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
-              Confirm who receives the same route and boarding updates.
+              Make sure the right guardian or staff contacts receive the same updates.
             </p>
           </div>
         </div>
@@ -294,11 +294,11 @@ export function MateTimetableView() {
               Timeline
             </p>
             <h3 className="mt-2 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Current and upcoming rides
+              Current and upcoming trips
             </h3>
           </div>
           <Link href="/mate/route" className="text-sm font-semibold text-[var(--accent-deep)]">
-            Open route
+            Open live route
           </Link>
         </div>
 
@@ -317,7 +317,7 @@ export function MateTimetableView() {
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Important update
+              Important now
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
               {latestAlert.title}
@@ -375,7 +375,7 @@ export function MateRouteView() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Active route
+              Selected trip
             </p>
             <h2 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
               {journey.direction}
@@ -402,7 +402,7 @@ export function MateRouteView() {
           </div>
           <div className="rounded-[18px] border border-black/6 bg-white px-4 py-4">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Up next
+              Next stop
             </p>
             <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">{nextStop?.name}</p>
             <p className="mt-2 text-xs text-[var(--foreground-soft)]">{journey.progress}</p>
@@ -418,7 +418,7 @@ export function MateRouteView() {
         </div>
 
         <div className="mt-5 grid grid-cols-2 gap-3">
-          <ActionLink href="/mate/alerts" label="View alerts" />
+          <ActionLink href="/mate/alerts" label="Open alerts" />
           <ActionLink href="/mate/family" label="Share ETA" emphasis />
         </div>
       </section>
@@ -434,7 +434,7 @@ export function MateRouteView() {
               Stops
             </p>
             <h3 className="mt-2 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Follow the route in order
+              Follow the trip stop by stop
             </h3>
           </div>
           <LocateFixed className="h-5 w-5 text-[var(--foreground-soft)]" />
@@ -501,14 +501,14 @@ export function MateAlertsView() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Important first
+              Attention now
             </p>
             <h2 className="mt-3 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
               {importantAlert.title}
             </h2>
           </div>
           <span className="rounded-full bg-white px-3 py-2 text-xs font-semibold text-[var(--accent-deep)]">
-            {getUnreadAlerts().length} unread
+            {getUnreadAlerts().length} new
           </span>
         </div>
         <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">{importantAlert.detail}</p>
@@ -518,10 +518,10 @@ export function MateAlertsView() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Filter
+              Filter updates
             </p>
             <h3 className="mt-2 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Route updates
+              Service feed
             </h3>
           </div>
           <TriangleAlert className="h-5 w-5 text-[var(--foreground-soft)]" />
@@ -572,10 +572,10 @@ export function MateAlertsView() {
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Delivery
+              Alert delivery
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Notification settings
+              Notification preferences
             </h3>
           </div>
         </div>
@@ -600,7 +600,7 @@ export function MateAlertsView() {
                     : "bg-[#f1f0ea] text-[var(--foreground-soft)]",
                 )}
               >
-                {preference.enabled ? "On" : "Off"}
+                {preference.enabled ? "Enabled" : "Off"}
               </span>
             </div>
           ))}
@@ -624,7 +624,7 @@ export function MateFamilyView() {
           {familyMembers.length} people follow the same ride
         </h2>
         <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
-          Boarding, ETA, and route changes stay synced from the same trip state.
+          ETA, boarding proof, and service changes stay synced from one live trip state.
         </p>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -700,7 +700,7 @@ export function MateFamilyView() {
               Shared now
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              What everyone can see
+              What shared access includes
             </h3>
           </div>
         </div>
@@ -711,15 +711,15 @@ export function MateFamilyView() {
             <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">{mateHero.eta}</p>
           </div>
           <div className="rounded-[18px] border border-black/6 bg-white px-4 py-4">
-            <p className="text-sm font-semibold text-[var(--foreground)]">Boarding updates</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">Boarding proof</p>
             <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
-              Shared when the rider boards or exits.
+              Shared when boarding or drop-off is confirmed.
             </p>
           </div>
           <div className="rounded-[18px] border border-black/6 bg-white px-4 py-4">
             <p className="text-sm font-semibold text-[var(--foreground)]">Service alerts</p>
             <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
-              Delay and route changes stay visible in the same feed.
+              Delay and route updates stay visible in the same feed.
             </p>
           </div>
         </div>

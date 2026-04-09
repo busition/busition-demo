@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s | Busition Mate",
   },
   description:
-    "Front-end rider and guardian mobile app for Busition with timetable, live route tracking, alerts, and shared family access.",
+    "Busition Mate gives riders and guardians live ETA, boarding confirmation, route progress, and service alerts in one mobile experience.",
 };
 
 export default function MateLayout({

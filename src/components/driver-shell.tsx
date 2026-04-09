@@ -18,23 +18,23 @@ const navItems = [
 
 const pageMeta: Record<string, { title: string; subtitle: string; status: string }> = {
   "/driver": {
-    title: "Drive now",
-    subtitle: "See the next stop and the next action first.",
-    status: "Next stop 5 min",
+    title: "Trip overview",
+    subtitle: "See the next stop, rider exceptions, and trip status without distraction.",
+    status: "ETA 5 min",
   },
   "/driver/boarding": {
-    title: "Boarding",
-    subtitle: "Work through the rider queue with fewer taps.",
+    title: "Boarding control",
+    subtitle: "Confirm riders quickly and resolve exceptions before departure.",
     status: "Queue active",
   },
   "/driver/route": {
-    title: "Route",
-    subtitle: "Keep the current stop and route line in view.",
-    status: "Driving now",
+    title: "Live route",
+    subtitle: "Keep the current stop, next stop, and route line visible while driving.",
+    status: "In service",
   },
   "/driver/profile": {
     title: "Support",
-    subtitle: "Vehicle checks, notices, and help in one place.",
+    subtitle: "Review vehicle readiness, notices, and support contacts for this shift.",
     status: "Shift ready",
   },
 };

@@ -277,7 +277,7 @@ function getDriverMatchScore(route: RouteAssignment, driver: DriverRecord) {
 
 function getDriverMatchReason(route: RouteAssignment, driver: DriverRecord) {
   if (driver.zone === route.zone) {
-    return "Same zone";
+    return "Same service zone";
   }
 
   if (driver.assignedRoute === "Standby coverage") {
@@ -391,24 +391,24 @@ export function ConsoleDashboardView() {
     (route) => route.status === "Live now" || route.status === "Ready",
   );
   const actionQueue = [
-    "Reassign the Hongik morning route before 07:20",
-    "Confirm EV swap status for Pangyo -> Gangnam 2",
-    "Review new guardian alert groups added overnight",
+    "Reassign Hongik Univ to Gangnam 1 before 07:20",
+    "Confirm the replacement vehicle for Pangyo to Gangnam 2",
+    "Review overnight guardian groups added to Campus Connect",
     "Publish the latest boarding digest for Sunrise Academy",
   ];
 
   return (
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
-        eyebrow="Operations home"
-        title="See urgent routes, action queue, and live health in one pass."
-        description="Operators should reach the next decision without scanning the whole product."
+        eyebrow="Operations overview"
+        title="See route risk, action queues, and live service health in one pass."
+        description="Busition Console should surface the next operational decision without forcing the desk to scan every page."
         actions={
           <Link
             href="/console/assignments"
             className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold"
           >
-            Open assignments
+            Open coverage desk
           </Link>
         }
       />
@@ -427,14 +427,14 @@ export function ConsoleDashboardView() {
                 Critical queue
               </p>
               <h3 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                Routes needing action first
+                Routes that need action first
               </h3>
             </div>
             <Link
               href="/console/assignments"
               className="text-sm font-semibold text-[var(--accent-deep)]"
             >
-              Go to board
+              Open coverage desk
             </Link>
           </div>
 
@@ -467,19 +467,19 @@ export function ConsoleDashboardView() {
 
         <div className="grid gap-6">
           <div className={surfaceClassName("p-6")}>
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-[rgba(255,154,31,0.1)] text-[var(--accent-deep)]">
-                <CheckCheck className="h-6 w-6" />
-              </div>
-              <div>
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-[rgba(255,154,31,0.1)] text-[var(--accent-deep)]">
+                  <CheckCheck className="h-6 w-6" />
+                </div>
+                <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
                   Action queue
                 </p>
-                <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                  What the desk should do next
-                </h3>
+                  <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
+                    What the desk should do next
+                  </h3>
+                </div>
               </div>
-            </div>
 
             <div className="mt-6 space-y-3">
               {actionQueue.map((item) => (
@@ -539,7 +539,7 @@ export function ConsoleDashboardView() {
               Live operations
             </p>
             <h3 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Routes already stable
+              Routes currently stable
             </h3>
           </div>
           <Link href="/console/drivers" className="text-sm font-semibold text-[var(--accent-deep)]">
@@ -632,20 +632,20 @@ export function ConsoleAssignmentsView() {
   return (
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
-        eyebrow="Driver assignment"
-        title="Move from route risk to confirmed coverage without leaving one screen."
-        description="Route queue, recommended drivers, and assignment actions stay aligned in a single workflow."
+        eyebrow="Coverage desk"
+        title="Move from route risk to confirmed coverage in one workflow."
+        description="Route queue, recommended drivers, and assignment actions stay aligned on the same screen."
         actions={
           <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-            Publish plan
+            Publish coverage plan
           </button>
         }
       />
 
       <section className="grid gap-4 sm:grid-cols-3">
-        <SummaryStat label="Routes need drivers" value={openCount.toString()} detail="Open coverage queue" />
-        <SummaryStat label="Delayed routes" value={delayedCount.toString()} detail="Needs follow-up" />
-        <SummaryStat label="Drivers ready now" value={availableCount.toString()} detail="Immediately assignable" />
+        <SummaryStat label="Open coverage gaps" value={openCount.toString()} detail="Needs assignment" />
+        <SummaryStat label="Routes at risk" value={delayedCount.toString()} detail="Needs follow-up" />
+        <SummaryStat label="Drivers available now" value={availableCount.toString()} detail="Immediately assignable" />
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[1fr_0.96fr]">
@@ -748,7 +748,7 @@ export function ConsoleAssignmentsView() {
 
               <div className="mt-6 rounded-[22px] border border-black/6 bg-[#fff8ef] p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-                  Ops note
+                  Operations note
                 </p>
                 <p className="mt-3 text-sm leading-7 text-[var(--foreground)]">{activeRoute.notes}</p>
               </div>
@@ -761,7 +761,7 @@ export function ConsoleAssignmentsView() {
                     Suggested coverage
                   </p>
                   <h3 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                    Choose the next best driver
+                    Choose the best next driver
                   </h3>
                 </div>
                 <button
@@ -769,7 +769,7 @@ export function ConsoleAssignmentsView() {
                   onClick={handleUnassign}
                   className="text-sm font-semibold text-[var(--foreground-soft)]"
                 >
-                  Clear
+                  Clear assignment
                 </button>
               </div>
 
@@ -817,7 +817,7 @@ export function ConsoleAssignmentsView() {
                   {currentDriver ? "Reassign driver" : "Assign driver"}
                 </button>
                 <button className="outline-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-                  Reserve as standby
+                  Reserve standby
                 </button>
               </div>
             </div>
@@ -853,9 +853,9 @@ export function ConsoleSchedulesView() {
   return (
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
-        eyebrow="Schedule manager"
-        title="Plan routes, departures, and publish impact together."
-        description="The planner keeps route selection, day changes, map context, and next actions in one workspace."
+        eyebrow="Schedule planning"
+        title="Plan departures and publish change impact together."
+        description="Route selection, day changes, map context, and publish steps stay aligned in one planning surface."
         actions={
           <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
             Save schedules
@@ -877,7 +877,7 @@ export function ConsoleSchedulesView() {
                 Route list
               </p>
               <h3 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                Active schedule sets
+                Route schedule sets
               </h3>
             </div>
 
@@ -916,7 +916,7 @@ export function ConsoleSchedulesView() {
                   {route.name}
                 </p>
                 <h3 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                  Departure list
+                  Scheduled departures
                 </h3>
               </div>
               <Clock3 className="h-5 w-5 text-[var(--foreground-soft)]" />
@@ -995,7 +995,7 @@ export function ConsoleSchedulesView() {
                 })
               ) : (
                 <div className="rounded-[24px] border border-dashed border-black/10 bg-white px-4 py-8 text-center text-sm text-[var(--foreground-soft)]">
-                  No departures scheduled for {activeDay}.
+                  No departures are scheduled for {activeDay}.
                 </div>
               )}
             </div>
@@ -1050,9 +1050,9 @@ export function ConsoleSchedulesView() {
                   </p>
                   <div className="mt-5 space-y-3">
                     {[
-                      "Update the day template",
-                      "Review rider notification timing",
-                      "Push the change to the driver app",
+                      "Update the route-day template",
+                      "Review rider and guardian notification timing",
+                      "Push schedule changes to Driver and Mate",
                       "Confirm departure windows before publish",
                     ].map((item) => (
                       <div
@@ -1105,28 +1105,28 @@ export function ConsoleDriversView() {
   const driverActions =
     selectedDriver?.status === "Available"
       ? [
-          "Assign to open route",
-          "Review latest shift summary",
+          "Assign to an open route",
+          "Review the latest shift summary",
           "Check route history before dispatch",
         ]
       : selectedDriver?.status === "Review"
         ? [
-            "Confirm vehicle handoff",
+            "Confirm the vehicle handoff",
             "Review check-in documents",
             "Clear the driver for assignment",
           ]
         : [
             "Review current trip status",
             "Check boarding accuracy",
-            "Prepare next standby move",
+            "Prepare the next standby move",
           ];
 
   return (
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
-        eyebrow="Driver management"
-        title="See who is ready, busy, or blocked without leaving the roster."
-        description="Search and filter first, then move straight into the next operator action for the selected driver."
+        eyebrow="Driver roster"
+        title="See who is ready, in service, or blocked without leaving the roster."
+        description="Search and filter first, then move directly to the next operator action for the selected driver."
         actions={
           <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
             Invite driver
@@ -1244,7 +1244,7 @@ export function ConsoleDriversView() {
 
               <div className="mt-6 rounded-[22px] border border-black/6 bg-[#fff8ef] px-4 py-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-                  Ops note
+                  Operations note
                 </p>
                 <p className="mt-3 text-sm leading-7 text-[var(--foreground)]">
                   {selectedDriver.note}
@@ -1262,7 +1262,7 @@ export function ConsoleDriversView() {
                     Next actions
                   </p>
                   <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                    What the operator can do next
+                    What the desk can do next
                   </h3>
                 </div>
               </div>
@@ -1300,12 +1300,12 @@ export function ConsoleOrganizationsView() {
   return (
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
-        eyebrow="Organization management"
-        title="Review launch state, access, and connected services in one place."
-        description="The organization view should answer who is live, who is preparing launch, and what each partner can use."
+        eyebrow="Partner organizations"
+        title="Review partner readiness, access, and enabled services in one place."
+        description="The organization view should show who is live, who is preparing launch, and what each partner can use today."
         actions={
           <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-            Create organization
+            Add organization
           </button>
         }
       />
@@ -1334,7 +1334,7 @@ export function ConsoleOrganizationsView() {
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                    Selected organization
+                    Selected partner
                   </p>
                   <h3 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
                     {selectedOrganization.name}

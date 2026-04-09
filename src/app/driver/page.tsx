@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { DriverTodayView } from "@/components/driver-app";
 
 export const metadata: Metadata = {
-  title: "Today's Trip",
+  title: "Trip Overview",
   description:
-    "Operational home for the Busition Driver mobile service.",
+    "Live trip overview for Busition Driver with next stop, queue status, and route actions.",
 };
 
 export default function DriverPage() {

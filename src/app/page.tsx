@@ -16,18 +16,18 @@ import { SiteShell } from "@/components/site-shell";
 
 const sharedSignals = [
   {
-    title: "Shared ETA",
-    detail: "Riders, guardians, and operators read the same arrival state.",
+    title: "Shared live ETA",
+    detail: "Every role sees the same arrival forecast and route progress in real time.",
     icon: Clock3,
   },
   {
-    title: "Boarding status",
-    detail: "Boarded, waiting, and delay events stay visible across roles.",
+    title: "Boarding visibility",
+    detail: "Boarded, waiting, and exception states stay visible the moment service changes.",
     icon: ShieldCheck,
   },
   {
-    title: "Route control",
-    detail: "Assignments and schedule changes stay tied to the same route flow.",
+    title: "Operational control",
+    detail: "Assignments, schedules, and alerts stay connected to the same trip state.",
     icon: Waypoints,
   },
 ];
@@ -36,10 +36,14 @@ const roleCards = [
   {
     id: "mate",
     title: "Mate",
-    summary: "For riders and guardians who need clear ETA, stop progress, and alerts.",
-    bullets: ["ETA and next stop first", "Alerts in one feed", "Shared family access"],
+    summary: "For riders and guardians who need dependable ETA, boarding confirmation, and service alerts.",
+    bullets: [
+      "See ETA and next stop at a glance",
+      "Receive boarding and delay updates in one feed",
+      "Share the same trip status with family or staff",
+    ],
     href: "/mate",
-    actionLabel: "Open Mate",
+    actionLabel: "Explore Mate",
     icon: UsersRound,
     preview: "/previews/mate-live-route-preview.png",
     previewAlt: "Busition Mate live route preview",
@@ -48,10 +52,14 @@ const roleCards = [
   {
     id: "driver",
     title: "Driver",
-    summary: "For drivers who need the next stop, boarding state, and route actions at a glance.",
-    bullets: ["Today view stays focused", "Route and boarding are one tap away", "Minimal motion-side reading"],
+    summary: "For drivers who need the next stop, rider queue, and route actions without extra distraction.",
+    bullets: [
+      "Keep the next action visible while driving",
+      "Resolve boarding exceptions quickly",
+      "Reach support and shift readiness from the same flow",
+    ],
     href: "/driver",
-    actionLabel: "Open Driver",
+    actionLabel: "Explore Driver",
     icon: BusFront,
     preview: "/previews/driver-today-trip-preview.png",
     previewAlt: "Busition Driver today trip preview",
@@ -60,10 +68,14 @@ const roleCards = [
   {
     id: "console",
     title: "Console",
-    summary: "For operators who need route readiness, assignments, and schedule control in one workspace.",
-    bullets: ["Priorities above narrative", "Fewer operator steps", "Route-first management"],
+    summary: "For operators who need live coverage, schedule control, and route health in one workspace.",
+    bullets: [
+      "Spot coverage gaps before service slips",
+      "Coordinate assignments, schedules, and partners together",
+      "Operate from live route and boarding data",
+    ],
     href: "/login?next=/console",
-    actionLabel: "Operator login",
+    actionLabel: "Open Console",
     icon: MapPinned,
     preview: "/previews/console-schedule-preview.png",
     previewAlt: "Busition Console schedule preview",
@@ -73,42 +85,42 @@ const roleCards = [
 
 const pricingPlans = [
   {
-    name: "Starter",
-    price: "Free",
-    detail: "For concept validation and early demos.",
+    name: "Pilot Launch",
+    price: "Contact us",
+    detail: "For first institutions replacing calls and uncertainty with live ETA and boarding visibility.",
     points: [
-      "Single-route preview",
-      "Mate and Driver walkthroughs",
-      "Basic route narrative",
+      "Initial route rollout and launch support",
+      "Mate, Driver, and Console access",
+      "Operational setup for live ETA and boarding proof",
     ],
     accent: false,
-    href: "#roles",
-    ctaLabel: "View roles",
+    href: "mailto:contact@wookingwoo.com?subject=Busition%20Pilot%20Launch",
+    ctaLabel: "Talk to us",
   },
   {
-    name: "Operator Pilot",
-    price: "$99 / mo",
-    detail: "For small teams testing real operator flows.",
+    name: "Multi-Route Ops",
+    price: "Custom",
+    detail: "For schools, academies, and campus shuttle teams running daily multi-role operations.",
     points: [
-      "Multi-role experience",
-      "Console access",
-      "Pilot-ready route planning",
+      "Shared trip state across every role",
+      "Coverage and schedule workflows in Console",
+      "Operator-grade alerts and service updates",
     ],
     accent: true,
     href: "/login?next=/console",
-    ctaLabel: "Open Console",
+    ctaLabel: "View Console",
   },
   {
-    name: "Enterprise Preview",
-    price: "Contact us",
-    detail: "For larger campus and commute rollouts. Pricing is available on request.",
+    name: "Enterprise Rollout",
+    price: "Custom",
+    detail: "For multi-site operators that need stronger rollout control, reporting, and partner coordination.",
     points: [
-      "Console-heavy setup",
-      "Multi-site storytelling",
-      "Driver, rider, and operator alignment",
+      "Multi-site organization management",
+      "Operational reporting and rollout planning",
+      "Implementation support from the Busition team",
     ],
     accent: false,
-    href: "mailto:contact@wookingwoo.com?subject=Busition%20Enterprise%20Preview",
+    href: "mailto:contact@wookingwoo.com?subject=Busition%20Enterprise%20Rollout",
     ctaLabel: "Contact sales",
   },
 ];
@@ -249,15 +261,15 @@ export default function Home() {
       <main>
         <section className="mx-auto grid max-w-[1240px] gap-12 px-4 pb-20 pt-12 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:pb-24 lg:pt-20">
           <div className="flex flex-col justify-center">
-            <div className="section-kicker">Shuttle service, made clear</div>
+            <div className="section-kicker">Real-time shuttle operations</div>
             <h1 className="mt-6 font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl xl:text-7xl">
-              One live route view
+              From live position
               <br />
-              for every role.
+              to operational certainty.
             </h1>
             <p className="mt-6 max-w-[560px] text-lg leading-8 text-[var(--foreground-soft)]">
-              Busition keeps riders, drivers, and operators on the same route state,
-              ETA, boarding updates, and service changes.
+              Busition keeps riders, guardians, drivers, and operators aligned on the
+              same live ETA, boarding status, delay updates, and route changes.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
@@ -265,13 +277,13 @@ export default function Home() {
                 href="#roles"
                 className="orange-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-transform hover:-translate-y-0.5"
               >
-                See roles
+                Explore the product
               </Link>
               <Link
                 href="/login?next=/console"
                 className="outline-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-colors hover:text-[var(--accent-deep)]"
               >
-                Operator login
+                Open Console
               </Link>
             </div>
 
@@ -300,11 +312,11 @@ export default function Home() {
             <div className="mx-auto max-w-[760px] text-center">
               <div className="section-kicker">Role overview</div>
               <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-5xl">
-                Three views, one service state.
+                Three products. One live operating state.
               </h2>
               <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                Each role gets a simpler surface, but every screen reads from the same
-                route progress and operating updates.
+                Each role gets a simpler interface, but every screen reads from the same
+                route progress, boarding certainty, and operating updates.
               </p>
             </div>
 
@@ -333,11 +345,11 @@ export default function Home() {
             <div>
               <div className="section-kicker">Direct entry</div>
               <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-5xl">
-                Enter the product by role.
+                Start with the surface built for your role.
               </h2>
               <p className="mt-5 max-w-[34rem] text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                Start with the view you need. Each route keeps the same service state,
-                but the UI stays focused on the job at hand.
+                The workflow changes by audience. The operational truth does not.
+                Each role stays focused on the job at hand without losing the shared trip state.
               </p>
             </div>
 
@@ -372,10 +384,10 @@ export default function Home() {
             <div className="mx-auto max-w-[760px] text-center">
               <div className="section-kicker">Pricing</div>
               <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-5xl">
-                Simple plans for launch and pilot.
+                Plans built for pilot launch and scale.
               </h2>
               <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                Keep pricing visible, but keep the choice simple.
+                Start with a controlled rollout, then expand as routes, riders, and partners grow.
               </p>
             </div>
 

@@ -17,7 +17,6 @@ import {
   driverMapMarkers,
   driverNotices,
   driverProfile,
-  driverQuickActions,
   driverRoutePath,
   driverShift,
   driverStops,
@@ -207,7 +206,7 @@ export function DriverTodayView() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Driving now
+              In service
             </p>
             <h2 className="mt-3 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
               {driverShift.nextStop}
@@ -248,7 +247,7 @@ export function DriverTodayView() {
 
         <div className="mt-5 grid grid-cols-3 gap-2">
           <ActionLink href="/driver/boarding" label="Boarding" emphasis />
-          <ActionLink href="/driver/route" label="Route" />
+          <ActionLink href="/driver/route" label="Live route" />
           <ActionLink href="/driver/profile" label="Support" />
         </div>
       </section>
@@ -263,26 +262,26 @@ export function DriverTodayView() {
               Focus now
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              What the driver needs next
+              What needs attention next
             </h3>
           </div>
         </div>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           <div className="rounded-[20px] border border-black/6 bg-white px-4 py-4">
-            <p className="text-sm font-semibold text-[var(--foreground)]">Open boarding fast</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">Confirm boarding before departure</p>
             <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
               Confirm waiting riders before leaving the stop.
             </p>
           </div>
           <div className="rounded-[20px] border border-black/6 bg-white px-4 py-4">
-            <p className="text-sm font-semibold text-[var(--foreground)]">Keep route visible</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">Keep route context visible</p>
             <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
               Current stop and next stop stay readable while driving.
             </p>
           </div>
           <div className="rounded-[20px] border border-black/6 bg-white px-4 py-4">
-            <p className="text-sm font-semibold text-[var(--foreground)]">Check support only when needed</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">Open support only when needed</p>
             <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
               Reach notices, contacts, and readiness without leaving the trip flow.
             </p>
@@ -297,10 +296,10 @@ export function DriverTodayView() {
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Attention queue
+              Exceptions queue
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Handle exceptions before they slow the route
+              Resolve service exceptions before they slow the route
             </h3>
           </div>
         </div>
@@ -357,7 +356,7 @@ export function DriverRouteView() {
               {driverShift.routeName}
             </h2>
             <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
-              Keep the current stop and next stop visible while the route stays active.
+              Keep the current stop, next stop, and occupancy visible while service is active.
             </p>
           </div>
           <span className="rounded-[18px] bg-[#f5f5f2] px-4 py-3 text-sm font-bold text-[var(--accent-deep)]">
@@ -512,7 +511,7 @@ export function DriverBoardingView() {
               Queue
             </p>
             <h3 className="mt-2 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Work from the highest priority first
+              Review the highest-priority riders first
             </h3>
           </div>
           <UsersRound className="h-5 w-5 text-[var(--foreground-soft)]" />
@@ -577,10 +576,10 @@ export function DriverBoardingView() {
 
           <div className="mt-5 grid grid-cols-2 gap-3">
             <button className="orange-button rounded-[18px] px-4 py-3 text-sm font-semibold">
-              Confirm boarded
+              Confirm boarding
             </button>
             <button className="rounded-[18px] border border-black/6 bg-white px-4 py-3 text-sm font-semibold text-[var(--foreground)]">
-              Manual check
+              Manual confirm
             </button>
           </div>
         </section>
@@ -594,7 +593,7 @@ export function DriverProfileView() {
     <div className="space-y-4">
       <section className="rounded-[30px] bg-[linear-gradient(135deg,#fff6e7_0%,#fff0d8_100%)] p-5 shadow-[0_18px_34px_rgba(255,154,31,0.12)]">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-          Support
+          Driver support
         </p>
         <h2 className="mt-3 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
           {driverShift.driverName}
@@ -619,14 +618,14 @@ export function DriverProfileView() {
               Readiness
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Vehicle and shift checks
+              Vehicle and shift readiness
             </h3>
           </div>
         </div>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           {[
-            { label: "Email", value: driverProfile.email },
+            { label: "Work email", value: driverProfile.email },
             { label: "Vehicle code", value: driverShift.vehicleCode },
             { label: "Vehicle", value: driverShift.vehicle },
             { label: "Plate", value: driverShift.plate },
@@ -663,7 +662,7 @@ export function DriverProfileView() {
               Support notices
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              What may interrupt the trip
+              What could interrupt service
             </h3>
           </div>
         </div>
@@ -685,7 +684,7 @@ export function DriverProfileView() {
             Contact support
           </button>
           <button className="rounded-[18px] border border-black/6 bg-white px-4 py-3 text-sm font-semibold text-[var(--foreground)]">
-            Logout
+            Sign out
           </button>
         </div>
       </section>

@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { MateTimetableView } from "@/components/mate-app";
 
 export const metadata: Metadata = {
-  title: "Timetable",
+  title: "Ride Overview",
   description:
-    "Operational timetable home for the Busition Mate mobile service.",
+    "Live ride overview for Busition Mate with ETA, boarding visibility, and important service updates.",
 };
 
 export default function MatePage() {

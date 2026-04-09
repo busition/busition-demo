@@ -18,23 +18,23 @@ const navItems = [
 
 const pageMeta: Record<string, { title: string; subtitle: string; status: string }> = {
   "/mate": {
-    title: "Ride status",
-    subtitle: "Check ETA, next stop, and key updates first.",
+    title: "Ride overview",
+    subtitle: "See ETA, boarding confirmation, and service updates in one place.",
     status: "ETA 6 min",
   },
   "/mate/route": {
     title: "Live route",
-    subtitle: "Track the current stop and what comes next.",
-    status: "Journey live",
+    subtitle: "Follow the current stop, next stop, and arrival progress in real time.",
+    status: "Trip live",
   },
   "/mate/alerts": {
-    title: "Alerts",
-    subtitle: "See important changes before the full feed.",
-    status: "1 unread",
+    title: "Service alerts",
+    subtitle: "Review boarding, delay, and route updates before they affect pickup.",
+    status: "1 new",
   },
   "/mate/family": {
-    title: "Sharing",
-    subtitle: "See who gets updates and what is shared.",
+    title: "Shared access",
+    subtitle: "Control who receives the same ride status and boarding proof.",
     status: "2 linked",
   },
 };

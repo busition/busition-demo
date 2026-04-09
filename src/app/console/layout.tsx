@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s | Busition Console",
   },
   description:
-    "Front-end operator console for Busition with route assignments, schedule planning, driver management, and organization controls.",
+    "Busition Console gives operators live coverage control, schedule planning, driver management, and partner operations in one workspace.",
 };
 
 export default function ConsoleLayout({
