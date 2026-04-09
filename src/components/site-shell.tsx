@@ -24,6 +24,11 @@ const footerLinks = [
   { href: "/login?next=/console", label: "Open Console" },
 ];
 
+const serviceLinkProps = {
+  target: "_blank",
+  rel: "noopener noreferrer",
+} as const;
+
 function cx(...classNames: Array<string | false | null | undefined>) {
   return classNames.filter(Boolean).join(" ");
 }
@@ -34,6 +39,10 @@ function isActive(pathname: string, href: string) {
   }
 
   return pathname.startsWith(href);
+}
+
+function isServiceEntryHref(href: string) {
+  return href === "/mate" || href === "/driver" || href === "/console" || href === "/login?next=/console";
 }
 
 export function SiteShell({ children }: SiteShellProps) {
@@ -54,6 +63,7 @@ export function SiteShell({ children }: SiteShellProps) {
               <Link
                 key={item.href}
                 href={item.href}
+                {...(isServiceEntryHref(item.href) ? serviceLinkProps : {})}
                 className={cx(
                   "text-sm font-semibold transition-colors",
                   isActive(pathname, item.href)
@@ -69,6 +79,7 @@ export function SiteShell({ children }: SiteShellProps) {
           <div className="hidden lg:block">
             <Link
               href="/login?next=/console"
+              {...serviceLinkProps}
               className="orange-button rounded-xl px-4 py-2 text-sm font-semibold transition-transform hover:-translate-y-0.5"
             >
               Open Console
@@ -92,6 +103,7 @@ export function SiteShell({ children }: SiteShellProps) {
                 <Link
                   key={item.href}
                   href={item.href}
+                  {...(isServiceEntryHref(item.href) ? serviceLinkProps : {})}
                   onClick={() => setMobileOpen(false)}
                   className={cx(
                     "rounded-2xl px-4 py-3 text-sm font-semibold",
@@ -106,6 +118,7 @@ export function SiteShell({ children }: SiteShellProps) {
 
               <Link
                 href="/login?next=/console"
+                {...serviceLinkProps}
                 onClick={() => setMobileOpen(false)}
                 className="orange-button mt-2 rounded-2xl px-4 py-3 text-center text-sm font-semibold"
               >
@@ -148,6 +161,7 @@ export function SiteShell({ children }: SiteShellProps) {
                 <Link
                   key={link.href}
                   href={link.href}
+                  {...(isServiceEntryHref(link.href) ? serviceLinkProps : {})}
                   className="transition-colors hover:text-[var(--accent-deep)]"
                 >
                   {link.label}

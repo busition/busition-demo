@@ -133,6 +133,11 @@ const pricingPlans: PricingPlan[] = [
   },
 ];
 
+const serviceLinkProps = {
+  target: "_blank",
+  rel: "noopener noreferrer",
+} as const;
+
 function cx(...classNames: Array<string | false | null | undefined>) {
   return classNames.filter(Boolean).join(" ");
 }
@@ -232,6 +237,7 @@ function RoleOverviewSection({
         <div className="mt-7">
           <Link
             href={href}
+            {...serviceLinkProps}
             className="orange-button inline-flex items-center gap-2 rounded-[18px] px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5"
           >
             {actionLabel}
@@ -377,6 +383,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="/login?next=/console"
+                  {...serviceLinkProps}
                   className="outline-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-colors hover:text-[var(--accent-deep)]"
                 >
                   Open Console
@@ -441,6 +448,7 @@ export default function Home() {
                 <Link
                   key={role.id}
                   href={role.href}
+                  {...serviceLinkProps}
                   className="concept-card rounded-[30px] p-6 transition-transform hover:-translate-y-1"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
