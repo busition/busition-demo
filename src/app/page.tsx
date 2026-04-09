@@ -247,25 +247,44 @@ function PricingPlanCard({ plan }: { plan: PricingPlan }) {
   return (
     <article
       className={cx(
-        "flex h-full flex-col rounded-[28px] border bg-white/92 p-6 shadow-[0_14px_32px_rgba(23,23,23,0.04)] sm:p-7",
-        plan.featured ? "border-[rgba(255,154,31,0.22)]" : "border-[var(--line)]",
+        "concept-card flex h-full flex-col rounded-[30px] p-6 sm:p-7",
+        plan.featured &&
+          "border-[rgba(255,154,31,0.22)] bg-[linear-gradient(180deg,rgba(255,247,234,0.9)_0%,rgba(255,255,255,0.96)_100%)] shadow-[0_18px_36px_rgba(255,154,31,0.08)]",
       )}
     >
       <div className="flex h-full flex-col">
-        <h3 className="text-[1.75rem] font-bold tracking-[-0.05em] text-[var(--foreground)]">
+        <div
+          className={cx(
+            "h-1.5 w-12 rounded-full bg-[rgba(35,35,35,0.12)]",
+            plan.featured && "bg-[linear-gradient(90deg,var(--accent)_0%,var(--accent-strong)_100%)]",
+          )}
+        />
+        <h3 className="mt-5 text-[1.75rem] font-bold tracking-[-0.05em] text-[var(--foreground)]">
           {plan.name}
         </h3>
-        <p className="mt-4 text-4xl font-bold tracking-[-0.06em] text-[var(--foreground)]">
+        <p
+          className={cx(
+            "mt-5 text-4xl font-bold tracking-[-0.06em] text-[var(--foreground)]",
+            plan.featured && "text-[var(--accent-deep)]",
+          )}
+        >
           {plan.price}
         </p>
         <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
           {plan.detail}
         </p>
 
-        <ul className="mt-6 space-y-2 border-t border-[var(--line)] pt-5">
+        <ul className="mt-6 space-y-3 border-t border-[var(--line)] pt-5">
           {plan.points.map((point) => (
-            <li key={point} className="ml-4 list-disc pl-1 text-sm leading-6 text-[var(--foreground)] marker:text-[var(--foreground-soft)]">
-              {point}
+            <li key={point} className="flex items-start gap-3 text-sm leading-6 text-[var(--foreground)]">
+              <span
+                aria-hidden="true"
+                className={cx(
+                  "mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[rgba(35,35,35,0.22)]",
+                  plan.featured && "bg-[var(--accent)]",
+                )}
+              />
+              <span>{point}</span>
             </li>
           ))}
         </ul>
@@ -274,8 +293,8 @@ function PricingPlanCard({ plan }: { plan: PricingPlan }) {
           <Link
             href={plan.href}
             className={cx(
-              "inline-flex items-center gap-2 text-sm font-semibold transition-colors",
-              plan.featured ? "text-[var(--accent-deep)]" : "text-[var(--foreground)] hover:text-[var(--accent-deep)]",
+              "inline-flex w-full items-center justify-center gap-2 rounded-[18px] px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5",
+              plan.featured ? "orange-button" : "outline-button text-[var(--foreground)]",
             )}
           >
             {plan.ctaLabel}
