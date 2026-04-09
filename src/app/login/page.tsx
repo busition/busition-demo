@@ -14,11 +14,27 @@ export const metadata: Metadata = {
 
 function LoginFormFallback() {
   return (
-    <div className="rounded-[34px] border border-[rgba(35,35,35,0.08)] bg-white/92 p-6 shadow-[0_24px_60px_rgba(26,26,26,0.08)] backdrop-blur sm:p-8">
-      <div className="space-y-4">
-        <div className="h-4 w-28 rounded-full bg-[#ece9e0]" />
-        <div className="h-10 w-3/4 rounded-[18px] bg-[#f3f1ea]" />
-        <div className="h-14 rounded-[18px] bg-[#f3f1ea]" />
+    <div className="rounded-[38px] border border-[rgba(35,35,35,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(248,248,244,0.98)_100%)] p-6 shadow-[0_30px_80px_rgba(26,26,26,0.12)] backdrop-blur sm:p-8">
+      <div className="flex items-center justify-between gap-4">
+        <div className="h-9 w-32 rounded-full bg-[#ece9e0]" />
+        <div className="h-9 w-28 rounded-full bg-[#f3f1ea]" />
+      </div>
+
+      <div className="mt-6 h-4 w-24 rounded-full bg-[#ece9e0]" />
+      <div className="mt-4 h-11 w-2/3 rounded-[18px] bg-[#f3f1ea]" />
+      <div className="mt-3 h-5 w-full max-w-[24rem] rounded-full bg-[#f5f2ea]" />
+
+      <div className="mt-8 rounded-[26px] border border-[rgba(35,35,35,0.06)] bg-[#fcfbf7] p-5">
+        <div className="h-4 w-32 rounded-full bg-[#ece9e0]" />
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="h-20 rounded-[18px] bg-[#f3f1ea]" />
+          <div className="h-20 rounded-[18px] bg-[#f3f1ea]" />
+        </div>
+      </div>
+
+      <div className="mt-8 space-y-4">
+        <div className="h-24 rounded-[20px] bg-[#f3f1ea]" />
+        <div className="h-24 rounded-[20px] bg-[#f3f1ea]" />
         <div className="h-14 rounded-[18px] bg-[#f3f1ea]" />
         <div className="h-14 rounded-[20px] bg-[#ffe1ba]" />
       </div>
@@ -28,8 +44,25 @@ function LoginFormFallback() {
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(255,193,71,0.2),transparent_20%),linear-gradient(180deg,#fffdfa_0%,#f7f6f0_48%,#eef2f6_100%)]">
-      <div className="mx-auto flex max-w-[1160px] flex-col px-4 pb-16 pt-6 sm:px-6 lg:px-8 lg:pb-24 lg:pt-8">
+    <main className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#fffefb_0%,#f7f5ef_50%,#edf2f7_100%)]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[340px] bg-[radial-gradient(circle_at_top,rgba(255,194,88,0.28),transparent_58%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-[22%] h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.82)_0%,rgba(255,255,255,0)_72%)] blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-24 top-28 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(255,214,151,0.34)_0%,rgba(255,214,151,0)_70%)] blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 bottom-12 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(186,219,255,0.28)_0%,rgba(186,219,255,0)_70%)] blur-3xl"
+      />
+
+      <div className="relative mx-auto flex min-h-screen max-w-[1120px] flex-col px-4 pb-10 pt-6 sm:px-6 lg:px-8 lg:pt-8">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" aria-label="Busition home">
             <BusitionLogo compact />
@@ -43,34 +76,8 @@ export default function LoginPage() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
-          <section className="rounded-[36px] border border-[rgba(35,35,35,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88)_0%,rgba(248,248,243,0.96)_100%)] p-7 shadow-[0_24px_60px_rgba(24,24,24,0.08)] sm:p-8">
-            <p className="section-kicker">Console access</p>
-            <h2 className="mt-6 max-w-[12ch] font-display text-4xl font-semibold tracking-[-0.07em] text-[var(--foreground)] sm:text-5xl">
-              Access the operating desk.
-            </h2>
-            <p className="mt-5 max-w-[34rem] text-base leading-8 text-[var(--foreground-soft)]">
-              Sign in with the preview workspace to review live routes, coverage gaps,
-              schedule changes, and partner readiness.
-            </p>
-
-            <div className="mt-8 grid gap-3">
-              {[
-                "One workspace for live route health and exceptions.",
-                "Coverage, schedules, drivers, and partners stay connected.",
-                "Preview access opens directly into the Console workflow.",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-[20px] border border-[var(--line)] bg-white/88 px-4 py-4 text-sm font-semibold text-[var(--foreground)]"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
+        <div className="flex flex-1 items-center justify-center py-10 sm:py-14 lg:py-16">
+          <section className="w-full max-w-[560px]">
             <Suspense fallback={<LoginFormFallback />}>
               <OperatorLoginForm />
             </Suspense>
