@@ -209,14 +209,9 @@ function RoleOverviewSection({
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
             <Icon className="h-5 w-5" />
           </div>
-          <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-              Role
-            </p>
-            <h3 className="mt-1 text-3xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              {title}
-            </h3>
-          </div>
+          <h3 className="text-3xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
+            {title}
+          </h3>
         </div>
 
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
