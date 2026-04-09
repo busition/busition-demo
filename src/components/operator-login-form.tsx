@@ -68,8 +68,8 @@ export function OperatorLoginForm() {
   return (
     <div className="rounded-[38px] border border-[rgba(35,35,35,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.97)_0%,rgba(248,248,244,0.98)_100%)] p-6 shadow-[0_30px_80px_rgba(26,26,26,0.12)] backdrop-blur sm:p-8">
       <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-          <div className="max-w-[24rem]">
+        <div className="max-w-[24rem]">
+          <div>
             <p className="section-kicker">Console access</p>
             <h1 className="mt-5 font-display text-3xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-4xl">
               Operator sign in
@@ -78,18 +78,10 @@ export function OperatorLoginForm() {
               Open the preview console to review routes, schedules, assignments, and live operations.
             </p>
           </div>
-
-          <button
-            type="button"
-            onClick={fillDemoCredentials}
-            className="inline-flex h-11 items-center justify-center rounded-full border border-[rgba(255,154,31,0.24)] bg-[rgba(255,154,31,0.1)] px-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent-deep)] transition-colors hover:bg-[rgba(255,154,31,0.16)]"
-          >
-            Autofill demo
-          </button>
         </div>
 
         <div className="rounded-[26px] border border-[rgba(255,154,31,0.16)] bg-[linear-gradient(180deg,rgba(255,248,238,0.98)_0%,rgba(255,255,255,0.92)_100%)] p-5">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent-deep)]">
                 Preview workspace
@@ -99,9 +91,13 @@ export function OperatorLoginForm() {
               </p>
             </div>
 
-            <span className="rounded-full border border-white/70 bg-white/80 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Live demo
-            </span>
+            <button
+              type="button"
+              onClick={fillDemoCredentials}
+              className="inline-flex h-11 shrink-0 items-center justify-center rounded-full border border-[rgba(255,154,31,0.24)] bg-[rgba(255,154,31,0.1)] px-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent-deep)] transition-colors hover:bg-[rgba(255,154,31,0.16)]"
+            >
+              Autofill demo
+            </button>
           </div>
 
           <button
