@@ -1,132 +1,234 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BusFront, Clock3, GraduationCap, MapPinned, School, ShieldCheck, UsersRound, Waypoints } from "lucide-react";
-
+import type { ComponentType } from "react";
 import {
-  BrowserFrame,
-  OrbitRoleMap,
-  PhoneFrame,
-} from "@/components/mockup-screens";
+  ArrowRight,
+  BusFront,
+  Clock3,
+  MapPinned,
+  ShieldCheck,
+  UsersRound,
+  Waypoints,
+} from "lucide-react";
+
+import { BrowserFrame, PhoneFrame } from "@/components/mockup-screens";
 import { SiteShell } from "@/components/site-shell";
 
-const featureCards = [
+const sharedSignals = [
   {
-    title: "Live ETA for riders and guardians",
-    description:
-      "The ride stops feeling vague. Busition changes 'where is it?' into a shared countdown with current stop context.",
+    title: "Shared ETA",
+    detail: "Riders, guardians, and operators read the same arrival state.",
     icon: Clock3,
   },
   {
-    title: "Boarding proof with less manual follow-up",
-    description:
-      "Drivers, guardians, and operators all read from the same boarding state instead of fragmented calls and spreadsheets.",
+    title: "Boarding status",
+    detail: "Boarded, waiting, and delay events stay visible across roles.",
     icon: ShieldCheck,
   },
   {
-    title: "Service orchestration for operators",
-    description:
-      "Assignments, schedules, delay handling, and route changes live in one operator console instead of separate tools.",
+    title: "Route control",
+    detail: "Assignments and schedule changes stay tied to the same route flow.",
     icon: Waypoints,
   },
 ];
 
-const serviceLinks = [
+const roleCards = [
   {
+    id: "mate",
+    title: "Mate",
+    summary: "For riders and guardians who need clear ETA, stop progress, and alerts.",
+    bullets: ["ETA and next stop first", "Alerts in one feed", "Shared family access"],
     href: "/mate",
-    title: "Busition for Mate",
-    description: "Open the actual rider and guardian mobile service experience.",
+    actionLabel: "Open Mate",
     icon: UsersRound,
-    openInNewTab: true,
+    preview: "/previews/mate-live-route-preview.png",
+    previewAlt: "Busition Mate live route preview",
+    frame: "phone" as const,
   },
   {
+    id: "driver",
+    title: "Driver",
+    summary: "For drivers who need the next stop, boarding state, and route actions at a glance.",
+    bullets: ["Today view stays focused", "Route and boarding are one tap away", "Minimal motion-side reading"],
     href: "/driver",
-    title: "Busition for Driver",
-    description: "Open the actual route-first driver mobile service experience.",
+    actionLabel: "Open Driver",
     icon: BusFront,
-    openInNewTab: true,
+    preview: "/previews/driver-today-trip-preview.png",
+    previewAlt: "Busition Driver today trip preview",
+    frame: "phone" as const,
   },
   {
-    href: "/console",
-    title: "Busition for Console",
-    description: "Open the actual multi-page operator console service.",
+    id: "console",
+    title: "Console",
+    summary: "For operators who need route readiness, assignments, and schedule control in one workspace.",
+    bullets: ["Priorities above narrative", "Fewer operator steps", "Route-first management"],
+    href: "/login?next=/console",
+    actionLabel: "Operator login",
     icon: MapPinned,
-    openInNewTab: true,
+    preview: "/previews/console-schedule-preview.png",
+    previewAlt: "Busition Console schedule preview",
+    frame: "browser" as const,
   },
 ];
 
-const packages = [
+const pricingPlans = [
   {
     name: "Starter",
     price: "Free",
-    accent: false,
+    detail: "For concept validation and early demos.",
     points: [
-      "Single-route concept validation",
-      "Basic route and rider preview",
-      "Mate and Driver screen walkthroughs",
-      "Pilot narrative for stakeholder meetings",
+      "Single-route preview",
+      "Mate and Driver walkthroughs",
+      "Basic route narrative",
     ],
+    accent: false,
+    href: "#roles",
+    ctaLabel: "View roles",
   },
   {
     name: "Operator Pilot",
     price: "$99 / mo",
-    accent: true,
+    detail: "For small teams testing real operator flows.",
     points: [
-      "Multi-role site experience",
-      "Operator console preview",
-      "Pilot launch structure and route planning narrative",
-      "Best for academies and small shuttle teams",
+      "Multi-role experience",
+      "Console access",
+      "Pilot-ready route planning",
     ],
+    accent: true,
+    href: "/login?next=/console",
+    ctaLabel: "Open Console",
   },
   {
     name: "Enterprise Preview",
-    price: "$490 / mo",
-    accent: false,
+    price: "Contact us",
+    detail: "For larger campus and commute rollouts. Pricing is available on request.",
     points: [
-      "Multi-site shuttle storytelling",
-      "Console-heavy rollout proposal",
-      "Driver, rider, and operator flow alignment",
-      "Best for universities and enterprise commutes",
+      "Console-heavy setup",
+      "Multi-site storytelling",
+      "Driver, rider, and operator alignment",
     ],
+    accent: false,
+    href: "mailto:contact@wookingwoo.com?subject=Busition%20Enterprise%20Preview",
+    ctaLabel: "Contact sales",
   },
 ];
 
-function MatePreviewPhone({ className = "" }: { className?: string }) {
-  return (
-    <PhoneFrame className={className}>
-      <Image
-        src="/previews/mate-live-route-preview.png"
-        alt="Busition Mate live route preview"
-        width={523}
-        height={1149}
-        className="h-auto w-full"
-        priority
-      />
-    </PhoneFrame>
-  );
+function cx(...classNames: Array<string | false | null | undefined>) {
+  return classNames.filter(Boolean).join(" ");
 }
 
-function DriverPreviewPhone({ className = "" }: { className?: string }) {
+function RolePreview({
+  frame,
+  preview,
+  previewAlt,
+}: {
+  frame: "phone" | "browser";
+  preview: string;
+  previewAlt: string;
+}) {
+  const image = (
+    <Image
+      src={preview}
+      alt={previewAlt}
+      width={frame === "phone" ? 523 : 1899}
+      height={frame === "phone" ? 1149 : 1102}
+      className="h-auto w-full"
+    />
+  );
+
+  if (frame === "phone") {
+    return <PhoneFrame>{image}</PhoneFrame>;
+  }
+
+  return <BrowserFrame>{image}</BrowserFrame>;
+}
+
+function RoleOverviewSection({
+  title,
+  summary,
+  bullets,
+  href,
+  actionLabel,
+  icon: Icon,
+  preview,
+  previewAlt,
+  frame,
+  reverse = false,
+}: {
+  title: string;
+  summary: string;
+  bullets: string[];
+  href: string;
+  actionLabel: string;
+  icon: ComponentType<{ className?: string }>;
+  preview: string;
+  previewAlt: string;
+  frame: "phone" | "browser";
+  reverse?: boolean;
+}) {
   return (
-    <PhoneFrame className={className}>
-      <Image
-        src="/previews/driver-today-trip-preview.png"
-        alt="Busition Driver today's trip preview"
-        width={522}
-        height={1084}
-        className="h-auto w-full"
-      />
-    </PhoneFrame>
+    <article
+      className={cx(
+        "grid items-center gap-10 py-12 lg:grid-cols-[0.96fr_1.04fr] lg:gap-14",
+        reverse && "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1",
+      )}
+    >
+      <div className="flex items-center justify-center">
+        <div className="w-full rounded-[32px] bg-[linear-gradient(180deg,#fffdf8_0%,#f6f7f4_100%)] p-5 sm:p-7">
+          <RolePreview frame={frame} preview={preview} previewAlt={previewAlt} />
+        </div>
+      </div>
+
+      <div className="max-w-[520px]">
+        <div className="flex items-center gap-3">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
+            <Icon className="h-5 w-5" />
+          </div>
+          <div>
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
+              Role
+            </p>
+            <h3 className="mt-1 text-3xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
+              {title}
+            </h3>
+          </div>
+        </div>
+
+        <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+          {summary}
+        </p>
+
+        <div className="mt-6 space-y-3">
+          {bullets.map((bullet) => (
+            <div
+              key={bullet}
+              className="rounded-[18px] border border-[var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[var(--foreground)]"
+            >
+              {bullet}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-7">
+          <Link
+            href={href}
+            className="orange-button inline-flex items-center gap-2 rounded-[18px] px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5"
+          >
+            {actionLabel}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
 
 function HeroVisual() {
   return (
-    <div className="relative h-[460px] w-full lg:h-[540px]">
-      <div className="absolute inset-x-10 top-6 h-24 rounded-full bg-[radial-gradient(circle,rgba(255,208,92,0.42)_0%,rgba(255,208,92,0)_72%)] blur-3xl" />
-      <div className="absolute inset-y-16 left-0 w-40 rounded-full bg-[radial-gradient(circle,rgba(255,180,58,0.22)_0%,rgba(255,180,58,0)_78%)] blur-3xl" />
-
-      <div className="relative h-full overflow-hidden rounded-[42px] border border-[rgba(255,182,72,0.18)] bg-[linear-gradient(180deg,#fffaf1_0%,#fffefb_48%,#ffffff_100%)] shadow-[0_30px_80px_rgba(255,166,35,0.12)]">
-        <div className="absolute inset-0 flex items-center justify-center px-2 py-6 sm:px-5">
+    <div className="relative h-[420px] w-full lg:h-[520px]">
+      <div className="absolute inset-x-10 top-6 h-24 rounded-full bg-[radial-gradient(circle,rgba(255,208,92,0.32)_0%,rgba(255,208,92,0)_72%)] blur-3xl" />
+      <div className="relative h-full overflow-hidden rounded-[40px] border border-[rgba(255,182,72,0.16)] bg-[linear-gradient(180deg,#fffaf1_0%,#fffefb_44%,#ffffff_100%)] shadow-[0_24px_64px_rgba(255,166,35,0.1)]">
+        <div className="absolute inset-0 flex items-center justify-center px-4 py-6">
           <Image
             src="/illustrations/busition-connected-route-hero.png"
             alt="Busition shuttle service illustration showing a connected route experience across bus and mobile interface."
@@ -141,285 +243,122 @@ function HeroVisual() {
   );
 }
 
-function FeatureSection({
-  ctaHref,
-  ctaLabel,
-  ctaOpenInNewTab = false,
-  id,
-  reverse = false,
-  title,
-  description,
-  eyebrow,
-  bullets,
-  children,
-}: {
-  ctaHref?: string;
-  ctaLabel?: string;
-  ctaOpenInNewTab?: boolean;
-  id?: string;
-  reverse?: boolean;
-  title: string;
-  description: string;
-  eyebrow: string;
-  bullets: string[];
-  children: React.ReactNode;
-}) {
-  return (
-    <section id={id} className="scroll-mt-28 py-16 sm:py-20">
-      <div
-        className={`grid items-center gap-12 lg:grid-cols-2 ${reverse ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1" : ""}`}
-      >
-        <div>{children}</div>
-        <div className="max-w-[520px]">
-          <div className="section-kicker">{eyebrow}</div>
-          <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-5xl">
-            {title}
-          </h2>
-          <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-            {description}
-          </p>
-          <div className="mt-8 space-y-3">
-            {bullets.map((bullet) => (
-              <div
-                key={bullet}
-                className="flex items-start gap-3 rounded-[20px] border border-[var(--line)] bg-white px-4 py-3"
-              >
-                <span className="mt-2 h-2 w-2 rounded-full bg-[var(--accent)]" />
-                <p className="text-sm leading-7 text-[var(--foreground)]">{bullet}</p>
-              </div>
-            ))}
-          </div>
-          {ctaHref && ctaLabel ? (
-            <div className="mt-8">
-              <Link
-                href={ctaHref}
-                target={ctaOpenInNewTab ? "_blank" : undefined}
-                rel={ctaOpenInNewTab ? "noopener noreferrer" : undefined}
-                className="orange-button inline-flex items-center gap-2 rounded-[18px] px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5"
-              >
-                {ctaLabel}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function Home() {
   return (
     <SiteShell>
       <main>
-        <section className="mx-auto grid max-w-[1240px] gap-12 px-4 pb-20 pt-12 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:pb-28 lg:pt-20">
+        <section className="mx-auto grid max-w-[1240px] gap-12 px-4 pb-20 pt-12 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:pb-24 lg:pt-20">
           <div className="flex flex-col justify-center">
-            <h1 className="font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl xl:text-7xl">
-              A smarter beginning
+            <div className="section-kicker">Shuttle service, made clear</div>
+            <h1 className="mt-6 font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl xl:text-7xl">
+              One live route view
               <br />
-              for shuttle service.
+              for every role.
             </h1>
             <p className="mt-6 max-w-[560px] text-lg leading-8 text-[var(--foreground-soft)]">
-              Busition turns shuttle operations into one connected service flow.
-              Riders, guardians, drivers, and operators all see the same route
-              state, ETA, boarding signal, and service update in real time.
+              Busition keeps riders, drivers, and operators on the same route state,
+              ETA, boarding updates, and service changes.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
               <Link
-                href="/#mate-experience"
+                href="#roles"
                 className="orange-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-transform hover:-translate-y-0.5"
               >
-                Explore Mate
+                See roles
               </Link>
               <Link
-                href="/#console-experience"
+                href="/login?next=/console"
                 className="outline-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-colors hover:text-[var(--accent-deep)]"
               >
-                View Console
+                Operator login
               </Link>
             </div>
 
-            <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              <div className="concept-card rounded-[26px] px-5 py-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                  Launch model
-                </p>
-                <p className="mt-3 text-2xl font-bold text-[var(--foreground)]">
-                  No extra hardware
-                </p>
-              </div>
-              <div className="concept-card rounded-[26px] px-5 py-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                  Core promise
-                </p>
-                <p className="mt-3 text-2xl font-bold text-[var(--foreground)]">
-                  One live operating view
-                </p>
-              </div>
+            <div className="mt-10 grid gap-3 sm:grid-cols-3">
+              {sharedSignals.map((signal) => (
+                <div key={signal.title} className="concept-card rounded-[24px] px-5 py-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
+                    <signal.icon className="h-5 w-5" />
+                  </div>
+                  <p className="mt-4 text-base font-bold text-[var(--foreground)]">
+                    {signal.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-[var(--foreground-soft)]">
+                    {signal.detail}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
 
           <HeroVisual />
         </section>
 
-        <section className="concept-band py-20 sm:py-24">
+        <section id="roles" className="concept-band py-20 sm:py-24">
           <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-[760px] text-center">
-              <div className="section-kicker">Connected roles</div>
+              <div className="section-kicker">Role overview</div>
               <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-5xl">
-                Driver, rider, guardian, and operator belong to the same route.
+                Three views, one service state.
               </h2>
               <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                The original concepts were clear about one thing: the value is not
-                a single app screen. The value is the fact that every role reads
-                the same service reality instead of separate assumptions.
+                Each role gets a simpler surface, but every screen reads from the same
+                route progress and operating updates.
               </p>
             </div>
 
-            <div className="mt-16">
-              <OrbitRoleMap />
+            <div className="mt-14 divide-y divide-[rgba(35,35,35,0.08)]">
+              {roleCards.map((role, index) => (
+                <RoleOverviewSection
+                  key={role.id}
+                  title={role.title}
+                  summary={role.summary}
+                  bullets={role.bullets}
+                  href={role.href}
+                  actionLabel={role.actionLabel}
+                  icon={role.icon}
+                  preview={role.preview}
+                  previewAlt={role.previewAlt}
+                  frame={role.frame}
+                  reverse={index % 2 === 1}
+                />
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
-          <FeatureSection
-            ctaHref="/mate"
-            ctaLabel="Open Mate service"
-            ctaOpenInNewTab
-            id="mate-experience"
-            eyebrow="Mate experience"
-            title="Live arrival guidance that makes waiting feel predictable."
-            description="The mobile concept work focused on a very practical experience: riders and guardians should know how far the route has progressed, what stop is next, and whether the shuttle is worth waiting for."
-            bullets={[
-              "Show the next stop, route path, and stop-by-stop progress.",
-              "Turn vague waiting into a route-aware ETA with actual context.",
-              "Keep the structure light enough for schools, campuses, and private shuttle programs.",
-            ]}
-          >
-            <div className="relative flex items-center justify-center">
-              <MatePreviewPhone className="animate-float-mid scale-[0.92] sm:scale-100" />
-              <div className="absolute -bottom-2 left-4 hidden rounded-[24px] border border-[rgba(255,154,31,0.16)] bg-white/92 px-5 py-4 shadow-[0_18px_36px_rgba(26,26,26,0.08)] backdrop-blur sm:block">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-                  Static concept image
-                </p>
-                <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
-                  Live route preview for riders and guardians
-                </p>
-              </div>
-            </div>
-          </FeatureSection>
-
-          <FeatureSection
-            ctaHref="/driver"
-            ctaLabel="Open Driver service"
-            ctaOpenInNewTab
-            id="driver-experience"
-            reverse
-            eyebrow="Driver experience"
-            title="A route-first mobile workspace that keeps the next action obvious."
-            description="The driver concept focused on clarity under motion. Instead of treating drivers like desk users, Busition keeps shift timing, next stop, vehicle state, and trip summary visible in one calm mobile surface."
-            bullets={[
-              "Keep shift window, next stop, and vehicle context on the first screen.",
-              "Reduce taps for mounted-phone usage during live shuttle operation.",
-              "Make trip progress readable without burying boarding or seat state.",
-            ]}
-          >
-            <div className="relative flex items-center justify-center">
-              <DriverPreviewPhone className="animate-float-mid scale-[0.92] sm:scale-100" />
-              <div className="absolute -bottom-2 right-4 hidden rounded-[24px] border border-[rgba(255,154,31,0.16)] bg-white/92 px-5 py-4 shadow-[0_18px_36px_rgba(26,26,26,0.08)] backdrop-blur sm:block">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-                  Static concept image
-                </p>
-                <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
-                  Today&apos;s trip preview for route-first drivers
-                </p>
-              </div>
-            </div>
-          </FeatureSection>
-
-          <FeatureSection
-            ctaHref="/console"
-            ctaLabel="Open Console service"
-            ctaOpenInNewTab
-            id="console-experience"
-            reverse
-            eyebrow="Console experience"
-            title="A console that looks like an operator tool, not a generic dashboard."
-            description="The desktop concepts pointed toward route assignment, schedule management, and map-assisted operations. The site now follows that structure instead of abstract landing-page patterns."
-            bullets={[
-              "Assign drivers and vehicles from a route-centric grid.",
-              "Edit schedules with day-based controls and stop ordering.",
-              "Keep route structure and geography visible in the same screen flow.",
-            ]}
-          >
-            <BrowserFrame>
-              <Image
-                src="/previews/console-schedule-preview.png"
-                alt="Busition Console schedule manager preview"
-                width={1899}
-                height={1102}
-                className="h-auto w-full"
-              />
-            </BrowserFrame>
-          </FeatureSection>
-
-          <section className="py-16 sm:py-20">
-            <div className="grid gap-4 lg:grid-cols-3">
-              {featureCards.map((card) => (
-                <div key={card.title} className="concept-card rounded-[30px] p-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
-                    <card.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-5 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                    {card.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
-                    {card.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </section>
-
-        <section className="concept-band py-20 sm:py-24">
-          <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-[720px]">
-                <div className="section-kicker">Product suite</div>
-                <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-5xl">
-                  Open the live Busition services by role.
-                </h2>
-                <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                  The product family now lives in the real service routes. Use the mobile
-                  Mate and Driver apps or jump into the multi-page Console without passing
-                  through separate preview pages.
-                </p>
-              </div>
+        <section className="mx-auto max-w-[1240px] px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[0.76fr_1.24fr] lg:items-start">
+            <div>
+              <div className="section-kicker">Direct entry</div>
+              <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-5xl">
+                Enter the product by role.
+              </h2>
+              <p className="mt-5 max-w-[34rem] text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+                Start with the view you need. Each route keeps the same service state,
+                but the UI stays focused on the job at hand.
+              </p>
             </div>
 
-            <div className="mt-10 grid gap-4 lg:grid-cols-3">
-              {serviceLinks.map((link) => (
+            <div className="grid gap-4 md:grid-cols-3">
+              {roleCards.map((role) => (
                 <Link
-                  key={link.href}
-                  href={link.href}
-                  target={link.openInNewTab ? "_blank" : undefined}
-                  rel={link.openInNewTab ? "noopener noreferrer" : undefined}
+                  key={role.id}
+                  href={role.href}
                   className="concept-card rounded-[30px] p-6 transition-transform hover:-translate-y-1"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
-                    <link.icon className="h-6 w-6" />
+                    <role.icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-5 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                    {link.title}
+                    {role.title}
                   </h3>
                   <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
-                    {link.description}
+                    {role.summary}
                   </p>
                   <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent-deep)]">
-                    Open service
+                    {role.actionLabel}
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </Link>
@@ -428,83 +367,64 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1240px] px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
-          <div className="grid gap-12 xl:grid-cols-[0.82fr_1.18fr] xl:items-start">
-            <div>
-              <div className="section-kicker">Target segments</div>
+        <section className="concept-band py-20 sm:py-24">
+          <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-[760px] text-center">
+              <div className="section-kicker">Pricing</div>
               <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.06em] text-[var(--foreground)] sm:text-5xl">
-                Built for the markets the planning documents prioritized first.
+                Simple plans for launch and pilot.
               </h2>
-              <div className="mt-8 space-y-4">
-                {[
-                  {
-                    title: "Academies and K-12 transport",
-                    detail: "Reduce guardian anxiety, prove boarding, and replace daily phone-based dispatch.",
-                    icon: School,
-                  },
-                  {
-                    title: "Universities and campus loops",
-                    detail: "Give students live seats, stop context, and better route decisions before they walk to a stop.",
-                    icon: GraduationCap,
-                  },
-                  {
-                    title: "Enterprise commute operations",
-                    detail: "Expose shift punctuality risk and move transport decisions into one operator-facing view.",
-                    icon: MapPinned,
-                  },
-                ].map((item) => (
-                  <div key={item.title} className="concept-card rounded-[24px] px-5 py-4">
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
-                        <item.icon className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <p className="text-lg font-bold text-[var(--foreground)]">{item.title}</p>
-                        <p className="mt-1 text-sm leading-7 text-[var(--foreground-soft)]">
-                          {item.detail}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+                Keep pricing visible, but keep the choice simple.
+              </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
-              {packages.map((pkg) => (
+            <div className="mt-12 grid gap-4 md:grid-cols-3">
+              {pricingPlans.map((plan) => (
                 <div
-                  key={pkg.name}
-                  className={`rounded-[30px] border p-6 ${
-                    pkg.accent
-                      ? "border-[rgba(255,154,31,0.24)] bg-[#fff7ea] shadow-[0_24px_48px_rgba(255,154,31,0.12)]"
-                      : "concept-card"
-                  }`}
+                  key={plan.name}
+                  className={cx(
+                    "rounded-[28px] border p-6",
+                    plan.accent
+                      ? "border-[rgba(255,154,31,0.24)] bg-[#fff7ea] shadow-[0_18px_36px_rgba(255,154,31,0.1)]"
+                      : "concept-card",
+                  )}
                 >
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                    {pkg.name}
+                    {plan.name}
                   </p>
                   <p className="mt-4 text-4xl font-bold tracking-[-0.06em] text-[var(--foreground)]">
-                    {pkg.price}
+                    {plan.price}
                   </p>
+                  <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
+                    {plan.detail}
+                  </p>
+
                   <div className="mt-6 space-y-3">
-                    {pkg.points.map((point) => (
-                      <div key={point} className="flex items-start gap-3">
-                        <span className="mt-2 h-2 w-2 rounded-full bg-[var(--accent)]" />
-                        <p className="text-sm leading-7 text-[var(--foreground-soft)]">
-                          {point}
-                        </p>
+                    {plan.points.map((point) => (
+                      <div
+                        key={point}
+                        className="rounded-[18px] bg-white/80 px-4 py-3 text-sm font-semibold text-[var(--foreground)]"
+                      >
+                        {point}
                       </div>
                     ))}
                   </div>
-                  <button
-                    className={`mt-8 w-full rounded-[18px] py-3 text-sm font-semibold ${
-                      pkg.accent
-                        ? "orange-button"
-                        : "border border-[var(--line)] bg-white text-[var(--foreground)]"
-                    }`}
-                  >
-                    Start with {pkg.name}
-                  </button>
+
+                  <div className="mt-7">
+                    <Link
+                      href={plan.href}
+                      className={cx(
+                        "inline-flex items-center gap-2 rounded-[18px] px-5 py-3 text-sm font-semibold",
+                        plan.accent
+                          ? "orange-button"
+                          : "outline-button text-[var(--foreground)]",
+                      )}
+                    >
+                      {plan.ctaLabel}
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>

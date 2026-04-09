@@ -33,12 +33,12 @@ export function OperatorLoginForm() {
     const normalizedEmail = email.trim().toLowerCase();
 
     if (!normalizedEmail || !password) {
-      setErrorMessage("Enter both your operator email and password.");
+      setErrorMessage("Enter your operator email and password.");
       return;
     }
 
     if (normalizedEmail !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
-      setErrorMessage("Invalid credentials. Check your operator account or use the autofill button.");
+      setErrorMessage("Invalid credentials. Use the demo account to continue.");
       return;
     }
 
@@ -65,17 +65,17 @@ export function OperatorLoginForm() {
   }
 
   return (
-    <div className="rounded-[34px] border border-[rgba(35,35,35,0.08)] bg-white/92 p-6 shadow-[0_28px_80px_rgba(26,26,26,0.1)] backdrop-blur sm:p-8">
+    <div className="rounded-[34px] border border-[rgba(35,35,35,0.08)] bg-white/92 p-6 shadow-[0_24px_60px_rgba(26,26,26,0.08)] backdrop-blur sm:p-8">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[var(--foreground-soft)]">
             Operator access
           </p>
           <h1 className="mt-3 font-display text-3xl font-semibold tracking-[-0.05em] text-[var(--foreground)] sm:text-4xl">
-            Sign in to Busition Console
+            Sign in to Console
           </h1>
           <p className="mt-3 max-w-md text-sm leading-7 text-[var(--foreground-soft)]">
-            Route launches, driver assignments, and schedule control stay in the same operator workspace.
+            Use the demo account to open the operator workspace.
           </p>
         </div>
 
@@ -88,7 +88,11 @@ export function OperatorLoginForm() {
         </button>
       </div>
 
-      <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+      <div className="mt-6 rounded-[20px] border border-[var(--line)] bg-[#fcfcfa] px-4 py-4 text-sm text-[var(--foreground-soft)]">
+        Demo email: <span className="font-semibold text-[var(--foreground)]">{DEMO_EMAIL}</span>
+      </div>
+
+      <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
         <div className="space-y-2">
           <label htmlFor="operator-email" className="text-sm font-semibold text-[var(--foreground)]">
             Work email
@@ -106,14 +110,9 @@ export function OperatorLoginForm() {
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center justify-between gap-4">
-            <label htmlFor="operator-password" className="text-sm font-semibold text-[var(--foreground)]">
-              Password
-            </label>
-            <span className="text-xs font-medium text-[var(--foreground-soft)]">
-              Managed by operator access control
-            </span>
-          </div>
+          <label htmlFor="operator-password" className="text-sm font-semibold text-[var(--foreground)]">
+            Password
+          </label>
           <input
             id="operator-password"
             name="password"
@@ -133,7 +132,7 @@ export function OperatorLoginForm() {
             onChange={(event) => setRememberDevice(event.target.checked)}
             className="h-4 w-4 rounded border-[var(--line)] text-[var(--accent)]"
           />
-          Remember this device for the operator session
+          Remember this device
         </label>
 
         {errorMessage ? (
@@ -154,23 +153,20 @@ export function OperatorLoginForm() {
             </>
           ) : (
             <>
-              Continue to Console
+              Open Console
               <ArrowRight className="h-4 w-4" />
             </>
           )}
         </button>
       </form>
 
-      <div className="mt-6 flex flex-col gap-2 text-sm text-[var(--foreground-soft)] sm:flex-row sm:items-center sm:justify-between">
-        <p>Need policy details before operator access?</p>
-        <div className="flex items-center gap-4">
-          <Link href="/policy/service" className="transition-colors hover:text-[var(--foreground)]">
-            Terms
-          </Link>
-          <Link href="/policy/privacy" className="transition-colors hover:text-[var(--foreground)]">
-            Privacy
-          </Link>
-        </div>
+      <div className="mt-6 flex items-center justify-between gap-4 text-sm text-[var(--foreground-soft)]">
+        <Link href="/policy/service" className="transition-colors hover:text-[var(--foreground)]">
+          Terms
+        </Link>
+        <Link href="/policy/privacy" className="transition-colors hover:text-[var(--foreground)]">
+          Privacy
+        </Link>
       </div>
     </div>
   );

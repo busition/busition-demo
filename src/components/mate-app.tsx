@@ -2,15 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import {
-  Bell,
-  ChevronRight,
-  Clock3,
-  LocateFixed,
-  MapPinned,
-  ShieldCheck,
-  UsersRound,
-} from "lucide-react";
+import { Bell, LocateFixed, UsersRound } from "lucide-react";
 
 import {
   familyMembers,
@@ -31,7 +23,7 @@ function cx(...classNames: Array<string | false | null | undefined>) {
 
 function panelClassName(className = "") {
   return cx(
-    "rounded-[28px] border border-black/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(248,248,246,0.96)_100%)] shadow-[0_20px_50px_rgba(24,24,24,0.08)]",
+    "rounded-[28px] border border-black/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(248,248,246,0.96)_100%)] shadow-[0_16px_36px_rgba(24,24,24,0.06)]",
     className,
   );
 }
@@ -81,48 +73,38 @@ function TripCard({
         <p className="text-base font-bold tracking-[-0.04em] text-[var(--foreground)]">
           {routeName}
         </p>
-        <button
-          type="button"
-          className="rounded-full border border-black/6 px-3 py-1.5 text-[0.68rem] font-semibold text-[var(--foreground-soft)]"
-        >
+        <span className="rounded-full border border-black/6 px-3 py-1.5 text-[0.68rem] font-semibold text-[var(--foreground-soft)]">
           {state}
-        </button>
+        </span>
       </div>
 
-      <div className={`mt-4 rounded-[22px] px-4 py-6 text-center ${accent}`}>
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-[0_12px_22px_rgba(0,0,0,0.06)]">
-          <LocateFixed className="h-6 w-6 text-[var(--accent)]" />
-        </div>
-        <p className={`mt-4 text-3xl font-bold tracking-[-0.06em] ${statusTone}`}>{headline}</p>
-        <p className="mt-2 text-sm text-[var(--foreground-soft)]">{detail}</p>
+      <div className={`mt-4 rounded-[22px] px-4 py-5 ${accent}`}>
+        <p className={`text-3xl font-bold tracking-[-0.06em] ${statusTone}`}>{headline}</p>
+        <p className="mt-2 text-sm leading-6 text-[var(--foreground-soft)]">{detail}</p>
       </div>
 
       <div className="mt-4 flex gap-2">
         <Link
           href="/mate/route"
-          className="flex-1 rounded-[16px] border border-black/6 bg-white px-4 py-3 text-center text-sm font-semibold text-[var(--foreground)]"
+          className="orange-button flex-1 rounded-[16px] px-4 py-3 text-center text-sm font-semibold"
         >
           {actionLabel}
         </Link>
-        <button
-          type="button"
-          className="rounded-[16px] border border-black/6 bg-white px-4 py-3 text-sm font-semibold text-[var(--foreground-soft)]"
+        <Link
+          href="/mate/alerts"
+          className="rounded-[16px] border border-black/6 bg-white px-4 py-3 text-sm font-semibold text-[var(--foreground)]"
         >
-          Route detail
-        </button>
+          Alerts
+        </Link>
       </div>
     </div>
   );
 }
 
-function RouteMap({
-  journey,
-}: {
-  journey: RouteJourney;
-}) {
+function RouteMap({ journey }: { journey: RouteJourney }) {
   return (
     <div className="mate-map-grid relative h-[320px] overflow-hidden rounded-[28px] border border-black/6 bg-[#eef2f0]">
-      <div className="absolute left-4 top-4 z-10 rounded-[20px] border border-white/60 bg-white/92 px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+      <div className="absolute left-4 top-4 z-10 rounded-[20px] border border-white/60 bg-white/92 px-4 py-3 shadow-[0_10px_24px_rgba(0,0,0,0.06)]">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
           {journey.detailLabel}
         </p>
@@ -160,7 +142,7 @@ function RouteMap({
                   : "bg-[#66c3a0]",
             )}
           />
-          <div className="mt-5 rounded-[16px] border border-white/70 bg-white/90 px-3 py-2 shadow-[0_12px_24px_rgba(0,0,0,0.07)]">
+          <div className="mt-5 rounded-[16px] border border-white/70 bg-white/90 px-3 py-2 shadow-[0_10px_20px_rgba(0,0,0,0.06)]">
             <p className="text-xs font-semibold text-[var(--foreground)]">{marker.label}</p>
           </div>
         </div>
@@ -170,37 +152,70 @@ function RouteMap({
 }
 
 export function MateTimetableView() {
+  const primaryTrip = timetableTrips[0];
+  const latestAlert = mateAlerts[0];
+
   return (
     <div className="space-y-4">
-      <section className="rounded-[30px] bg-[linear-gradient(135deg,#fff6e5_0%,#fff0d8_100%)] p-5 shadow-[0_22px_40px_rgba(255,154,31,0.14)]">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold text-[var(--foreground-soft)]">Good morning</p>
-            <h2 className="mt-2 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
-              {mateHero.rider}
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-[var(--foreground-soft)]">
-              {mateHero.campus}
-            </p>
-          </div>
-          <div className="rounded-[18px] bg-white px-4 py-3 text-right shadow-[0_12px_26px_rgba(255,154,31,0.1)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Next ETA
-            </p>
-            <p className="mt-2 text-lg font-bold text-[var(--accent-deep)]">09:41</p>
-          </div>
-        </div>
+      <section className="rounded-[30px] bg-[linear-gradient(135deg,#fff6e5_0%,#fff0d8_100%)] p-5 shadow-[0_18px_34px_rgba(255,154,31,0.12)]">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+          Today
+        </p>
+        <h2 className="mt-3 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
+          {mateHero.eta}
+        </h2>
+        <p className="mt-3 text-sm leading-6 text-[var(--foreground-soft)]">
+          {mateHero.campus}
+        </p>
 
-        <div className="mt-5 rounded-[22px] bg-white/84 px-4 py-4">
-          <p className="text-base font-semibold text-[var(--foreground)]">{mateHero.eta}</p>
-          <p className="mt-2 text-sm leading-6 text-[var(--foreground-soft)]">{mateHero.detail}</p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-[22px] bg-white/86 px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Live trip
+            </p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              {primaryTrip.routeName}
+            </p>
+          </div>
+          <div className="rounded-[22px] bg-white/86 px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Latest alert
+            </p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              {latestAlert.category}
+            </p>
+          </div>
+          <div className="rounded-[22px] bg-white/86 px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Shared access
+            </p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              {familyMembers.length} linked people
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="space-y-4">
-        {timetableTrips.map((trip) => (
-          <TripCard key={trip.id} {...trip} />
-        ))}
+      <section className={panelClassName("p-5")}>
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Trips
+            </p>
+            <h3 className="mt-2 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
+              What matters next
+            </h3>
+          </div>
+          <Link href="/mate/route" className="text-sm font-semibold text-[var(--accent-deep)]">
+            Open route
+          </Link>
+        </div>
+
+        <div className="mt-5 space-y-3">
+          {timetableTrips.map((trip) => (
+            <TripCard key={trip.id} {...trip} />
+          ))}
+        </div>
       </section>
 
       <section className={panelClassName("p-5")}>
@@ -209,28 +224,32 @@ export function MateTimetableView() {
             <UsersRound className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-              Shared access
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Shared status
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Rider, guardian, and staff stay aligned
+              Rider and guardian stay aligned
             </h3>
           </div>
         </div>
 
-        <div className="mt-5 grid gap-3">
-          {[
-            "Guardian notifications are currently enabled.",
-            "Campus coordinator receives delay and route-change notices.",
-            "Boarding proof is shared from the same trip state.",
-          ].map((item) => (
-            <div
-              key={item}
-              className="rounded-[18px] border border-black/6 bg-white px-4 py-3 text-sm leading-7 text-[var(--foreground)]"
-            >
-              {item}
-            </div>
-          ))}
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-[18px] border border-black/6 bg-white px-4 py-4">
+            <p className="text-sm font-semibold text-[var(--foreground)]">
+              {matePreferences[0]?.title}
+            </p>
+            <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
+              {matePreferences[0]?.detail}
+            </p>
+          </div>
+          <div className="rounded-[18px] border border-black/6 bg-white px-4 py-4">
+            <p className="text-sm font-semibold text-[var(--foreground)]">
+              {latestAlert.title}
+            </p>
+            <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
+              {latestAlert.detail}
+            </p>
+          </div>
         </div>
       </section>
     </div>
@@ -265,19 +284,15 @@ export function MateRouteView() {
         })}
       </section>
 
-      <section className={panelClassName("overflow-hidden p-4")}>
-        <RouteMap journey={journey} />
-      </section>
-
       <section className={panelClassName("p-5")}>
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Route detail
+              Active route
             </p>
-            <h3 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
+            <h2 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
               {journey.direction}
-            </h3>
+            </h2>
             <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
               {journey.description}
             </p>
@@ -290,23 +305,78 @@ export function MateRouteView() {
           </div>
         </div>
 
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-[18px] border border-black/6 bg-white px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Progress
+            </p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">{journey.progress}</p>
+          </div>
+          <div className="rounded-[18px] border border-black/6 bg-white px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Stops
+            </p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              {journey.stops.length} total
+            </p>
+          </div>
+          <div className="rounded-[18px] border border-black/6 bg-white px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Status
+            </p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              {journey.detailLabel}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={panelClassName("overflow-hidden p-4")}>
+        <RouteMap journey={journey} />
+      </section>
+
+      <section className={panelClassName("p-5")}>
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Stops
+            </p>
+            <h3 className="mt-2 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
+              Stop-by-stop progress
+            </h3>
+          </div>
+          <LocateFixed className="h-5 w-5 text-[var(--foreground-soft)]" />
+        </div>
+
         <div className="mt-5 space-y-3">
           {journey.stops.map((stop) => (
             <div
               key={stop.id}
               className="flex items-start gap-3 rounded-[20px] border border-black/6 bg-white px-4 py-4"
             >
-              <div className={cx("mt-1 flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold", stopTone(stop.state))}>
+              <div
+                className={cx(
+                  "mt-1 flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold",
+                  stopTone(stop.state),
+                )}
+              >
                 {stop.state === "done" ? "✓" : stop.state === "active" ? "•" : "○"}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-semibold text-[var(--foreground)]">{stop.name}</p>
-                  <span className={cx("rounded-full px-3 py-1.5 text-[0.68rem] font-semibold", stopTone(stop.state))}>
+                  <span
+                    className={cx(
+                      "rounded-full px-3 py-1.5 text-[0.68rem] font-semibold",
+                      stopTone(stop.state),
+                    )}
+                  >
                     {stop.boarding}
                   </span>
                 </div>
-                <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">{stop.address}</p>
+                <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
+                  {stop.address}
+                </p>
               </div>
             </div>
           ))}
@@ -314,13 +384,13 @@ export function MateRouteView() {
 
         <div className="mt-5 flex gap-2">
           <button className="orange-button flex-1 rounded-[18px] px-4 py-3 text-sm font-semibold">
-            Share live ETA
+            Share ETA
           </button>
           <Link
             href="/mate/alerts"
             className="flex items-center justify-center rounded-[18px] border border-black/6 bg-white px-4 py-3 text-sm font-semibold text-[var(--foreground)]"
           >
-            Alerts
+            View alerts
           </Link>
         </div>
       </section>
@@ -341,10 +411,10 @@ export function MateAlertsView() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Notification center
+              Alerts
             </p>
             <h2 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Keep everyone on the same route state
+              Keep the route state visible
             </h2>
           </div>
           <div className="rounded-full bg-[rgba(255,154,31,0.12)] px-3 py-2 text-xs font-semibold text-[var(--accent-deep)]">
@@ -378,7 +448,9 @@ export function MateAlertsView() {
               <span className={cx("rounded-full px-3 py-2 text-xs font-semibold", alertTone(alert.category))}>
                 {alert.category}
               </span>
-              <span className="text-xs font-semibold text-[var(--foreground-soft)]">{alert.timestamp}</span>
+              <span className="text-xs font-semibold text-[var(--foreground-soft)]">
+                {alert.timestamp}
+              </span>
             </div>
             <p className="mt-4 text-lg font-bold tracking-[-0.04em] text-[var(--foreground)]">
               {alert.title}
@@ -394,11 +466,11 @@ export function MateAlertsView() {
             <Bell className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
               Preferences
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Notification rhythm
+              Notification settings
             </h3>
           </div>
         </div>
@@ -411,7 +483,9 @@ export function MateAlertsView() {
             >
               <div>
                 <p className="text-sm font-semibold text-[var(--foreground)]">{preference.title}</p>
-                <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">{preference.detail}</p>
+                <p className="mt-2 text-xs leading-6 text-[var(--foreground-soft)]">
+                  {preference.detail}
+                </p>
               </div>
               <span
                 className={cx(
@@ -434,16 +508,16 @@ export function MateAlertsView() {
 export function MateFamilyView() {
   return (
     <div className="space-y-4">
-      <section className="rounded-[30px] bg-[linear-gradient(135deg,#fff6e7_0%,#fff0db_100%)] p-5 shadow-[0_22px_40px_rgba(255,154,31,0.14)]">
+      <section className="rounded-[30px] bg-[linear-gradient(135deg,#fff6e7_0%,#fff0db_100%)] p-5 shadow-[0_18px_34px_rgba(255,154,31,0.12)]">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-          Shared visibility
+          Family
         </p>
         <h2 className="mt-3 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
-          One route view across rider, guardian, and staff
+          Shared route access for {familyMembers.length} people
         </h2>
         <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
-          Mate is not only a rider tool. It is the shared mobile surface that keeps the
-          people waiting on the ride aligned to the same operating state.
+          Boarding, ETA, and route changes stay visible to the rider, guardian, and
+          support contact.
         </p>
       </section>
 
@@ -471,38 +545,6 @@ export function MateFamilyView() {
             </div>
           </div>
         ))}
-      </section>
-
-      <section className={panelClassName("p-5")}>
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(255,154,31,0.12)] text-[var(--accent-deep)]">
-            <ShieldCheck className="h-5 w-5" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-              Access tools
-            </p>
-            <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              What guardians can do
-            </h3>
-          </div>
-        </div>
-
-        <div className="mt-5 space-y-3">
-          {[
-            "Open the same live route map the rider sees.",
-            "Receive boarding proof without calling the driver.",
-            "Share service issues with the campus-side operator contact.",
-          ].map((item) => (
-            <div
-              key={item}
-              className="flex items-start gap-3 rounded-[18px] border border-black/6 bg-white px-4 py-3"
-            >
-              <ChevronRight className="mt-0.5 h-5 w-5 text-[var(--accent-deep)]" />
-              <p className="text-sm leading-7 text-[var(--foreground)]">{item}</p>
-            </div>
-          ))}
-        </div>
       </section>
     </div>
   );

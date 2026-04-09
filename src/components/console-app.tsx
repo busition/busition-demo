@@ -5,18 +5,12 @@ import { useDeferredValue, useState } from "react";
 import {
   AlertTriangle,
   ArrowUpRight,
-  BellRing,
   Building2,
-  BusFront,
   CalendarRange,
   CheckCheck,
-  ChevronRight,
   Clock3,
-  MapPinned,
-  Route,
   Search,
   ShieldCheck,
-  TimerReset,
   UsersRound,
 } from "lucide-react";
 
@@ -229,69 +223,51 @@ export function ConsoleDashboardView() {
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
         eyebrow="Operations home"
-        title="See route readiness, rider trust, and dispatch risk in one workspace."
-        description="The console is designed as a real operator surface, not a marketing mock. Route launches, driver assignment, schedule quality, and organization readiness now sit inside the same front-end product flow."
+        title="See the routes that need action first."
+        description="Route status, assignment gaps, and operator priorities stay in one view."
         actions={
-          <>
-            <Link
-              href="/console/assignments"
-              className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold"
-            >
-              Open assignments
-            </Link>
-            <Link
-              href="/#console-experience"
-              className="outline-button rounded-[18px] px-5 py-3 text-sm font-semibold"
-            >
-              View product overview
-            </Link>
-          </>
+          <Link
+            href="/console/assignments"
+            className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold"
+          >
+            Open assignments
+          </Link>
         }
       />
 
-      <section className={surfaceClassName("overflow-hidden p-6 lg:p-7")}>
-        <div className="grid gap-6 xl:grid-cols-[1.14fr_0.86fr]">
-          <div className="rounded-[28px] bg-[linear-gradient(135deg,#fff6e7_0%,#fffaf2_100%)] p-6">
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div className="max-w-[560px]">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-[18px] bg-white text-[var(--accent-deep)] shadow-[0_16px_30px_rgba(255,138,0,0.16)]">
-                  <BusFront className="h-7 w-7" />
-                </div>
-                <h3 className="mt-5 text-3xl font-bold tracking-[-0.06em] text-[var(--foreground)]">
-                  Busition Console is ready for pilot operations.
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-[var(--foreground-soft)] sm:text-base">
-                  The current build mirrors the administrator mockups, but behaves like an
-                  actual tool. Operations teams can move from route health to assignment,
-                  then into schedule control without leaving the app shell.
-                </p>
-              </div>
-
-              <div className="min-w-[220px] space-y-3 rounded-[24px] border border-[rgba(255,154,31,0.2)] bg-white/86 p-4 shadow-[0_16px_34px_rgba(255,154,31,0.08)]">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                  This morning
-                </p>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--foreground-soft)]">Next critical departure</span>
-                  <span className="font-semibold text-[var(--foreground)]">07:20</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--foreground-soft)]">Open exceptions</span>
-                  <span className="font-semibold text-[var(--foreground)]">2 routes</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--foreground-soft)]">Boarding confidence</span>
-                  <span className="font-semibold text-[var(--foreground)]">High</span>
-                </div>
-              </div>
+      <section className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
+        <div className={surfaceClassName("p-6")}>
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-[rgba(255,154,31,0.1)] text-[var(--accent-deep)]">
+              <ShieldCheck className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
+                Next actions
+              </p>
+              <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
+                What needs operator attention
+              </h3>
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
-            {consoleMetrics.map((metric) => (
-              <MetricCard key={metric.label} {...metric} />
+          <div className="mt-6 space-y-3">
+            {launchChecklist.map((item) => (
+              <div
+                key={item}
+                className="flex items-start gap-3 rounded-[20px] border border-black/6 bg-white px-4 py-3"
+              >
+                <CheckCheck className="mt-0.5 h-5 w-5 text-[var(--accent-deep)]" />
+                <p className="text-sm leading-7 text-[var(--foreground)]">{item}</p>
+              </div>
             ))}
           </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {consoleMetrics.map((metric) => (
+            <MetricCard key={metric.label} {...metric} />
+          ))}
         </div>
       </section>
 
@@ -303,15 +279,14 @@ export function ConsoleDashboardView() {
                 Departure board
               </p>
               <h3 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                Today&apos;s highest-priority routes
+                Routes with the highest impact
               </h3>
             </div>
             <Link
               href="/console/assignments"
               className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent-deep)]"
             >
-              Open dispatch
-              <ChevronRight className="h-4 w-4" />
+              Open assignments
             </Link>
           </div>
 
@@ -368,78 +343,48 @@ export function ConsoleDashboardView() {
           </div>
         </div>
 
-        <div className="grid gap-6">
-          <div className={surfaceClassName("p-6")}>
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-[rgba(255,154,31,0.1)] text-[var(--accent-deep)]">
-                <AlertTriangle className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                  Open alerts
-                </p>
-                <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                  Exceptions needing attention
-                </h3>
-              </div>
+        <div className={surfaceClassName("p-6")}>
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-[rgba(255,154,31,0.1)] text-[var(--accent-deep)]">
+              <AlertTriangle className="h-6 w-6" />
             </div>
-
-            <div className="mt-6 space-y-3">
-              {dashboardAlerts.map((alert) => (
-                <div
-                  key={alert.id}
-                  className="rounded-[22px] border border-black/6 bg-white px-4 py-4"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <StatusBadge
-                      label={alert.severity}
-                      tone={
-                        alert.severity === "High"
-                          ? "border-[rgba(245,91,78,0.18)] bg-[rgba(245,91,78,0.1)] text-[#d14e42]"
-                          : alert.severity === "Medium"
-                            ? "border-[rgba(255,154,31,0.26)] bg-[rgba(255,154,31,0.12)] text-[var(--accent-deep)]"
-                            : "border-black/8 bg-[#f1f0ea] text-[var(--foreground-soft)]"
-                      }
-                    />
-                    <span className="text-xs font-semibold text-[var(--foreground-soft)]">
-                      {alert.time}
-                    </span>
-                  </div>
-                  <p className="mt-4 text-lg font-bold text-[var(--foreground)]">{alert.title}</p>
-                  <p className="mt-2 text-sm leading-7 text-[var(--foreground-soft)]">
-                    {alert.detail}
-                  </p>
-                </div>
-              ))}
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
+                Open alerts
+              </p>
+              <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
+                Exceptions needing attention
+              </h3>
             </div>
           </div>
 
-          <div className={surfaceClassName("p-6")}>
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-[rgba(255,154,31,0.1)] text-[var(--accent-deep)]">
-                <ShieldCheck className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                  Launch checklist
-                </p>
-                <h3 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-                  What the desk needs next
-                </h3>
-              </div>
-            </div>
-
-            <div className="mt-6 space-y-3">
-              {launchChecklist.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-3 rounded-[20px] border border-black/6 bg-white px-4 py-3"
-                >
-                  <CheckCheck className="mt-0.5 h-5 w-5 text-[var(--accent-deep)]" />
-                  <p className="text-sm leading-7 text-[var(--foreground)]">{item}</p>
+          <div className="mt-6 space-y-3">
+            {dashboardAlerts.map((alert) => (
+              <div
+                key={alert.id}
+                className="rounded-[22px] border border-black/6 bg-white px-4 py-4"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <StatusBadge
+                    label={alert.severity}
+                    tone={
+                      alert.severity === "High"
+                        ? "border-[rgba(245,91,78,0.18)] bg-[rgba(245,91,78,0.1)] text-[#d14e42]"
+                        : alert.severity === "Medium"
+                          ? "border-[rgba(255,154,31,0.26)] bg-[rgba(255,154,31,0.12)] text-[var(--accent-deep)]"
+                          : "border-black/8 bg-[#f1f0ea] text-[var(--foreground-soft)]"
+                    }
+                  />
+                  <span className="text-xs font-semibold text-[var(--foreground-soft)]">
+                    {alert.time}
+                  </span>
                 </div>
-              ))}
-            </div>
+                <p className="mt-4 text-lg font-bold text-[var(--foreground)]">{alert.title}</p>
+                <p className="mt-2 text-sm leading-7 text-[var(--foreground-soft)]">
+                  {alert.detail}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -503,20 +448,12 @@ export function ConsoleAssignmentsView() {
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
         eyebrow="Driver assignment"
-        title="Match routes, vehicles, and standby coverage without leaving the grid."
-        description="This page follows the administrator assignment mockup, but behaves like an actual workstation. Operators can filter the route board, inspect route details, and simulate assignment changes directly in the front-end."
+        title="Match open routes with available drivers."
+        description="Filter routes, inspect coverage, and assign the next driver without leaving the board."
         actions={
-          <>
-            <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-              Publish assignment plan
-            </button>
-            <Link
-              href="/console/schedules"
-              className="outline-button rounded-[18px] px-5 py-3 text-sm font-semibold"
-            >
-              Open schedules
-            </Link>
-          </>
+          <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
+            Publish plan
+          </button>
         }
       />
 
@@ -755,17 +692,12 @@ export function ConsoleSchedulesView() {
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
         eyebrow="Schedule manager"
-        title="Keep route selection, timetable editing, and service geography on the same page."
-        description="This is the functional version of the schedule management mockup. Operators can switch routes, review day-specific departures, and read the route path without leaving the planner."
+        title="Review route plans and departures together."
+        description="Switch routes, check day-specific departures, and keep the map beside the schedule."
         actions={
-          <>
-            <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-              Save schedule set
-            </button>
-            <button className="outline-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-              Add departure
-            </button>
-          </>
+          <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
+            Save schedules
+          </button>
         }
       />
 
@@ -1046,17 +978,12 @@ export function ConsoleDriversView() {
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
         eyebrow="Driver management"
-        title="Manage availability, certifications, and live route ownership from one roster."
-        description="The driver page translates the concept direction into an actual front-end product screen. Search, status filters, and a structured operator detail view make the roster feel like a real admin tool."
+        title="Keep availability and route ownership in one roster."
+        description="Search drivers, filter status, and review the active operator detail without switching pages."
         actions={
-          <>
-            <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-              Invite driver
-            </button>
-            <button className="outline-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-              Export roster
-            </button>
-          </>
+          <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
+            Invite driver
+          </button>
         }
       />
 
@@ -1284,17 +1211,12 @@ export function ConsoleOrganizationsView() {
     <div className="space-y-6 lg:space-y-8">
       <PageHeader
         eyebrow="Organization management"
-        title="Turn partner launches into structured, repeatable shuttle operations."
-        description="The organization page acts as the control point for academy groups, universities, and enterprise commute programs. Codes, service levels, contacts, and route counts stay in the same console surface."
+        title="Keep partner launches and access in one place."
+        description="Review partner status, contacts, and enabled services from a single organization view."
         actions={
-          <>
-            <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-              Create organization
-            </button>
-            <button className="outline-button rounded-[18px] px-5 py-3 text-sm font-semibold">
-              Generate access code
-            </button>
-          </>
+          <button className="orange-button rounded-[18px] px-5 py-3 text-sm font-semibold">
+            Create organization
+          </button>
         }
       />
 

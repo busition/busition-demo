@@ -6,12 +6,10 @@ import {
   AlertTriangle,
   ArrowRight,
   BusFront,
-  CheckCheck,
   CircleUserRound,
   Clock3,
   LocateFixed,
   ShieldCheck,
-  TriangleAlert,
   UsersRound,
 } from "lucide-react";
 
@@ -34,7 +32,7 @@ function cx(...classNames: Array<string | false | null | undefined>) {
 
 function panelClassName(className = "") {
   return cx(
-    "rounded-[28px] border border-black/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(248,248,246,0.96)_100%)] shadow-[0_20px_50px_rgba(24,24,24,0.08)]",
+    "rounded-[28px] border border-black/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(248,248,246,0.96)_100%)] shadow-[0_16px_36px_rgba(24,24,24,0.06)]",
     className,
   );
 }
@@ -66,9 +64,9 @@ function riderTone(state: RiderBoardingState) {
 function RouteMap() {
   return (
     <div className="driver-map-grid relative h-[320px] overflow-hidden rounded-[28px] border border-black/6 bg-[#eef2f0]">
-      <div className="absolute left-4 top-4 z-10 rounded-[20px] border border-white/70 bg-white/92 px-4 py-3 shadow-[0_12px_26px_rgba(0,0,0,0.08)]">
+      <div className="absolute left-4 top-4 z-10 rounded-[20px] border border-white/70 bg-white/92 px-4 py-3 shadow-[0_10px_24px_rgba(0,0,0,0.06)]">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-          Live navigation
+          Live route
         </p>
         <p className="mt-2 text-lg font-bold text-[var(--foreground)]">{driverShift.routeName}</p>
         <p className="mt-1 text-sm text-[var(--foreground-soft)]">
@@ -106,7 +104,7 @@ function RouteMap() {
                   : "bg-[#66c3a0]",
             )}
           />
-          <div className="mt-5 rounded-[16px] border border-white/70 bg-white/90 px-3 py-2 shadow-[0_12px_24px_rgba(0,0,0,0.07)]">
+          <div className="mt-5 rounded-[16px] border border-white/70 bg-white/90 px-3 py-2 shadow-[0_10px_20px_rgba(0,0,0,0.06)]">
             <p className="text-xs font-semibold text-[var(--foreground)]">{marker.label}</p>
           </div>
         </div>
@@ -131,7 +129,7 @@ function RiderRow({
       className={cx(
         "w-full rounded-[22px] border px-4 py-4 text-left transition-all",
         selected
-          ? "border-[rgba(255,154,31,0.24)] bg-[#fff8ef] shadow-[0_16px_28px_rgba(255,154,31,0.08)]"
+          ? "border-[rgba(255,154,31,0.24)] bg-[#fff8ef] shadow-[0_14px_26px_rgba(255,154,31,0.08)]"
           : "border-black/6 bg-white",
       )}
     >
@@ -151,41 +149,44 @@ function RiderRow({
 export function DriverTodayView() {
   return (
     <div className="space-y-4">
-      <section className="rounded-[30px] bg-[linear-gradient(135deg,#fff6e7_0%,#fff0d8_100%)] p-5 shadow-[0_22px_40px_rgba(255,154,31,0.14)]">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold text-[var(--foreground-soft)]">Signed in</p>
-            <h2 className="mt-2 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
-              {driverShift.driverName}
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-[var(--foreground-soft)]">
-              {driverShift.routeName}
-            </p>
-          </div>
-          <div className="rounded-[18px] bg-white px-4 py-3 text-right shadow-[0_12px_26px_rgba(255,154,31,0.1)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Shift
-            </p>
-            <p className="mt-2 text-sm font-bold text-[var(--accent-deep)]">{driverShift.shiftWindow}</p>
-          </div>
-        </div>
+      <section className="rounded-[30px] bg-[linear-gradient(135deg,#fff6e7_0%,#fff0d8_100%)] p-5 shadow-[0_18px_34px_rgba(255,154,31,0.12)]">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+          Current trip
+        </p>
+        <h2 className="mt-3 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
+          {driverShift.routeName}
+        </h2>
+        <p className="mt-3 text-sm leading-6 text-[var(--foreground-soft)]">
+          {driverShift.driverName} · {driverShift.shiftWindow}
+        </p>
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-[22px] bg-white/84 px-4 py-4">
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-[22px] bg-white/86 px-4 py-4">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
               Next stop
             </p>
-            <p className="mt-2 text-lg font-bold text-[var(--foreground)]">{driverShift.nextStop}</p>
-            <p className="mt-2 text-sm text-[var(--foreground-soft)]">
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              {driverShift.nextStop}
+            </p>
+            <p className="mt-2 text-xs text-[var(--foreground-soft)]">
               ETA {driverShift.nextStopEta}
             </p>
           </div>
-          <div className="rounded-[22px] bg-white/84 px-4 py-4">
+          <div className="rounded-[22px] bg-white/86 px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Riders
+            </p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              {driverShift.seats}
+            </p>
+          </div>
+          <div className="rounded-[22px] bg-white/86 px-4 py-4">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
               Vehicle
             </p>
-            <p className="mt-2 text-lg font-bold text-[var(--foreground)]">{driverShift.vehicle}</p>
-            <p className="mt-2 text-sm text-[var(--foreground-soft)]">{driverShift.seats}</p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              {driverShift.vehicle}
+            </p>
           </div>
         </div>
       </section>
@@ -196,28 +197,13 @@ export function DriverTodayView() {
             <BusFront className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-              Trip summary
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Next actions
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Route-first driving surface
+              What the driver needs now
             </h3>
           </div>
-        </div>
-
-        <div className="mt-5 space-y-3">
-          {[
-            `Departure ${driverShift.startTime} from ${driverStops[0]?.name}`,
-            `Current stop is ${driverShift.nextStop}`,
-            `${driverShift.seats} currently synced with console`,
-          ].map((item) => (
-            <div
-              key={item}
-              className="rounded-[18px] border border-black/6 bg-white px-4 py-3 text-sm leading-7 text-[var(--foreground)]"
-            >
-              {item}
-            </div>
-          ))}
         </div>
 
         <div className="mt-5 grid grid-cols-2 gap-3">
@@ -234,6 +220,18 @@ export function DriverTodayView() {
             Open boarding
           </Link>
         </div>
+
+        <div className="mt-5 space-y-3">
+          {driverQuickActions.map((item) => (
+            <div
+              key={item}
+              className="flex items-center justify-between rounded-[18px] border border-black/6 bg-white px-4 py-3"
+            >
+              <p className="text-sm font-semibold text-[var(--foreground)]">{item}</p>
+              <ArrowRight className="h-4 w-4 text-[var(--accent-deep)]" />
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className={panelClassName("p-5")}>
@@ -242,23 +240,28 @@ export function DriverTodayView() {
             <Clock3 className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-              Quick actions
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Live notices
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              What drivers need most
+              Trip updates
             </h3>
           </div>
         </div>
 
-        <div className="mt-5 grid gap-3">
-          {driverQuickActions.map((item) => (
+        <div className="mt-5 space-y-3">
+          {driverNotices.map((notice) => (
             <div
-              key={item}
-              className="flex items-center justify-between rounded-[18px] border border-black/6 bg-white px-4 py-3"
+              key={notice.id}
+              className="rounded-[20px] border border-black/6 bg-white px-4 py-4"
             >
-              <p className="text-sm font-semibold text-[var(--foreground)]">{item}</p>
-              <ArrowRight className="h-4 w-4 text-[var(--accent-deep)]" />
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-sm font-bold text-[var(--foreground)]">{notice.title}</p>
+                <span className={cx("rounded-full px-3 py-2 text-[0.68rem] font-semibold", notice.tone)}>
+                  Notice
+                </span>
+              </div>
+              <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">{notice.detail}</p>
             </div>
           ))}
         </div>
@@ -278,7 +281,7 @@ export function DriverRouteView() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
-              Stop sequence
+              Route
             </p>
             <h3 className="mt-2 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
               {driverShift.routeName}
@@ -333,19 +336,35 @@ export function DriverRouteView() {
 export function DriverBoardingView() {
   const [activeRiderId, setActiveRiderId] = useState(boardingRiders[0]?.id ?? "");
   const activeRider = boardingRiders.find((rider) => rider.id === activeRiderId) ?? boardingRiders[0];
+  const pendingCount = boardingRiders.filter((rider) => rider.state !== "Boarded").length;
 
   return (
     <div className="space-y-4">
-      <section className="rounded-[30px] bg-[linear-gradient(135deg,#fff6e7_0%,#fff0d8_100%)] p-5 shadow-[0_22px_40px_rgba(255,154,31,0.14)]">
+      <section className="rounded-[30px] bg-[linear-gradient(135deg,#fff6e7_0%,#fff0d8_100%)] p-5 shadow-[0_18px_34px_rgba(255,154,31,0.12)]">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
           Current stop
         </p>
         <h2 className="mt-3 text-[1.9rem] font-bold tracking-[-0.07em] text-[var(--foreground)]">
           {driverShift.nextStop}
         </h2>
-        <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
-          Confirm riders quickly, recover from scan failures, and keep guardian notifications accurate.
-        </p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-[22px] bg-white/86 px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Pending riders
+            </p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              {pendingCount} need review
+            </p>
+          </div>
+          <div className="rounded-[22px] bg-white/86 px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Guardian updates
+            </p>
+            <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">
+              Auto-send on confirm
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className={panelClassName("p-5")}>
@@ -354,11 +373,11 @@ export function DriverBoardingView() {
             <UsersRound className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
               Rider roster
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Stop-side confirmation
+              Confirm riders fast
             </h3>
           </div>
         </div>
@@ -418,8 +437,8 @@ export function DriverProfileView() {
             <CircleUserRound className="h-6 w-6" />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-              Driver profile
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Driver
             </p>
             <h2 className="mt-1 text-2xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
               {driverShift.driverName}
@@ -430,9 +449,9 @@ export function DriverProfileView() {
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           {[
             { label: "Email", value: driverProfile.email },
-            { label: "Company", value: driverProfile.company },
             { label: "Phone", value: driverProfile.phone },
-            { label: "Vehicle code", value: driverShift.vehicleCode },
+            { label: "Vehicle", value: driverShift.vehicleCode },
+            { label: "Company", value: driverProfile.company },
           ].map((item) => (
             <div key={item.label} className="rounded-[18px] bg-[#f6f5ef] px-4 py-4">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
@@ -450,8 +469,8 @@ export function DriverProfileView() {
             <ShieldCheck className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-              Daily readiness
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Readiness
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
               Vehicle and shift checks
@@ -478,11 +497,11 @@ export function DriverProfileView() {
             <AlertTriangle className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-              Live notices
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+              Support
             </p>
             <h3 className="mt-1 text-xl font-bold tracking-[-0.05em] text-[var(--foreground)]">
-              Shift alerts and support
+              Shift notices
             </h3>
           </div>
         </div>
@@ -493,12 +512,7 @@ export function DriverProfileView() {
               key={notice.id}
               className="rounded-[20px] border border-black/6 bg-white px-4 py-4"
             >
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-bold text-[var(--foreground)]">{notice.title}</p>
-                <span className={cx("rounded-full px-3 py-2 text-[0.68rem] font-semibold", notice.tone)}>
-                  Notice
-                </span>
-              </div>
+              <p className="text-sm font-bold text-[var(--foreground)]">{notice.title}</p>
               <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">{notice.detail}</p>
             </div>
           ))}
