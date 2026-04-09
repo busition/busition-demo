@@ -18,6 +18,12 @@ const navItems = [
   { href: "/console", label: "Console" },
 ];
 
+const footerLinks = [
+  { href: "/policy/service", label: "Terms" },
+  { href: "/policy/privacy", label: "Privacy" },
+  { href: "/login?next=/console", label: "Operator login" },
+];
+
 function cx(...classNames: Array<string | false | null | undefined>) {
   return classNames.filter(Boolean).join(" ");
 }
@@ -33,6 +39,7 @@ function isActive(pathname: string, href: string) {
 export function SiteShell({ children }: SiteShellProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="min-h-screen">
@@ -112,12 +119,15 @@ export function SiteShell({ children }: SiteShellProps) {
       {children}
 
       <footer className="border-t border-[var(--line)] bg-[#f6f5ef]">
-        <div className="mx-auto max-w-[1240px] px-4 py-8 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div>
+        <div className="mx-auto max-w-[1240px] px-4 pb-6 pt-8 sm:px-6 lg:px-8">
+          <div className="grid gap-8 border-b border-[var(--line)] pb-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-12">
+            <div className="max-w-[760px]">
               <BusitionLogo />
-              <div className="mt-4 space-y-1 text-sm leading-7 text-[var(--foreground-soft)]">
-                <p>Busition (버지션)</p>
+              <p className="mt-4 text-sm leading-7 text-[var(--foreground-soft)]">
+                Busition (버지션)
+              </p>
+
+              <div className="mt-4 flex flex-col gap-1 text-sm leading-7 text-[var(--foreground-soft)] sm:flex-row sm:flex-wrap sm:gap-x-6">
                 <p>Representative: Jeongheon Woo</p>
                 <p>Privacy Officer: Kyungmin Yoo</p>
                 <p>Business Registration No.: 117-20-13096</p>
@@ -125,7 +135,7 @@ export function SiteShell({ children }: SiteShellProps) {
                   Contact:{" "}
                   <a
                     href="mailto:contact@wookingwoo.com"
-                    className="transition-colors hover:text-[var(--foreground)]"
+                    className="transition-colors hover:text-[var(--accent-deep)]"
                   >
                     contact@wookingwoo.com
                   </a>
@@ -134,25 +144,21 @@ export function SiteShell({ children }: SiteShellProps) {
             </div>
 
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-semibold text-[var(--foreground-soft)] lg:justify-end">
-              <Link
-                href="/policy/service"
-                className="transition-colors hover:text-[var(--foreground)]"
-              >
-                Terms
-              </Link>
-              <Link
-                href="/policy/privacy"
-                className="transition-colors hover:text-[var(--foreground)]"
-              >
-                Privacy
-              </Link>
-              <Link
-                href="/login?next=/console"
-                className="transition-colors hover:text-[var(--foreground)]"
-              >
-                Operator login
-              </Link>
+              {footerLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="transition-colors hover:text-[var(--accent-deep)]"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
+          </div>
+
+          <div className="flex flex-col gap-2 pt-5 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)] sm:flex-row sm:items-center sm:justify-between">
+            <p>© {currentYear} Busition.</p>
+            <p>Mobility operations for shared routes.</p>
           </div>
         </div>
       </footer>
