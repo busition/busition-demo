@@ -4,6 +4,7 @@ import type { ComponentType } from "react";
 import {
   ArrowRight,
   BusFront,
+  Check,
   Clock3,
   MapPinned,
   ShieldCheck,
@@ -83,43 +84,57 @@ const roleCards = [
   },
 ];
 
-const pricingPlans = [
+type PricingPlan = {
+  name: string;
+  eyebrow: string;
+  price: string;
+  detail: string;
+  points: string[];
+  href: string;
+  ctaLabel: string;
+  featured?: boolean;
+  badge?: string;
+};
+
+const pricingPlans: PricingPlan[] = [
   {
     name: "Pilot Launch",
-    price: "Contact us",
+    eyebrow: "First live rollout",
+    price: "Free",
     detail: "For first institutions replacing calls and uncertainty with live ETA and boarding visibility.",
     points: [
       "Initial route rollout and launch support",
       "Mate, Driver, and Console access",
       "Operational setup for live ETA and boarding proof",
     ],
-    accent: false,
     href: "mailto:contact@wookingwoo.com?subject=Busition%20Pilot%20Launch",
     ctaLabel: "Talk to us",
   },
   {
     name: "Multi-Route Ops",
-    price: "Custom",
+    eyebrow: "Daily route operations",
+    price: "$99 / mo",
     detail: "For schools, academies, and campus shuttle teams running daily multi-role operations.",
     points: [
       "Shared trip state across every role",
       "Coverage and schedule workflows in Console",
       "Operator-grade alerts and service updates",
     ],
-    accent: true,
-    href: "/login?next=/console",
-    ctaLabel: "View Console",
+    featured: true,
+    badge: "Recommended",
+    href: "mailto:contact@wookingwoo.com?subject=Busition%20Multi-Route%20Ops",
+    ctaLabel: "Talk to us",
   },
   {
     name: "Enterprise Rollout",
-    price: "Custom",
+    eyebrow: "Multi-site expansion",
+    price: "Contact us",
     detail: "For multi-site operators that need stronger rollout control, reporting, and partner coordination.",
     points: [
       "Multi-site organization management",
       "Operational reporting and rollout planning",
       "Implementation support from the Busition team",
     ],
-    accent: false,
     href: "mailto:contact@wookingwoo.com?subject=Busition%20Enterprise%20Rollout",
     ctaLabel: "Contact sales",
   },
@@ -227,6 +242,108 @@ function RoleOverviewSection({
             className="orange-button inline-flex items-center gap-2 rounded-[18px] px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5"
           >
             {actionLabel}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function PricingPlanCard({ plan }: { plan: PricingPlan }) {
+  return (
+    <article
+      className={cx(
+        "relative flex h-full flex-col overflow-hidden rounded-[30px] border p-6 transition-transform duration-200 hover:-translate-y-1 sm:p-7",
+        plan.featured
+          ? "border-[rgba(255,154,31,0.26)] bg-[linear-gradient(180deg,#fff9ee_0%,#fff3de_100%)] shadow-[0_24px_48px_rgba(255,154,31,0.14)]"
+          : "concept-card",
+      )}
+    >
+      <div
+        aria-hidden="true"
+        className={cx(
+          "pointer-events-none absolute inset-x-6 top-0 h-px",
+          plan.featured
+            ? "bg-[linear-gradient(90deg,rgba(255,154,31,0)_0%,rgba(255,154,31,0.76)_50%,rgba(255,154,31,0)_100%)]"
+            : "bg-[linear-gradient(90deg,rgba(35,35,35,0)_0%,rgba(35,35,35,0.18)_50%,rgba(35,35,35,0)_100%)]",
+        )}
+      />
+      <div
+        aria-hidden="true"
+        className={cx(
+          "pointer-events-none absolute right-[-32px] top-[-42px] h-32 w-32 rounded-full",
+          plan.featured
+            ? "bg-[radial-gradient(circle,rgba(255,190,92,0.28)_0%,rgba(255,190,92,0)_72%)]"
+            : "bg-[radial-gradient(circle,rgba(35,35,35,0.08)_0%,rgba(35,35,35,0)_72%)]",
+        )}
+      />
+
+      <div className="relative flex h-full flex-col">
+        <div>
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
+            {plan.eyebrow}
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <h3 className="whitespace-nowrap text-[1.75rem] font-bold tracking-[-0.05em] text-[var(--foreground)]">
+              {plan.name}
+            </h3>
+
+            {plan.badge ? (
+              <span className="inline-flex rounded-full border border-[rgba(255,154,31,0.22)] bg-white/82 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--accent-deep)]">
+                {plan.badge}
+              </span>
+            ) : null}
+          </div>
+        </div>
+
+        <div
+          className={cx(
+            "mt-7 rounded-[24px] border px-5 py-5",
+            plan.featured
+              ? "border-[rgba(255,154,31,0.14)] bg-white/78"
+              : "border-[rgba(35,35,35,0.08)] bg-white/74",
+          )}
+        >
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[var(--foreground-soft)]">
+            Plan pricing
+          </p>
+          <p className="mt-2 text-4xl font-bold tracking-[-0.06em] text-[var(--foreground)]">
+            {plan.price}
+          </p>
+          <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
+            {plan.detail}
+          </p>
+        </div>
+
+        <ul className="mt-6 space-y-3">
+          {plan.points.map((point) => (
+            <li
+              key={point}
+              className={cx(
+                "flex items-start gap-3 rounded-[18px] px-4 py-3 text-sm font-semibold",
+                plan.featured ? "bg-white/84" : "bg-white/78",
+              )}
+            >
+              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
+                <Check className="h-3.5 w-3.5" />
+              </span>
+              <span className="leading-6 text-[var(--foreground)]">{point}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-auto pt-8">
+          <Link
+            href={plan.href}
+            className={cx(
+              "inline-flex w-full items-center justify-center gap-2 rounded-[18px] px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5",
+              plan.featured
+                ? "orange-button"
+                : "outline-button text-[var(--foreground)]",
+            )}
+          >
+            {plan.ctaLabel}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -391,53 +508,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-12 grid gap-4 md:grid-cols-3">
+            <div className="mt-12 grid gap-5 md:grid-cols-3 lg:gap-6">
               {pricingPlans.map((plan) => (
-                <div
-                  key={plan.name}
-                  className={cx(
-                    "rounded-[28px] border p-6",
-                    plan.accent
-                      ? "border-[rgba(255,154,31,0.24)] bg-[#fff7ea] shadow-[0_18px_36px_rgba(255,154,31,0.1)]"
-                      : "concept-card",
-                  )}
-                >
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--foreground-soft)]">
-                    {plan.name}
-                  </p>
-                  <p className="mt-4 text-4xl font-bold tracking-[-0.06em] text-[var(--foreground)]">
-                    {plan.price}
-                  </p>
-                  <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
-                    {plan.detail}
-                  </p>
-
-                  <div className="mt-6 space-y-3">
-                    {plan.points.map((point) => (
-                      <div
-                        key={point}
-                        className="rounded-[18px] bg-white/80 px-4 py-3 text-sm font-semibold text-[var(--foreground)]"
-                      >
-                        {point}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-7">
-                    <Link
-                      href={plan.href}
-                      className={cx(
-                        "inline-flex items-center gap-2 rounded-[18px] px-5 py-3 text-sm font-semibold",
-                        plan.accent
-                          ? "orange-button"
-                          : "outline-button text-[var(--foreground)]",
-                      )}
-                    >
-                      {plan.ctaLabel}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
+                <PricingPlanCard key={plan.name} plan={plan} />
               ))}
             </div>
           </div>
