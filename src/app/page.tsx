@@ -306,6 +306,30 @@ function PricingPlanCard({ plan }: { plan: PricingPlan }) {
   );
 }
 
+function SharedSignalsBand() {
+  return (
+    <div className="concept-card mt-10 overflow-hidden rounded-[30px]">
+      <div className="grid divide-y divide-[var(--line)] md:grid-cols-3 md:divide-x md:divide-y-0">
+        {sharedSignals.map((signal) => (
+          <div key={signal.title} className="flex gap-4 px-5 py-5 sm:px-6 sm:py-6">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
+              <signal.icon className="h-5 w-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-base font-bold leading-6 text-[var(--foreground)]">
+                {signal.title}
+              </p>
+              <p className="mt-2 text-sm leading-7 text-[var(--foreground-soft)]">
+                {signal.detail}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function HeroVisual() {
   return (
     <div className="relative h-[420px] w-full lg:h-[520px]">
@@ -330,52 +354,40 @@ export default function Home() {
   return (
     <SiteShell>
       <main>
-        <section className="mx-auto grid max-w-[1240px] gap-12 px-4 pb-20 pt-12 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:pb-24 lg:pt-20">
-          <div className="flex flex-col justify-center">
-            <div className="section-kicker">Real-time shuttle operations</div>
-            <h1 className="mt-6 font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl xl:text-7xl">
-              From live position
-              <br />
-              to operational certainty.
-            </h1>
-            <p className="mt-6 max-w-[560px] text-lg leading-8 text-[var(--foreground-soft)]">
-              Busition keeps riders, guardians, drivers, and operators aligned on the
-              same live ETA, boarding status, delay updates, and route changes.
-            </p>
+        <section className="mx-auto max-w-[1240px] px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-24 lg:pt-20">
+          <div className="grid gap-12 lg:grid-cols-[0.92fr_1.08fr]">
+            <div className="flex flex-col justify-center">
+              <div className="section-kicker">Real-time shuttle operations</div>
+              <h1 className="mt-6 font-display text-5xl font-semibold tracking-[-0.08em] text-[var(--foreground)] sm:text-6xl xl:text-7xl">
+                From live position
+                <br />
+                to operational certainty.
+              </h1>
+              <p className="mt-6 max-w-[560px] text-lg leading-8 text-[var(--foreground-soft)]">
+                Busition keeps riders, guardians, drivers, and operators aligned on the
+                same live ETA, boarding status, delay updates, and route changes.
+              </p>
 
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link
-                href="#roles"
-                className="orange-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-transform hover:-translate-y-0.5"
-              >
-                Explore the product
-              </Link>
-              <Link
-                href="/login?next=/console"
-                className="outline-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-colors hover:text-[var(--accent-deep)]"
-              >
-                Open Console
-              </Link>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Link
+                  href="#roles"
+                  className="orange-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-transform hover:-translate-y-0.5"
+                >
+                  Explore the product
+                </Link>
+                <Link
+                  href="/login?next=/console"
+                  className="outline-button rounded-[18px] px-6 py-4 text-sm font-semibold transition-colors hover:text-[var(--accent-deep)]"
+                >
+                  Open Console
+                </Link>
+              </div>
             </div>
 
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              {sharedSignals.map((signal) => (
-                <div key={signal.title} className="concept-card rounded-[24px] px-5 py-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-deep)]">
-                    <signal.icon className="h-5 w-5" />
-                  </div>
-                  <p className="mt-4 text-base font-bold text-[var(--foreground)]">
-                    {signal.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-[var(--foreground-soft)]">
-                    {signal.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <HeroVisual />
           </div>
 
-          <HeroVisual />
+          <SharedSignalsBand />
         </section>
 
         <section id="roles" className="concept-band py-20 sm:py-24">
